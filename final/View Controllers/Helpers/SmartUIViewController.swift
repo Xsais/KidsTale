@@ -25,6 +25,8 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
     */
     private var currentTextField: UITextField?
 
+    private var respondersIgnored: Bool = false
+
     /**
      * An event that is fired when the view is loaded into memory
     */
@@ -50,12 +52,13 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
     /**
      * A method created to handle the action of a 'TouchUpInside' event
     */
+    @objc
     private func hideTextField() {
 
-        resignFirstResponder()
+        resignFirstResponder(nil)
     }
 
-    func resignFirstResponder(_ textField: UITextField?) -> Bool {
+    public func resignFirstResponder(_ textField: UITextField?) -> Bool {
 
         if (textField != nil) {
 
@@ -66,6 +69,22 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
         }
 
         return false
+    }
+
+    /**
+     * Ignores all future request to invoke a TextField keyboard
+    */
+    public func ignoreResponders() {
+
+        respondersIgnored = true
+    }
+
+    /**
+     * Acknowledge all future request to invoke a TextField keyboard
+    */
+    public func acknowledgeResponders() {
+
+        respondersIgnored = false
     }
 
     /**
@@ -98,6 +117,15 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
      * Handles the action that is to be performed when a TetField requested to be in focus
     */
     public func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        /**
+         * If the responders have been set to be ignored prevent the keyboard
+        */
+        if (respondersIgnored) {
+
+            resignFirstResponder(textField)
+            return
+        }
 
         currentTextField = textField
         textFieldDidBeginEditing()

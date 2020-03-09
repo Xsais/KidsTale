@@ -144,6 +144,7 @@ public class HomeScreenViewController: SmartUIViewController {
              *Changes the tag of the menu so that the state can be recorded
             */
             self.slideoutMenu?.tag = isVisible.rawValue;
+            self.ignoreResponders()
 
             /**
              * Hides the menu once it is no longer on the screen
@@ -152,6 +153,8 @@ public class HomeScreenViewController: SmartUIViewController {
 
                 return
             }
+
+            self.acknowledgeResponders()
 
             self.slideoutMenu?.isHidden = true
         }
@@ -178,7 +181,9 @@ public class HomeScreenViewController: SmartUIViewController {
 
                 self.slideoutMenu?.frame = self.slidoutMenuProperties![.visible]!
             }
-        }
+        case .gone:
+            break
+}
 
         animator.startAnimation()
     }
