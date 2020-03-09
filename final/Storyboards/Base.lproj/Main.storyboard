@@ -134,6 +134,9 @@
                                 <state key="normal" title="Help">
                                     <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <segue destination="hWd-M9-RQy" kind="presentation" id="NPU-OF-bWZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -144,9 +147,45 @@
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="137.94642857142856"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Iya-HF-RlU">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="hWd-M9-RQy" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Je-Pi-DB5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-2R-2lW">
+                                <rect key="frame" x="20" y="63" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="chevron"/>
+                                <connections>
+                                    <action selector="showMenuWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ohs-jo-vVc"/>
+                                    <segue destination="9lf-ZZ-xZM" kind="unwind" unwindAction="unwindToHome:" id="hTJ-Ok-s0j"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajj-TE-RcI">
+                                <rect key="frame" x="187" y="62" width="41" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7VI-Mi-7P1"/>
+                    </view>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ay-9E-5o5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="9lf-ZZ-xZM" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="815.625"/>
+        </scene>
     </scenes>
     <resources>
         <image name="burger" width="292" height="250"/>
+        <image name="chevron" width="190" height="318"/>
         <image name="search" width="342" height="342"/>
     </resources>
 </document>

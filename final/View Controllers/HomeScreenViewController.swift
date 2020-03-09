@@ -183,8 +183,14 @@ public class HomeScreenViewController: SmartUIViewController {
             }
         case .gone:
             break
-}
+        }
 
         animator.startAnimation()
+    }
+    
+    @IBAction
+    public func unwindToHome(_ sender: UIStoryboardSegue) {
+        
+        hideMenu(sender: sender)
     }
 }
