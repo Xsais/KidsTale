@@ -78,7 +78,7 @@ public class HomeScreenViewController: SmartUIViewController {
         let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         blurEffectView.frame = CGRect(x: slideoutMenu?.frame.width ?? 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
 
-        exitSlideOut.backgroundColor = .black
+        exitSlideOut.setBackgroundImage(UIImage(named: "close"), for: .normal)
 
         /**
          * Register an 'TouchUpInside' event so that the menu disappears
