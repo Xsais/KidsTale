@@ -6,7 +6,7 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-08-2020
+ * Last Modified: 03-09-2020
  * Description: A singleton that is to be shared among the classes
  * ----------------------------------------------------------------------------+
 */
@@ -21,8 +21,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
-    var window: UIWindow?
+    // TODO: To be replaced byy a SQLite database
+    private static let FAKE_REPO: Dictionary<ItemType, Dictionary<Int, StoreItem>> = [
 
+        ItemType.book: [
+            1: Book(),
+            2: Book(),
+            3: Book(),
+            4: Book(),
+            5: Book()
+        ],
+        ItemType.store: [
+            1: Store(),
+            2: Store(),
+            3: Store(),
+            4: Store(),
+            5: Store()
+        ]
+    ]
+
+    /**
+     * Retrieves all of the items of a specific type that are in the stores list of items
+     * - Parameters:
+     *      - itemType: The type of the item you expect to get in return
+    */
+    public func findAll(itemType: ItemType) -> Array<StoreItem> {
+
+        return AppDelegate.FAKE_REPO[itemType]?.values.filter({(item: StoreItem) in true}) ?? Array<StoreItem>()
+    }
+
+    /**
+     * Retrieves a specific item that is in the stores list of items
+     * - Parameters:
+     *      - id: THe id of the item that is to be deleted
+     *      - itemType: The type of the item you expect to get in return
+    */
+    public func findById(id: Int, itemType: ItemType) -> StoreItem {
+
+        return AppDelegate.FAKE_REPO[itemType]?[id] ?? StoreItem()
+    }
+
+    /**
+     * Saves a single item to the stores list of items
+     * - Parameters:
+     *      - id: THe id of the item that is to be deleted
+     *      - curve: The mathematical formula that the animation should follow
+    */
+    public func save(id: Int, item: StoreItem) -> Bool {
+
+        return true
+    }
+
+    /**
+     * Deletes a single item from the stores list of items
+     * - Parameters:
+     *      - id: THe id of the item that is to be deleted
+     *      - itemType: The type of the item you expect to get in return
+    */
+    public func deleteById(id: Int, itemType: ItemType) -> Bool {
+
+        return true
+    }
+
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,6 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
+        type(of: application)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
