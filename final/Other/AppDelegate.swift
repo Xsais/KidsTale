@@ -6,12 +6,13 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-09-2020
+ * Last Modified: 03-18-2020
  * Description: A singleton that is to be shared among the classes
  * ----------------------------------------------------------------------------+
 */
 
 import UIKit
+import SQLite3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,22 +22,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
+    private let databaseCommunicator = DatabaseBuilder(databaseName: "MyDatabase.db")
+
+    var window: UIWindow?
+
     // TODO: To be replaced byy a SQLite database
     private static let FAKE_REPO: Dictionary<ItemType, Dictionary<Int, StoreItem>> = [
 
         ItemType.book: [
-            1: Book(),
-            2: Book(),
-            3: Book(),
-            4: Book(),
-            5: Book()
+            1: Book(title: "Test Title", description: "Test Description"),
+            2: Book(title: "Test Title", description: "Test Description"),
+            3: Book(title: "Test Title", description: "Test Description"),
+            4: Book(title: "Test Title", description: "Test Description"),
+            5: Book(title: "Test Title", description: "Test Description")
         ],
         ItemType.store: [
-            1: Store(),
-            2: Store(),
-            3: Store(),
-            4: Store(),
-            5: Store()
+            1: Store(name: ""),
+            2: Store(name: ""),
+            3: Store(name: ""),
+            4: Store(name: ""),
+            5: Store(name: "")
         ]
     ]
 
@@ -58,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     public func findById(id: Int, itemType: ItemType) -> StoreItem {
 
-        return AppDelegate.FAKE_REPO[itemType]?[id] ?? StoreItem()
+        return AppDelegate.FAKE_REPO[itemType]?[id] ?? Store(name: "")
     }
 
     /**
@@ -72,29 +77,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    /**
-     * Deletes a single item from the stores list of items
-     * - Parameters:
-     *      - id: THe id of the item that is to be deleted
-     *      - itemType: The type of the item you expect to get in return
-    */
-    public func deleteById(id: Int, itemType: ItemType) -> Bool {
-
-        return true
-    }
-
-    var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // TODO: To delete shows a test of the query bridge utility (To be implemented into the *ById methods)
+        // Inits the object to make sure the table mapping is registered
+        Entries()
+
+        func printValues(table: [Entries]) {
+
+            print("\tThere is currently \(table.count) entries in the table")
+
+            table.forEach({(entry: Entries) in
+
+                print("\t\t\(entry.id)\t|\(entry.name)\t|\(entry.email)\t|\t\(entry.food)")
+            })
+        }
+
+        print("Querying the 'entries' table")
+
+        printValues(table: databaseCommunicator.querySelect(table: Entries.self, columns: nil) as! [Entries])
+
+        print("Inserting values into the 'entries' table")
+        databaseCommunicator.queryInsert(table: Entries.self, values: ["Test", "user@example.com", "Banana"])
+
+        printValues(table: databaseCommunicator.querySelect(table: Entries.self, columns: nil) as! [Entries])
         return true
     }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-
-        type(of: application)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
