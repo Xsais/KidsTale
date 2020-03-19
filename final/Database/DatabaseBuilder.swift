@@ -97,6 +97,16 @@ public class DatabaseBuilder {
     }
 
     /**
+     * Applies static initiation of the table
+     * - Parameters:
+     *      - table: The table in question that will be queried
+    */
+    private func initQuery(table: InitDelegate.Type) {
+
+        table.initDescriptors()
+    }
+
+    /**
      * Executes a selection query to the database
      * - Parameters:
      *      - table: The table in question that will be queried
@@ -104,6 +114,8 @@ public class DatabaseBuilder {
      * - Returns: An array of the specified 'table' object, the is pulled using the query
     */
     public func querySelect(table: InitDelegate.Type, columns: [ColumnDescriptor]?) -> [DatabaseItem] {
+
+        initQuery(table: table)
 
         // Stores the columns that will be used for the query
         var usedColumn: [ColumnDescriptor]
@@ -199,6 +211,8 @@ public class DatabaseBuilder {
      *      - values: The The values that is required to be inserted into the database, minus the auto generated fields
     */
     public func queryInsert(table: InitDelegate.Type, values: [Any]) {
+
+        initQuery(table: table)
 
         // Retrieves the 'ColumnDescriptors' that is used to describe the table
         let columns: [ColumnDescriptor] = DatabaseItem.getDescriptors(table: table as! DatabaseItem.Type)

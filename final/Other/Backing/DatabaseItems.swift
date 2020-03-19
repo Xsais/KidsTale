@@ -71,13 +71,11 @@ public class Book: DatabaseItem, StoreItem {
     }
 
     /**
-     * Creates and sets-up the book object to connect with the database
+     * Allows the creation of an blank book
     */
     private override init() {
 
         super.init()
-
-        Book.initDescriptors()
     }
 
     /**
@@ -138,16 +136,11 @@ public class Store: DatabaseItem, StoreItem {
     }
 
     /**
-     * Allows the creation of an physical store whilst binding the object to a specific table
-     * - Parameters:
-     *      - name: The desired name of the physical store
+     * Allows the creation of an blank physical store
     */
     private override init() {
 
         super.init()
-
-        Store.initDescriptors()
-
     }
 
     /**
@@ -210,11 +203,21 @@ public class Entries: DatabaseItem, StoreItem {
     // Stores the food of the object as it is in the table
     public var food: String? { get { return _food }}
 
-    public override init() {
+    public convenience init(name: String, email: String, food: String) {
+
+        self.init()
+
+        self._name = name
+        self._email = email
+        self._food = food
+    }
+
+    /**
+     * Allows the creation of an blank entries
+    */
+    private override init() {
 
         super.init()
-
-        Entries.initDescriptors()
     }
 
     /**

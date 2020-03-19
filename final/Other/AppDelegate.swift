@@ -80,8 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // TODO: To delete shows a test of the query bridge utility (To be implemented into the *ById methods)
-        // Inits the object to make sure the table mapping is registered
-        Entries()
 
         func printValues(table: [Entries]) {
 
