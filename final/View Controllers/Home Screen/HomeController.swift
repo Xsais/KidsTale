@@ -80,7 +80,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
      * Reloads the table and all of its cells
     */
     public func invalidaateTable() {
-        
+
         tableResources?.reloadData()
     }
 
