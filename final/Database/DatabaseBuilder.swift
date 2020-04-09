@@ -6,7 +6,6 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-18-2020
  * Description: Acts as a bridge to SQLite database, statements simplifying a reducing errors
  * ----------------------------------------------------------------------------+
 */
@@ -210,7 +209,7 @@ public class DatabaseBuilder {
      *      - table: The table in question that will be queried
      *      - values: The The values that is required to be inserted into the database, minus the auto generated fields
     */
-    public func queryInsert(table: InitDelegate.Type, values: [Any]) {
+    public func queryInsert(table: InitDelegate.Type, values: [Any]) -> InitDelegate {
 
         initQuery(table: table)
 
@@ -259,6 +258,8 @@ public class DatabaseBuilder {
         // Opens a connection the the SQLite database
         openConnection()
 
+        var initDescriptors: Dictionary<ColumnDescriptor, Any> = Dictionary()
+
         // Setup object that will handle data transfer
         if sqlite3_prepare_v2(databaseReference, queryStatement, -1, &queryReference, nil) == SQLITE_OK {
 
@@ -278,6 +279,8 @@ public class DatabaseBuilder {
                 // Calculates the index that is needed to access the array
                 let valueIndex: Int = columnIndex - skipIndex.count
 
+                initDescriptors[descriptor] = values[valueIndex]
+
                 switch (descriptor.type) {
 
                 case .text:
@@ -288,6 +291,166 @@ public class DatabaseBuilder {
                 case .integer:
 
                     sqlite3_bind_int(queryReference, columnIndex32, Int32(values[valueIndex] as! Int))
+                    break
+                }
+            });
+
+            // Places the values into the table using the insertion query
+            sqlite3_step(queryReference)
+
+            //Clean up
+            sqlite3_finalize(queryReference)
+        }
+
+        closeConnection()
+
+        return table.initWithColumnDescriptors(columns: initDescriptors) as! InitDelegate
+    }
+
+    /**
+     * Inserts a new row into a table, with the specified values
+     * - Parameters:
+     *      - table: The table in question that will be queried
+     *      - values: The The values that is required to be inserted into the database, minus the auto generated fields
+    */
+    public func queryUpdate(table: InitDelegate.Type, values: [Any?]) -> InitDelegate {
+
+        initQuery(table: table)
+
+        // Retrieves the 'ColumnDescriptors' that is used to describe the table
+        let columns: [ColumnDescriptor] = DatabaseItem.getDescriptors(table: table as! DatabaseItem.Type)
+
+        // The 'StringBuilder' that is to be used to hold the insertion query
+        var queryStatement: String = "UPDATE \(String(describing: table)) SET "
+
+        // Determines weather the string has had values amended to it
+        var hasAppended: Bool = false
+
+        // Stores the columns that will be skipped because they are auto generated
+        var skipIndex: [ColumnDescriptor] = []
+
+        var valueIndex: Int = 0;
+
+        var whereClauses: String = "WHERE "
+
+        // Appends the required values to the to the insertion statement
+        columns.forEach({ (descriptor: ColumnDescriptor) in
+
+            if (descriptor.isAuto) {
+
+                whereClauses += "\(descriptor.name) = \(values[valueIndex]!)"
+
+                skipIndex.append(descriptor)
+                return
+            }
+
+            if (hasAppended) {
+
+                queryStatement += ","
+            }
+
+            queryStatement += "\(descriptor.name) = ?"
+
+            hasAppended = true
+            valueIndex += 1;
+        })
+
+        queryStatement = "\(queryStatement) \(whereClauses)"
+
+        var queryReference: OpaquePointer? = nil
+
+        // Opens a connection the the SQLite database
+        openConnection()
+
+        var initDescriptors: Dictionary<ColumnDescriptor, Any> = Dictionary()
+
+        // Setup object that will handle data transfer
+        if sqlite3_prepare_v2(databaseReference, queryStatement, -1, &queryReference, nil) == SQLITE_OK {
+
+            // Binds the required fields using the 'ColumnDescriptor'
+            columns.forEach({ (descriptor: ColumnDescriptor) in
+
+                // Retrieves the index of the column, using reverse lookup
+                let columnIndex: Int = columns.firstIndex(of: descriptor)!
+
+                // Skips if the column is auto generated
+                if (skipIndex.firstIndex(of: descriptor) != nil) {
+
+                    return
+                }
+                let columnIndex32: Int32 = Int32(columnIndex)
+
+                initDescriptors[descriptor] = values[columnIndex]
+
+                switch (descriptor.type) {
+
+                case .text:
+
+                    sqlite3_bind_text(queryReference, columnIndex32, (values[columnIndex] as! NSString).utf8String, -1, nil)
+                    break
+
+                case .integer:
+
+                    sqlite3_bind_int(queryReference, columnIndex32, Int32(values[columnIndex] as! Int))
+                    break
+                }
+            });
+
+            // Places the values into the table using the insertion query
+            sqlite3_step(queryReference)
+
+            //Clean up
+            sqlite3_finalize(queryReference)
+        }
+
+        closeConnection()
+
+        return table.initWithColumnDescriptors(columns: initDescriptors) as! InitDelegate
+    }
+
+    /**
+     * Inserts a new row into a table, with the specified values
+     * - Parameters:
+     *      - table: The table in question that will be queried
+     *      - values: The The values that is required to be inserted into the database, minus the auto generated fields
+    */
+    public func queryDelete(table: InitDelegate.Type, id: Any) {
+
+        initQuery(table: table)
+
+        // Retrieves the 'ColumnDescriptors' that is used to describe the table
+        let columns: [ColumnDescriptor] = DatabaseItem.getDescriptors(table: table as! DatabaseItem.Type)
+
+        // The 'StringBuilder' that is to be used to hold the insertion query
+        var queryStatement: String = "DELETE FROM \(String(describing: table)) WHERE id = ?"
+
+        var queryReference: OpaquePointer? = nil
+
+        // Opens a connection the the SQLite database
+        openConnection()
+
+        // Setup object that will handle data transfer
+        if sqlite3_prepare_v2(databaseReference, queryStatement, -1, &queryReference, nil) == SQLITE_OK {
+
+            // Binds the required fields using the 'ColumnDescriptor'
+            columns.forEach({ (descriptor: ColumnDescriptor) in
+
+                // Skips if the column is auto generated
+                if (descriptor.name != "ID") {
+
+                    return
+                }
+
+                switch (descriptor.type) {
+
+                case .text:
+
+                    sqlite3_bind_text(queryReference, 1, (id as! NSString).utf8String, -1, nil)
+                    break
+
+                case .integer:
+
+                    sqlite3_bind_int(queryReference, 1, Int32(id as! Int))
                     break
                 }
             });

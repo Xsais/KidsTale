@@ -6,7 +6,6 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-18-2020
  * Description: A singleton that is to be shared among the classes
  * ----------------------------------------------------------------------------+
 */
@@ -18,111 +17,209 @@ import SQLite3
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /**
-     * Stores the time a =n animation should take before it is completed
+     * Stores the time the last query results that were called to a specific table
+    */
+    private var cachedResults: Array<Array<DatabaseItem>> = Array()
+
+    /**
+     * Stores the "tables" that have already been queried, also acts as an index for "cachedResults"
+    */
+    private var cachedResultIndexes: Array<DatabaseItem.Type> = Array()
+
+    /**
+     * Stores the time an animation should take before it is completed
     */
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
-    private let databaseCommunicator = DatabaseBuilder(databaseName: "MyDatabase.db")
+    /**
+     * Stores the handler  that will be used to communicate with the database
+    */
+    private let databaseCommunicator = DatabaseBuilder(databaseName: "KidsTale.db")
 
+    /**
+     * Stores the current window that is presented to the user
+    */
     var window: UIWindow?
 
-    // TODO: To be replaced byy a SQLite database
-    private static let FAKE_REPO: Dictionary<ItemType, Dictionary<Int, StoreItem>> = [
+    /**
+ * Retrieves all of the items of a specific type that are in the stores list of items
+ * - Parameters:
+ *      - table: The type of the item you expect to get in return
+*/
+    public func findAll(table: DatabaseItem.Type) -> Array<DatabaseItem> {
 
-        ItemType.book: [
-            1: Book(title: "Test Title", description: "Test Description"),
-            2: Book(title: "Test Title", description: "Test Description"),
-            3: Book(title: "Test Title", description: "Test Description"),
-            4: Book(title: "Test Title", description: "Test Description"),
-            5: Book(title: "Test Title", description: "Test Description")
-        ],
-        ItemType.store: [
-            1: Store(name: ""),
-            2: Store(name: ""),
-            3: Store(name: ""),
-            4: Store(name: ""),
-            5: Store(name: "")
-        ]
-    ]
+        let cachedIndex: Int = getCacheIndex(table: table)
+
+        if (cachedIndex != -1) {
+
+            return cachedResults[cachedIndex]
+        }
+
+        let queriedList: Array<DatabaseItem> = databaseCommunicator.querySelect(table: table as! InitDelegate.Type, columns: nil)
+
+        cachedResultIndexes.append(table)
+
+        cachedResults.append(queriedList)
+
+        return queriedList
+    }
 
     /**
      * Retrieves all of the items of a specific type that are in the stores list of items
      * - Parameters:
-     *      - itemType: The type of the item you expect to get in return
+     *      - table: The type of the item you expect to get in return
+     *      - filter: The filter that should be applied to the items the were fetched
     */
-    public func findAll(itemType: ItemType) -> Array<StoreItem> {
+    public func findAll(table: DatabaseItem.Type, filter:  (DatabaseItem) -> Bool) -> Array<DatabaseItem> {
 
-        return AppDelegate.FAKE_REPO[itemType]?.values.filter({(item: StoreItem) in true}) ?? Array<StoreItem>()
+        return findAll(table: table).filter(filter)
     }
 
     /**
-     * Retrieves a specific item that is in the stores list of items
+     * Retrieves the index of the {@see cachedResults} is the cached query results stored
      * - Parameters:
-     *      - id: THe id of the item that is to be deleted
-     *      - itemType: The type of the item you expect to get in return
+     *      - table: The type of the item you expect to get in return
     */
-    public func findById(id: Int, itemType: ItemType) -> StoreItem {
+    private func getCacheIndex(table: DatabaseItem.Type) -> Int {
 
-        return AppDelegate.FAKE_REPO[itemType]?[id] ?? Store(name: "")
+        var desiredIndex: Int = 0;
+
+        var wasFound: Bool = false
+
+        for delegate in cachedResultIndexes {
+
+            if (delegate == table) {
+
+                wasFound = true
+                break
+            }
+
+            desiredIndex += 1;
+        }
+
+        return wasFound ? desiredIndex : -1;
+    }
+
+    /**
+     * Retrieves a single item from the table, either from the cache or directly from the database
+     * - Parameters:
+     *      - table: The type of the item you expect to get in return
+     *      - index: The desired index in which to be pulled
+    */
+    public func getSingleResource(table: DatabaseItem.Type, index: Int) -> DatabaseItem {
+
+        let cachedIndex: Int = getCacheIndex(table: table)
+
+        if (cachedIndex != -1) {
+
+            return cachedResults[cachedIndex][index]
+        }
+
+        return findAll(table: table)[index]
+    }
+
+    /**
+     * Retrieves a single item from the table, either from the cache or directly from the database
+     * - Parameters:
+     *      - table: The type of the item you expect to get in return
+     *      - index: The desired index in which to be pulled
+     *      - filter: The filter that should be applied to the items the were fetched
+    */
+    public func getSingleResource(table: DatabaseItem.Type, index: Int, filter:  (DatabaseItem) -> Bool) -> DatabaseItem {
+
+        let cachedIndex: Int = getCacheIndex(table: table)
+
+        if (cachedIndex != -1) {
+
+            return cachedResults[cachedIndex].filter(filter)[index]
+        }
+
+        return findAll(table: table).filter(filter)[0]
     }
 
     /**
      * Saves a single item to the stores list of items
      * - Parameters:
-     *      - id: THe id of the item that is to be deleted
-     *      - curve: The mathematical formula that the animation should follow
+     *      - table: The type of the item you expect to get in return
+     *      - values: The mathematical formula that the animation should follow
     */
-    public func save(id: Int, item: StoreItem) -> Bool {
+    public func save(table: DatabaseItem.Type, values: [Any]) -> DatabaseItem {
 
-        return true
-    }
+        let queriedResult: DatabaseItem =  databaseCommunicator.queryInsert(table: table as! InitDelegate.Type, values: values) as! DatabaseItem
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let cachedIndex: Int = getCacheIndex(table: table)
 
-        // TODO: To delete shows a test of the query bridge utility (To be implemented into the *ById methods)
+        if (cachedIndex == -1) {
 
-        func printValues(table: [Entries]) {
+            cachedResultIndexes.append(table)
 
-            print("\tThere is currently \(table.count) entries in the table")
+            cachedResults.append([queriedResult])
+        } else {
 
-            table.forEach({(entry: Entries) in
-
-                print("\t\t\(entry.id)\t|\(entry.name)\t|\(entry.email)\t|\t\(entry.food)")
-            })
+            cachedResults[cachedIndex].append(queriedResult)
         }
 
-        print("Querying the 'entries' table")
+        return queriedResult
+    }
 
-        printValues(table: databaseCommunicator.querySelect(table: Entries.self, columns: nil) as! [Entries])
+    /**
+     * The event that is executed when the application first starts
+     * - Parameters:
+     *      - application: The application that has been started
+     *      - launchOptions: Any options that have been passed with the application launch
+    */
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        print("Inserting values into the 'entries' table")
-        databaseCommunicator.queryInsert(table: Entries.self, values: ["Test", "user@example.com", "Banana"])
+        findAll(table: Store.self)
 
-        printValues(table: databaseCommunicator.querySelect(table: Entries.self, columns: nil) as! [Entries])
+        if (findAll(table: Book.self).count <= 0) {
+
+            HomeScreenViewController.grabBooks()
+        }
+
         return true
     }
 
-
+    /**
+     *  Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+     * Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+     * - Parameters:
+     *      - application: The application that has been started
+    */
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
+    /**
+     * Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+     * If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+     * - Parameters:
+     *      - application: The application that has been started
+    */
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
+    /**
+     * Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+     * - Parameters:
+     *      - application: The application that has been started
+    */
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 
+    /**
+     * Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     * - Parameters:
+     *      - application: The application that has been started
+    */
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    /**
+     * TCalled when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+     * - Parameters:
+     *      - application: The application that has been started
+    */
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
 

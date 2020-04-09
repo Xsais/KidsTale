@@ -6,7 +6,6 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-08-2020
  * Description: Contains the boilerplate for handling text field delegates
  * ----------------------------------------------------------------------------+
 */

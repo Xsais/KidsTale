@@ -6,7 +6,6 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 03-08-2020
- * Last Modified: 03-18-2020
  * Description: Houses all classes the relate to an item in the database
  * ----------------------------------------------------------------------------+
 */
@@ -14,6 +13,20 @@
 import Foundation
 
 public class DatabaseItem {
+
+    // Stores the title of the book
+    public var name: String!
+
+    // Stores the description of the book
+    public var description: String!
+
+    fileprivate var _id: Int?
+
+    public var id: Int? {
+        get {
+            return _id
+        }
+    }
 
     // Stores the columns descriptor for each column in the table
     private static var _columnDescriptors: [String: Array<ColumnDescriptor>] = [:]
@@ -48,13 +61,7 @@ public class DatabaseItem {
 /**
  * Represents a book object that belongs to the store
 */
-public class Book: DatabaseItem, StoreItem {
-
-    // Stores the title of the book
-    public var title: String?
-
-    // Stores the description of the book
-    public var description: String?
+public class Book: DatabaseItem, Resource {
 
     /**
      * Creates a new book object with the required data
@@ -62,11 +69,11 @@ public class Book: DatabaseItem, StoreItem {
      *      - title: The desired title of the book
      *      - description: The desired description of the book
     */
-    public convenience init(title: String, description: String) {
+    public convenience init(name: String, description: String) {
 
         self.init()
 
-        self.title = title
+        self.name = name
         self.description = description
     }
 
@@ -86,7 +93,7 @@ public class Book: DatabaseItem, StoreItem {
         // Registers all of the columns the are in the book table
         DatabaseItem.registerColumn(table: Book.self, columns:
         ColumnDescriptor(isAuto: true, columnName: "ID", columnType: .integer),
-                ColumnDescriptor(columnName: "title", columnType: .text),
+                ColumnDescriptor(columnName: "name", columnType: .text),
                 ColumnDescriptor(columnName: "description", columnType: .text))
     }
 
@@ -102,12 +109,22 @@ public class Book: DatabaseItem, StoreItem {
         // Searches throw each 'ColumnDescriptor' for the fields required to initialize the book
         columns.forEach({ (column: ColumnDescriptor, value: Any) in
 
-            if (column.name == "title") {
+            switch (column.name) {
 
-                builtItem.title = (value as! String)
-            } else if (column.name == "description") {
+            case "ID":
+
+                builtItem._id = (value as! Int)
+                break
+            case "name":
+
+                builtItem.name = (value as! String)
+                break
+            case "description":
 
                 builtItem.description = (value as! String)
+                break
+            default:
+                break
             }
         })
 
@@ -118,10 +135,10 @@ public class Book: DatabaseItem, StoreItem {
 /**
  * Represents a physical store object that belongs to the online store
 */
-public class Store: DatabaseItem, StoreItem {
+public class Store: DatabaseItem, Resource {
 
-    // Stores the name of the physical store
-    public var name: String?
+    // Stores the location of the store to be consumed by the map API
+    public var location: String?
 
     /**
      * Allows the creation of an physical store
@@ -151,7 +168,9 @@ public class Store: DatabaseItem, StoreItem {
         // Registers all of the columns the are in the store table
         DatabaseItem.registerColumn(table: Store.self, columns:
         ColumnDescriptor(isAuto: true, columnName: "ID", columnType: .integer),
-                ColumnDescriptor(columnName: "name", columnType: .text))
+                ColumnDescriptor(columnName: "name", columnType: .text),
+                ColumnDescriptor(columnName: "description", columnType: .text),
+                ColumnDescriptor(columnName: "location", columnType: .text))
     }
 
     /**
@@ -166,95 +185,29 @@ public class Store: DatabaseItem, StoreItem {
         // Searches throw each 'ColumnDescriptor' for the fields required to initialize the book
         columns.forEach({ (column: ColumnDescriptor, value: Any) in
 
-            if (column.name == "name") {
+            switch (column.name) {
 
-                builtItem.name = (value as! String)
-            }
-        })
-
-        return builtItem
-    }
-}
-
-// TODO: This is to be deleted, it only exists for example purposes
-public class Entries: DatabaseItem, StoreItem {
-
-    // Stores the id of the object as it is in the table
-    private var _id: Int?
-
-    // Stores the name of the object as it is in the table
-    private var _name: String?
-
-    // Stores the email of the object as it is in the table
-    private var _email: String?
-
-    // Stores the food of the object as it is in the table
-    private var _food: String?
-
-    // Stores the id of the object as it is in the table
-    public var id: Int? { get { return _id }}
-
-    // Stores the name of the object as it is in the table
-    public var name: String? { get { return _name }}
-
-    // Stores the email of the object as it is in the table
-    public var email: String? { get { return _email }}
-
-    // Stores the food of the object as it is in the table
-    public var food: String? { get { return _food }}
-
-    public convenience init(name: String, email: String, food: String) {
-
-        self.init()
-
-        self._name = name
-        self._email = email
-        self._food = food
-    }
-
-    /**
-     * Allows the creation of an blank entries
-    */
-    private override init() {
-
-        super.init()
-    }
-
-    /**
-     * The place were all of the 'ColumnDescriptors' are registered
-    */
-    public static func initDescriptors() {
-
-        // Binds the entries table to the object
-        DatabaseItem.registerColumn(table: Entries.self, columns:
-        ColumnDescriptor(isAuto: true, columnName: "ID", columnType: .integer),
-                ColumnDescriptor(columnName: "name", columnType: .text),
-                ColumnDescriptor(columnName: "email", columnType: .text),
-                ColumnDescriptor(columnName: "food", columnType: .text))
-    }
-
-    // TODO: This method is blank because the value are not needed se above for
-    public static func initWithColumnDescriptors(columns: Dictionary<ColumnDescriptor, Any>) -> DatabaseItem {
-
-        let builtItem: Entries = Entries()
-
-        // Searches throw each 'ColumnDescriptor' for the fields required to initialize the book
-        columns.forEach({ (column: ColumnDescriptor, value: Any) in
-
-            if (column.name == "name") {
-
-                builtItem._name = (value as! String)
-            } else if (column.name == "ID") {
+            case "ID":
 
                 builtItem._id = (value as! Int)
-            } else if (column.name == "email") {
+                break
+            case "name":
 
-                builtItem._email = (value as! String)
-            } else if (column.name == "food") {
+                builtItem.name = (value as! String)
+                break
+            case "description":
 
-                builtItem._food = (value as! String)
+                builtItem.description = (value as! String)
+                break
+            case "location":
+
+                builtItem.location = (value as! String)
+                break
+            default:
+                break
             }
         })
+
         return builtItem
     }
 }
