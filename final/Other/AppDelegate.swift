@@ -170,13 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        findAll(table: Store.self)
-
-        if (findAll(table: Book.self).count <= 0) {
-
-            HomeScreenViewController.grabBooks()
-        }
-
         return true
     }
 

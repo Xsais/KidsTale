@@ -57,7 +57,7 @@ public class HomeScreenViewController: HomeController {
     /**
      * Grabs books from the API endpoint and adds them to the database
     */
-    public static func grabBooks() {
+    public func grabBooks() {
 
         var request = URLRequest(url: HomeScreenViewController.BOOK_API_ENDPOINT)
 
@@ -75,12 +75,15 @@ public class HomeScreenViewController: HomeController {
                 let jsonObject: Array<Dictionary<String, Any>> = (try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         as? [String: Any])!["books"] as! Array<Dictionary<String, Any>>
 
-                let sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-
                 // Adds each book to the database
                 for book in jsonObject {
 
-                    sharedDelegate.save(table: Book.self, values: [book["title"], book["subtitle"]])
+                    self.sharedDelegate.save(table: Book.self, values: [book["title"], book["subtitle"]])
+                }
+
+                DispatchQueue.main.async {
+
+                    self.invalidaateTable()
                 }
             } catch let error {
 
@@ -96,6 +99,13 @@ public class HomeScreenViewController: HomeController {
     */
     override public func viewDidLoad() {
         super.viewDidLoad()
+
+        sharedDelegate.findAll(table: Store.self)
+
+        if (sharedDelegate.findAll(table: Book.self).count <= 0) {
+
+            grabBooks()
+        }
 
         /**
           * Registers a swipe gesture to be fired when the user swipes right on the screen
