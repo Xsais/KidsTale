@@ -144,11 +144,11 @@ public class HomeScreenViewController: HomeController {
         }
 
         lblNotificationCount?.makeCircle()
-        notificationCount = 100
+        notificationCount = 0
 
-        sharedDelegate.setNotificationCount = {(newValue: Int) in
+        sharedDelegate.setNotificationCount = {(newValue: Any) in
 
-            self.notificationCount = newValue
+            self.notificationCount = newValue as! Int
         }
 
         sharedDelegate.getNotificationCount = {() in

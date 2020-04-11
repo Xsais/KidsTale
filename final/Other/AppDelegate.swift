@@ -51,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     public var getNotificationCount: HandleGetValue? = nil
 
+    /**
+     * Stores the item that is selected on the HomeScreen
+    */
+    public var selectedItem: DatabaseItem?
+
+    /**
+     * Retrieves and assigns the current amount of notification, only if the handlers have been registered
+    */
     public var notificationCount: Int {
         get {
 

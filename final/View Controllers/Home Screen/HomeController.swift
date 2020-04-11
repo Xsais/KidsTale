@@ -132,6 +132,8 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
             return
         }
 
+        sharedDelegate.selectedItem = selectedItem
+
         if (viewing == Book.self) {
 
             // TODO: present() additional information for the specific book
