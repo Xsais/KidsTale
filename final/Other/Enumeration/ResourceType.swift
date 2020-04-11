@@ -16,4 +16,5 @@ public enum ResourceType: String {
 
     case book = "Book"
     case store = "Store"
+    case location = "Location"
 }
