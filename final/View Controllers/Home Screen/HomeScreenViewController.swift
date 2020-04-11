@@ -144,7 +144,17 @@ public class HomeScreenViewController: HomeController {
         }
 
         lblNotificationCount?.makeCircle()
-        notificationCount = 100;
+        notificationCount = 100
+
+        sharedDelegate.setNotificationCount = {(newValue: Int) in
+
+            self.notificationCount = newValue
+        }
+
+        sharedDelegate.getNotificationCount = {() in
+
+            return self.notificationCount;
+        }
 
         /**
           * Registers a swipe gesture to be fired when the user swipes right on the screen

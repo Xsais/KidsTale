@@ -32,6 +32,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
     /**
+     * The typealias responsible for handling getting a value
+    */
+    typealias HandleGetValue = () -> Any
+
+    /**
+     * The typealias responsible for handling setting a value
+    */
+    typealias HandleSetValue = (Any) -> Void
+
+    /**
+     * Stores the expresion used to set the notification count
+    */
+    public var setNotificationCount: HandleSetValue? = nil
+
+    /**
+     * Stores the expresion used to get the notification count
+    */
+    public var getNotificationCount: HandleGetValue? = nil
+
+    public var notificationCount: Int {
+        get {
+
+            if (getNotificationCount == nil) {
+
+                return -1
+            }
+
+            return getNotificationCount!() as! Int
+        }
+        set {
+
+            if (setNotificationCount == nil) {
+
+                return
+            }
+
+            setNotificationCount!(newValue)
+        }
+    }
+
+    /**
      * Stores the handler  that will be used to communicate with the database
     */
     private let databaseCommunicator = DatabaseBuilder(databaseName: "KidsTale.db")
@@ -70,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *      - table: The type of the item you expect to get in return
      *      - filter: The filter that should be applied to the items the were fetched
     */
-    public func findAll(table: DatabaseItem.Type, filter:  (DatabaseItem) -> Bool) -> Array<DatabaseItem> {
+    public func findAll(table: DatabaseItem.Type, filter: (DatabaseItem) -> Bool) -> Array<DatabaseItem> {
 
         return findAll(table: table).filter(filter)
     }
@@ -125,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *      - index: The desired index in which to be pulled
      *      - filter: The filter that should be applied to the items the were fetched
     */
-    public func getSingleResource(table: DatabaseItem.Type, index: Int, filter:  (DatabaseItem) -> Bool) -> DatabaseItem {
+    public func getSingleResource(table: DatabaseItem.Type, index: Int, filter: (DatabaseItem) -> Bool) -> DatabaseItem {
 
         let cachedIndex: Int = getCacheIndex(table: table)
 
@@ -145,7 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     public func save(table: DatabaseItem.Type, values: [Any]) -> DatabaseItem {
 
-        let queriedResult: DatabaseItem =  databaseCommunicator.queryInsert(table: table as! InitDelegate.Type, values: values) as! DatabaseItem
+        let queriedResult: DatabaseItem = databaseCommunicator.queryInsert(table: table as! InitDelegate.Type, values: values) as! DatabaseItem
 
         let cachedIndex: Int = getCacheIndex(table: table)
 
