@@ -20,6 +20,7 @@
 		70459607243FCE8400B0AB91 /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70459606243FCE8400B0AB91 /* DetailViewCell.swift */; };
 		70498F4D243E51A000E670A4 /* KidsTale.db in Resources */ = {isa = PBXBuildFile; fileRef = 70498F4C243E51A000E670A4 /* KidsTale.db */; };
 		70498F52243E633C00E670A4 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70498F51243E633C00E670A4 /* ResourceType.swift */; };
+		70825456244275EA00897ED9 /* EUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70825455244275EA00897ED9 /* EUIView.swift */; };
 		70FB91B0241574760039DE36 /* VisibilityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FB91AF241574760039DE36 /* VisibilityState.swift */; };
 		70FB91B624158ED00039DE36 /* SmartUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FB91B524158ED00039DE36 /* SmartUIViewController.swift */; };
 		AE84FA4124047568007865C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84FA4024047568007865C7 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		70459606243FCE8400B0AB91 /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		70498F4C243E51A000E670A4 /* KidsTale.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = KidsTale.db; sourceTree = "<group>"; };
 		70498F51243E633C00E670A4 /* ResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
+		70825455244275EA00897ED9 /* EUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUIView.swift; sourceTree = "<group>"; };
 		70FB91AF241574760039DE36 /* VisibilityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilityState.swift; sourceTree = "<group>"; };
 		70FB91B524158ED00039DE36 /* SmartUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartUIViewController.swift; sourceTree = "<group>"; };
 		AE84FA3D24047568007865C7 /* final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = final.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		70825454244275C800897ED9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				70825455244275EA00897ED9 /* EUIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		70FB91B72415A23F0039DE36 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		AE3CE090240ABB9200E62413 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				70825454244275C800897ED9 /* Extension */,
 				70498F50243E5E4100E670A4 /* Cell */,
 				70FB91B82415A25C0039DE36 /* Enumeration */,
 				AE84FA4724047568007865C7 /* Assets.xcassets */,
@@ -296,6 +307,7 @@
 				6D0C43770B646E04E1E29804 /* DatabaseItems.swift in Sources */,
 				70498F52243E633C00E670A4 /* ResourceType.swift in Sources */,
 				6D0C42EE9E075D58965A0156 /* HelpScreenViewController.swift in Sources */,
+				70825456244275EA00897ED9 /* EUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

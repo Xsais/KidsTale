@@ -44,25 +44,12 @@ class HelpScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        makeCircle(sender: txtOne!)
+        txtOne!.makeCircle()
 
-        makeCircle(sender: txtTwo!)
+        txtTwo!.makeCircle()
 
-        makeCircle(sender: txtThree!)
+        txtThree!.makeCircle()
 
-        makeCircle(sender: txtFour!)
+        txtFour!.makeCircle()
     }
-
-    /**
-     * Adds corner radius's to a UIElement making, it a circle
-     * - Parameters:
-     *      - sender: The UIElement that desired to be a circle
-    */
-    private func makeCircle(sender: UIView) {
-
-        sender.layer.cornerRadius = sender.frame.height / 2.0
-
-        sender.layer.masksToBounds = true
-    }
-
 }

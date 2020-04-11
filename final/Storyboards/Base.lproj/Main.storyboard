@@ -98,6 +98,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="xto-Gr-Xcd"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3K-r3-9i8">
+                                <rect key="frame" x="352" y="60" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="chat"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdY-w1-5vZ">
+                                <rect key="frame" x="371" y="48" width="28" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" id="D9M-W6-Hx2">
                                 <rect key="frame" x="0.0" y="0.0" width="273" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -117,6 +130,7 @@
                     </view>
                     <connections>
                         <outlet property="burgerIcon" destination="KhN-bq-LLX" id="zxf-rK-BJA"/>
+                        <outlet property="lblNotificationCount" destination="XdY-w1-5vZ" id="hUp-Qs-kgS"/>
                         <outlet property="segResourceType" destination="5U4-Ea-lWA" id="T3d-Yf-tLw"/>
                         <outlet property="slideoutMenu" destination="D9M-W6-Hx2" id="HVV-uZ-eLu"/>
                         <outlet property="tableResources" destination="HJV-8h-EX3" id="7E3-W0-grN"/>
@@ -380,6 +394,7 @@
     <resources>
         <image name="Book" width="512" height="512"/>
         <image name="burger" width="292" height="250"/>
+        <image name="chat" width="512" height="512"/>
         <image name="chevron" width="190" height="318"/>
         <image name="search" width="342" height="342"/>
     </resources>

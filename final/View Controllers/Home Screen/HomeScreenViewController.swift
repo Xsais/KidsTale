@@ -21,6 +21,12 @@ public class HomeScreenViewController: HomeController {
     private var slideoutMenu: UIView?
 
     /**
+     * Stores a copy of the UIView for the notification bubble
+    */
+    @IBOutlet
+    private var lblNotificationCount: UILabel?
+
+    /**
      * Stores a copy of the Segmented control that determines which resources to display
     */
     @IBOutlet
@@ -53,6 +59,36 @@ public class HomeScreenViewController: HomeController {
      * Stores a copy of the applications delegate
     */
     private let sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
+    public let maxNotifications: Int = 5
+
+    private var _notificationCount: Int = 0
+
+    public var notificationCount: Int {
+
+        get {
+
+            return _notificationCount
+        } set {
+
+            if (newValue < 0) {
+
+                return
+            }
+
+            if (newValue > maxNotifications) {
+
+                lblNotificationCount?.text = "\(maxNotifications)+"
+            } else {
+
+                lblNotificationCount?.text = String(newValue)
+            }
+
+            lblNotificationCount?.isHidden = newValue == 0
+
+            _notificationCount = newValue
+        }
+    }
 
     /**
      * Grabs books from the API endpoint and adds them to the database
@@ -106,6 +142,9 @@ public class HomeScreenViewController: HomeController {
 
             grabBooks()
         }
+
+        lblNotificationCount?.makeCircle()
+        notificationCount = 100;
 
         /**
           * Registers a swipe gesture to be fired when the user swipes right on the screen
