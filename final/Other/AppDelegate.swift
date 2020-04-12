@@ -97,10 +97,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     /**
- * Retrieves all of the items of a specific type that are in the stores list of items
- * - Parameters:
- *      - table: The type of the item you expect to get in return
-*/
+      * Retrieves all of the items of a specific type that are in the stores list of items
+      * - Parameters:
+      *      - table: The type of the item you expect to get in return
+     */
     public func findAll(table: DatabaseItem.Type) -> Array<DatabaseItem> {
 
         let cachedIndex: Int = getCacheIndex(table: table)

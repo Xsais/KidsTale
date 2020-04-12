@@ -18,6 +18,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
      * An event that is fired when the view is loaded into memory
     */
     override public func viewDidLoad() {
+
         super.viewDidLoad()
     }
 
@@ -71,7 +72,9 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
 
         tableCell?.object = searchCache![indexPath.row]
 
-        tableCell?.resourceType = ResourceType(rawValue: String(describing: viewing))!
+        tableCell?.customResource = String(describing: viewing)
+
+        tableCell?.customAccessory = "eye"
 
         return tableCell!
     }
@@ -79,7 +82,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
     /**
      * Reloads the table and all of its cells
     */
-    public func invalidaateTable() {
+    public func invalidateTable() {
 
         tableResources?.reloadData()
     }
