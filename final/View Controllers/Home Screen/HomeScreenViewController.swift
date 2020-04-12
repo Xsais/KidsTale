@@ -119,7 +119,7 @@ public class HomeScreenViewController: HomeController {
 
                 DispatchQueue.main.async {
 
-                    self.invalidaateTable()
+                    self.invalidateTable()
                 }
             } catch let error {
 
@@ -243,7 +243,7 @@ public class HomeScreenViewController: HomeController {
             }
         }
 
-        invalidaateTable()
+        invalidateTable()
     }
 
     /**
