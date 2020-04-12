@@ -255,7 +255,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if sqlite3_open(self.databasePath, &db) == SQLITE_OK {
             
             var queryStatement : OpaquePointer? = nil
-            var queryStatementString : String = "Select * from StoreInfo"
+            var queryStatementString : String = "Select * from store"
             
             //create table StoreInfo(ID integer Primary key, StoreName text, StoreLocation text, StoreDescription text, StoreHour text,StoreImage text);
 
