@@ -15,6 +15,8 @@ import SQLite3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    private static let DATABASE_NAME : String = "KidsTale.db"
 
     /**
      * Stores the time the last query results that were called to a specific table
@@ -83,7 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      * Stores the handler  that will be used to communicate with the database
     */
-    private let databaseCommunicator = DatabaseBuilder(databaseName: "KidsTale.db")
+    private let databaseCommunicator = DatabaseBuilder(databaseName: AppDelegate.DATABASE_NAME)
+    
+    var databasePath : String?
+    
+    var storeData : [Store] = []
 
     /**
      * Stores the current window that is presented to the user
@@ -218,8 +224,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *      - launchOptions: Any options that have been passed with the application launch
     */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+         // Override point for customization after application launch.
+         
+        let documentPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+         let documentsDir = documentPaths[0]
+        databasePath = documentsDir.appending("/" + AppDelegate.DATABASE_NAME)
+          checkAndCreateDatabase()
+         readDataFromDatabase()
+        
         return true
+    }
+     
+    func checkAndCreateDatabase(){
+         var success = false
+         let fileManager = FileManager.default
+         success = fileManager.fileExists(atPath: databasePath!)
+         if success {
+             return
+         }
+        let databasePathFromApp = Bundle.main.resourcePath?.appending("/" + AppDelegate.DATABASE_NAME)
+     
+         try? fileManager.copyItem(atPath: databasePathFromApp!, toPath: databasePath!)
+         
+         return
+     }
+    
+    func readDataFromDatabase(){
+        storeData.removeAll()
+        var db : OpaquePointer? = nil
+        if sqlite3_open(self.databasePath, &db) == SQLITE_OK {
+            
+            var queryStatement : OpaquePointer? = nil
+            var queryStatementString : String = "Select * from StoreInfo"
+            
+            //create table StoreInfo(ID integer Primary key, StoreName text, StoreLocation text, StoreDescription text, StoreHour text,StoreImage text);
+
+            if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil)
+                == SQLITE_OK{
+                while sqlite3_step(queryStatement) == SQLITE_ROW{
+                    //extract the row to the data object
+                    let id : Int = Int(sqlite3_column_int(queryStatement, 0))
+                    let cstorename = sqlite3_column_text(queryStatement, 1)
+                    let cstorelocation = sqlite3_column_text(queryStatement, 2)
+                    let cdescription = sqlite3_column_text(queryStatement, 3)
+                      let cstorehour = sqlite3_column_text(queryStatement, 4)
+                     let cstoreimage = sqlite3_column_text(queryStatement, 5)
+                    
+                    let storename = String(cString: cstorename!)
+                    let storelocation = String(cString: cstorelocation!)
+                    let storedescription = String(cString: cdescription!)
+                     let storehour = String(cString: cstorehour!)
+                    let storeimage = String(cString: cstoreimage!)
+                    
+                    
+                    let data : Store = Store.init(name: storename)
+                        data.initWithData(theRow: id, storeLocation: storelocation, storeDescription: storedescription, storeHour: storehour, storeImage: storeimage)
+                    storeData.append(data)
+                    print("query result")
+                    print("\(id) | \(storename) | \(storelocation) | \(storedescription)")
+                    
+                }
+                sqlite3_finalize(queryStatement)
+            }else{
+                print("Unable to open database1")
+            }
+            sqlite3_close(db)
+        }else{
+            print("Unable to open database2")
+        }
     }
 
     /**

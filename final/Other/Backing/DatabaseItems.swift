@@ -14,21 +14,33 @@ import Foundation
 
 public class DatabaseItem {
 
-    // Stores the title of the book
+    /**
+     * Stores the title of the book
+    */
     public var name: String!
 
-    // Stores the description of the book
+    /**
+     * Stores the description of the book
+    */
     public var description: String!
 
+    /**
+     * Stores the number the represents this object in the database
+    */
     fileprivate var _id: Int?
 
+    /**
+     * Allow for the modification and retrieval of the number the represents this object in the database
+    */
     public var id: Int? {
         get {
             return _id
         }
     }
 
-    // Stores the columns descriptor for each column in the table
+    /**
+     * Stores the columns descriptor for each column in the table
+    */
     private static var _columnDescriptors: [String: Array<ColumnDescriptor>] = [:]
 
     /**
@@ -137,8 +149,20 @@ public class Book: DatabaseItem, Resource {
 */
 public class Store: DatabaseItem, Resource {
 
-    // Stores the location of the store to be consumed by the map API
+    /**
+     * Stores the location of the store to be consumed by the map API
+    */
     public var location: String?
+
+    /**
+     * Stores the hours in which the store is opened
+    */
+    var hours: String?
+
+    /**
+     * Stores image that represents the store
+    */
+    var image: String?
 
     /**
      * Allows the creation of an physical store
@@ -150,6 +174,16 @@ public class Store: DatabaseItem, Resource {
         self.init()
 
         self.name = name
+    }
+
+    public func initWithData(theRow i: Int, storeLocation: String, storeDescription: String, storeHour: String, storeImage: String) {
+
+        _id = i
+        location = storeLocation
+        description = storeDescription
+        hours = storeHour
+        image = storeImage
+
     }
 
     /**
@@ -170,7 +204,9 @@ public class Store: DatabaseItem, Resource {
         ColumnDescriptor(isAuto: true, columnName: "ID", columnType: .integer),
                 ColumnDescriptor(columnName: "name", columnType: .text),
                 ColumnDescriptor(columnName: "description", columnType: .text),
-                ColumnDescriptor(columnName: "location", columnType: .text))
+                ColumnDescriptor(columnName: "location", columnType: .text),
+                ColumnDescriptor(columnName: "hours", columnType: .text),
+                ColumnDescriptor(columnName: "image", columnType: .text))
     }
 
     /**
@@ -202,6 +238,14 @@ public class Store: DatabaseItem, Resource {
             case "location":
 
                 builtItem.location = (value as! String)
+                break
+            case "hours":
+
+                builtItem.hours = (value as! String)
+                break
+            case "image":
+
+                builtItem.image = (value as! String)
                 break
             default:
                 break
