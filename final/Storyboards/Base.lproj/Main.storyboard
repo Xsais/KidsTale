@@ -125,11 +125,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="D9M-W6-Hx2"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="burgerIcon" destination="KhN-bq-LLX" id="zxf-rK-BJA"/>
@@ -303,6 +298,9 @@
                                 <rect key="frame" x="169" y="732" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Contact Us"/>
+                                <connections>
+                                    <segue destination="3fD-mz-6lj" kind="presentation" id="U7a-bO-DYq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -733,4 +731,7 @@
         <image name="mapIcon.png" width="16" height="16"/>
         <image name="search" width="342" height="342"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="U7a-bO-DYq"/>
+    </inferredMetricsTieBreakers>
 </document>

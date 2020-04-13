@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      * Stores the handler  that will be used to communicate with the database
     */
-    private let databaseCommunicator = DatabaseBuilder(databaseName: AppDelegate.DATABASE_NAME)
+    private let databaseCommunicator = DatabaseBuilder(databaseName: DATABASE_NAME)
     
     var databasePath : String?
     
