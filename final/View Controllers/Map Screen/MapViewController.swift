@@ -189,7 +189,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return render
     }
     
-    @IBAction func unwindToStoreDetailViewController(sender :
+    @IBAction func unwindToMapViewController(sender :
         UIStoryboardSegue)
     {
     }
