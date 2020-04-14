@@ -23,7 +23,6 @@
 		7050519024463E4F00F15D88 /* SlideOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7050518F24463E4F00F15D88 /* SlideOutViewController.swift */; };
 		7061479B24438E0D00203985 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479A24438E0D00203985 /* MapViewController.swift */; };
 		7061479D24438E1500203985 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479C24438E1500203985 /* StoreDetailViewController.swift */; };
-		7061479F244394C900203985 /* StoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479E244394C900203985 /* StoreDataClass.swift */; };
 		70825456244275EA00897ED9 /* EUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70825455244275EA00897ED9 /* EUIView.swift */; };
 		70AF89A02443597500E0DBD6 /* EUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF899F2443597500E0DBD6 /* EUIColor.swift */; };
 		70AF89A4244359A800E0DBD6 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF89A2244359A800E0DBD6 /* ChatService.swift */; };
@@ -68,7 +67,6 @@
 		7050518F24463E4F00F15D88 /* SlideOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutViewController.swift; sourceTree = "<group>"; };
 		7061479A24438E0D00203985 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7061479C24438E1500203985 /* StoreDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailViewController.swift; sourceTree = "<group>"; };
-		7061479E244394C900203985 /* StoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDataClass.swift; sourceTree = "<group>"; };
 		70825455244275EA00897ED9 /* EUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUIView.swift; sourceTree = "<group>"; };
 		70AF899B2443589000E0DBD6 /* Scaledrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Scaledrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AF899F2443597500E0DBD6 /* EUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUIColor.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 		6D0C465ACB97896EC5EF3E39 /* Backing */ = {
 			isa = PBXGroup;
 			children = (
-				7061479E244394C900203985 /* StoreDataClass.swift */,
 				6D0C48F16E1F4798E79B8BBB /* Object */,
 				6D0C47553D4EA313D0D3B08A /* DatabaseItems.swift */,
 			);
@@ -500,7 +497,6 @@
 				70AF89A7244359CB00E0DBD6 /* EString.swift in Sources */,
 				703649FD243FCBB800FC11B5 /* HomeController.swift in Sources */,
 				7050519024463E4F00F15D88 /* SlideOutViewController.swift in Sources */,
-				7061479F244394C900203985 /* StoreDataClass.swift in Sources */,
 				70AF89A4244359A800E0DBD6 /* ChatService.swift in Sources */,
 				702CD31D242287B40021E255 /* DatabaseBuilder.swift in Sources */,
 				AE84FA4124047568007865C7 /* AppDelegate.swift in Sources */,

@@ -88,6 +88,14 @@ public class HomeScreenViewController: HomeController {
                 dingAudio.currentTime = 0
                 dingAudio.volume = sharedDelegate.applicationVolume
 
+                dingAnimation.fromValue = 0.25
+                dingAnimation.toValue = 1
+                dingAnimation.duration = 1
+
+                dingAnimation.isRemovedOnCompletion = true;
+
+                dingAnimation.keyPath = sharedDelegate.appliedAnimation
+
                 dingAudio.play()
 
                 lblNotificationCount?.layer.add(dingAnimation, forKey: "dingAnimation")
@@ -163,12 +171,6 @@ public class HomeScreenViewController: HomeController {
         }
 
         lblNotificationCount?.makeCircle()
-
-        dingAnimation.fromValue = 0.25
-        dingAnimation.toValue = 1
-        dingAnimation.duration = 1
-
-        dingAnimation.isRemovedOnCompletion = true;
 
         notificationCount = 0
 

@@ -16,7 +16,20 @@ import SQLite3
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    /**
+     * Stores the name of the database that is to be used throughout the application
+    */
     private static let DATABASE_NAME : String = "KidsTale.db"
+    
+    /**
+     * Stores the name of the database that is to be used throughout the application
+    */
+    public static let validAnimations : [String: String] = ["Blink": "opacity", "Grow": "transform.scale"]
+    
+    /**
+     * Stores the animation that will be applied to the notification dot when a message is recieved
+    */
+    public var appliedAnimation : String = AppDelegate.validAnimations["Blink"]!
     
     /**
      * Stores the time the last query results that were called to a specific table
