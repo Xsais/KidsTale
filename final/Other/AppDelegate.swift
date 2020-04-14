@@ -17,7 +17,7 @@ import SQLite3
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private static let DATABASE_NAME : String = "KidsTale.db"
-
+    
     /**
      * Stores the time the last query results that were called to a specific table
     */
@@ -90,7 +90,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var databasePath : String?
     
     var storeData : [Store] = []
-
+    
+    //created variable to store selected store and it's location <Jie Ming Wu >
+    var storeSelect : String?
+    var storeLocation : String?
+    var LocationChoise : String = "OFF"
+    var InputLocation : String?
+    
+    //<Jie Ming Wu>
+    
     /**
      * Stores the current window that is presented to the user
     */

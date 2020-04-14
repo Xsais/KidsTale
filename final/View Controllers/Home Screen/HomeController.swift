@@ -14,6 +14,8 @@ import UIKit
 
 public class HomeController: SmartUIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     /**
      * An event that is fired when the view is loaded into memory
     */
@@ -21,7 +23,9 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
 
         super.viewDidLoad()
     }
-
+    override public func viewDidAppear(_ animated: Bool){
+        
+    }
     /**
      * Stores a copy of the applications delegate
     */
@@ -136,7 +140,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
         }
 
         sharedDelegate.selectedItem = selectedItem
-
+        
         if (viewing == Book.self) {
 
             // TODO: present() additional information for the specific book
@@ -144,6 +148,13 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
 
             // TODO: present() additional information for the specific store
         }
+    
+       //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
+       //store the select data into appdalegate's object, this object will be use to pull out the store details from db
+       mainDelegate.storeSelect = selectedItem?.name
+       self.performSegue(withIdentifier: "storeDetailViewController", sender: self)
+    
+        //end (Jie Ming Wu)
     }
 
 }
