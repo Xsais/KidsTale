@@ -281,7 +281,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let storename = String(cString: cstorename!)
                     let storelocation = String(cString: cstorelocation!)
                     let storedescription = String(cString: cdescription!)
-                     let storehour = String(cString: cstorehour!)
+                    let storehour = String(cString: cstorehour!)
                     let storeimage = String(cString: cstoreimage!)
                     
                     
