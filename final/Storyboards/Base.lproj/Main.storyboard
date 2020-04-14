@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +11,7 @@
         <!--Home Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,11 +125,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="D9M-W6-Hx2"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="burgerIcon" destination="KhN-bq-LLX" id="zxf-rK-BJA"/>
@@ -186,9 +179,9 @@
         <!--Help Screen View Controller-->
         <scene sceneID="Iya-HF-RlU">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="hWd-M9-RQy" customClass="HelpScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="hWd-M9-RQy" customClass="HelpScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Je-Pi-DB5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-2R-2lW">
@@ -330,7 +323,7 @@
         <!--View Controller-->
         <scene sceneID="sNV-Gx-xi2">
             <objects>
-                <viewController id="tO0-Ir-rOf" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="tO0-Ir-rOf" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZvV-eg-0ql">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,7 +398,7 @@
         <!--User View Controller-->
         <scene sceneID="ifr-Kj-7Lt">
             <objects>
-                <viewController id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dL4-dq-uKj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -462,7 +455,7 @@
         <!--User List Table View Controller-->
         <scene sceneID="O08-wx-H0X">
             <objects>
-                <viewController storyboardIdentifier="UserListTableView" id="WkZ-b5-kwF" customClass="UserListTableViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserListTableView" modalPresentationStyle="fullScreen" id="WkZ-b5-kwF" customClass="UserListTableViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDw-zf-JVO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -504,7 +497,7 @@
         <!--Chat View Controller-->
         <scene sceneID="XdG-8k-0Qo">
             <objects>
-                <viewController storyboardIdentifier="ChatView" id="MRn-Dc-XJB" customClass="ChatViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatView" modalPresentationStyle="fullScreen" id="MRn-Dc-XJB" customClass="ChatViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wgk-CC-bxh" customClass="ChatVie">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -519,7 +512,7 @@
         <!--Store Detail View Controller-->
         <scene sceneID="iHT-n5-JY5">
             <objects>
-                <viewController id="njL-ck-PYC" customClass="StoreDetailViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="njL-ck-PYC" customClass="StoreDetailViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="diB-bU-bJj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -669,7 +662,7 @@
         <!--Map View Controller-->
         <scene sceneID="cws-JP-AF3">
             <objects>
-                <viewController id="AL0-tt-O4i" customClass="MapViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="AL0-tt-O4i" customClass="MapViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ouc-vV-uTo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -678,14 +671,8 @@
                                 <rect key="frame" x="0.0" y="126" width="71" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jyV-om-KEa">
-                                <rect key="frame" x="169" y="14" width="225" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xap-mY-jvc">
-                                <rect key="frame" x="0.0" y="240" width="425" height="622"/>
+                                <rect key="frame" x="0.0" y="240" width="414" height="656"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Destination:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E00-ks-n1O">
@@ -746,29 +733,31 @@
         <!--Map Web View Controller-->
         <scene sceneID="99x-je-y6g">
             <objects>
-                <viewController id="eOK-Ge-2WC" customClass="MapWebViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="eOK-Ge-2WC" customClass="MapWebViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hNp-3j-Wwt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AdY-hG-jYL">
-                                <rect key="frame" x="0.0" y="65" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Google Map Website" id="JgM-UQ-d5n">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="gV3-IR-r4U">
-                                            <connections>
-                                                <segue destination="GcZ-1u-Efu" kind="unwind" unwindAction="unwindToStoreDetailViewControllerWithSender:" id="Gsb-lj-FoQ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hk2-B0-GTQ">
-                                <rect key="frame" x="0.0" y="109" width="414" height="714"/>
+                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKZ-w0-k9u">
+                                <rect key="frame" x="20" y="63" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="chevron"/>
+                                <connections>
+                                    <segue destination="GcZ-1u-Efu" kind="unwind" unwindAction="unwindToMapViewControllerWithSender:" id="tAd-ca-HWf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google Maps Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F06-L9-Bbd">
+                                <rect key="frame" x="112" y="62" width="191" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PLY-Ma-you"/>
