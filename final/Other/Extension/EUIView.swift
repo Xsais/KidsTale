@@ -11,6 +11,7 @@
 */
 
 import UIKit
+import QuartzCore
 
 extension UIView {
 
@@ -24,5 +25,6 @@ extension UIView {
         self.layer.cornerRadius = self.frame.height / 2.0
 
         self.layer.masksToBounds = true
+
     }
 }

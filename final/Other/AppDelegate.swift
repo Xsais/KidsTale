@@ -59,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var selectedItem: DatabaseItem?
 
     /**
+     * Stores the volume the application will use
+    */
+    public var applicationVolume: Float = 50
+
+    /**
      * Retrieves and assigns the current amount of notification, only if the handlers have been registered
     */
     public var notificationCount: Int {

@@ -11,6 +11,7 @@
 */
 
 import UIKit
+import AVFoundation
 
 public class HomeScreenViewController: HomeController {
 
@@ -19,6 +20,11 @@ public class HomeScreenViewController: HomeController {
     */
     @IBOutlet
     private var slideoutMenu: UIView?
+
+    /**
+     * Stores the animation that is used to flash the ding icon
+    */
+    let dingAnimation: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
 
     /**
      * Stores a copy of the UIView for the notification bubble
@@ -30,7 +36,7 @@ public class HomeScreenViewController: HomeController {
      * Stores a copy of the Segmented control that determines which resources to display
     */
     @IBOutlet
-    private var segResourceType: UISegmentedControl?
+    private var tabResourceType: UITabBar?
 
     /**
      * Stores a copy of the Text field that contains the query of the user
@@ -62,6 +68,8 @@ public class HomeScreenViewController: HomeController {
 
     public let maxNotifications: Int = 5
 
+    private let dingAudio: AVAudioPlayer = try! AVAudioPlayer(data: NSDataAsset(name: "bell", bundle: Bundle.main)!.data)
+
     private var _notificationCount: Int = 0
 
     public var notificationCount: Int {
@@ -69,11 +77,20 @@ public class HomeScreenViewController: HomeController {
         get {
 
             return _notificationCount
-        } set {
+        }
+        set {
 
             if (newValue < 0) {
 
                 return
+            } else if (newValue >= 1) {
+
+                dingAudio.currentTime = 0
+                dingAudio.volume = sharedDelegate.applicationVolume
+
+                dingAudio.play()
+
+                lblNotificationCount?.layer.add(dingAnimation, forKey: "dingAnimation")
             }
 
             if (newValue > maxNotifications) {
@@ -136,6 +153,8 @@ public class HomeScreenViewController: HomeController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        dingAudio.numberOfLoops = 1
+
         sharedDelegate.findAll(table: Store.self)
 
         if (sharedDelegate.findAll(table: Book.self).count <= 0) {
@@ -144,14 +163,21 @@ public class HomeScreenViewController: HomeController {
         }
 
         lblNotificationCount?.makeCircle()
+
+        dingAnimation.fromValue = 0.25
+        dingAnimation.toValue = 1
+        dingAnimation.duration = 1
+
+        dingAnimation.isRemovedOnCompletion = true;
+
         notificationCount = 0
 
-        sharedDelegate.setNotificationCount = {(newValue: Any) in
+        sharedDelegate.setNotificationCount = { (newValue: Any) in
 
             self.notificationCount = newValue as! Int
         }
 
-        sharedDelegate.getNotificationCount = {() in
+        sharedDelegate.getNotificationCount = { () in
 
             return self.notificationCount;
         }
@@ -206,7 +232,21 @@ public class HomeScreenViewController: HomeController {
         slideoutMenu?.addSubview(exitSlideOut)
         slideoutMenu?.addSubview(blurEffectView)
 
-        parseResourceType(segResourceType!)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24.0)], for: .normal)
+
+        tabResourceType?.delegate = self
+        tabResourceType?.selectedItem = tabResourceType!.items![0]
+    }
+
+    /**
+     * Handler for when the user presses a tab
+     * - Parameters:
+     *      - tabBar: The bar that triggered the event
+     *      - item: The tab item that was clicked
+    */
+    public func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+
+        parseResourceType(sender: tabBar)
     }
 
     /**
@@ -215,12 +255,12 @@ public class HomeScreenViewController: HomeController {
      *      - sender: The segmented control that initialized the event
     */
     @IBAction
-    public func parseResourceType(_ sender: UISegmentedControl) {
+    public func parseResourceType(sender: UITabBar) {
 
-        if (sender.selectedSegmentIndex == 0) {
+        if (sender.selectedItem?.title == String(describing: Book.self)) {
 
             viewing = Book.self
-        } else if (sender.selectedSegmentIndex == 1) {
+        } else if (sender.selectedItem?.title == String(describing: Store.self)) {
 
             viewing = Store.self
         }
