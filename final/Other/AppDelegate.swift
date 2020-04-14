@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * Stores the animation that will be applied to the notification dot when a message is recieved
     */
     public var appliedAnimation : String = AppDelegate.validAnimations["Blink"]!
-    
+  
     /**
      * Stores the time the last query results that were called to a specific table
     */
