@@ -18,9 +18,11 @@
 		702CD3252422972C0021E255 /* InitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CD3242422972C0021E255 /* InitDelegate.swift */; };
 		703649FD243FCBB800FC11B5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703649FC243FCBB800FC11B5 /* HomeController.swift */; };
 		70459607243FCE8400B0AB91 /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70459606243FCE8400B0AB91 /* DetailViewCell.swift */; };
+		7050518B24463AB100F15D88 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7050518A24463AB100F15D88 /* QuartzCore.framework */; };
+		7050518D24463AB600F15D88 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7050518C24463AB600F15D88 /* AVFoundation.framework */; };
+		7050519024463E4F00F15D88 /* SlideOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7050518F24463E4F00F15D88 /* SlideOutViewController.swift */; };
 		7061479B24438E0D00203985 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479A24438E0D00203985 /* MapViewController.swift */; };
 		7061479D24438E1500203985 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479C24438E1500203985 /* StoreDetailViewController.swift */; };
-		7061479F244394C900203985 /* StoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7061479E244394C900203985 /* StoreDataClass.swift */; };
 		70825456244275EA00897ED9 /* EUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70825455244275EA00897ED9 /* EUIView.swift */; };
 		70AF89A02443597500E0DBD6 /* EUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF899F2443597500E0DBD6 /* EUIColor.swift */; };
 		70AF89A4244359A800E0DBD6 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF89A2244359A800E0DBD6 /* ChatService.swift */; };
@@ -60,9 +62,11 @@
 		702CD3242422972C0021E255 /* InitDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitDelegate.swift; sourceTree = "<group>"; };
 		703649FC243FCBB800FC11B5 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		70459606243FCE8400B0AB91 /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
+		7050518A24463AB100F15D88 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7050518C24463AB600F15D88 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7050518F24463E4F00F15D88 /* SlideOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutViewController.swift; sourceTree = "<group>"; };
 		7061479A24438E0D00203985 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7061479C24438E1500203985 /* StoreDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailViewController.swift; sourceTree = "<group>"; };
-		7061479E244394C900203985 /* StoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDataClass.swift; sourceTree = "<group>"; };
 		70825455244275EA00897ED9 /* EUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUIView.swift; sourceTree = "<group>"; };
 		70AF899B2443589000E0DBD6 /* Scaledrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Scaledrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AF899F2443597500E0DBD6 /* EUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EUIColor.swift; sourceTree = "<group>"; };
@@ -98,7 +102,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7050518B24463AB100F15D88 /* QuartzCore.framework in Frameworks */,
 				702CD31A242286610021E255 /* libsqlite3.tbd in Frameworks */,
+				7050518D24463AB600F15D88 /* AVFoundation.framework in Frameworks */,
 				702CD318242286520021E255 /* libsqlite3.0.tbd in Frameworks */,
 				E86CEDA2B1E3AEDA21064FC0 /* Pods_final.framework in Frameworks */,
 			);
@@ -118,7 +124,6 @@
 		6D0C465ACB97896EC5EF3E39 /* Backing */ = {
 			isa = PBXGroup;
 			children = (
-				7061479E244394C900203985 /* StoreDataClass.swift */,
 				6D0C48F16E1F4798E79B8BBB /* Object */,
 				6D0C47553D4EA313D0D3B08A /* DatabaseItems.swift */,
 			);
@@ -136,6 +141,8 @@
 		702CD3162422864B0021E255 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7050518C24463AB600F15D88 /* AVFoundation.framework */,
+				7050518A24463AB100F15D88 /* QuartzCore.framework */,
 				70AF899B2443589000E0DBD6 /* Scaledrone.framework */,
 				702CD319242286570021E255 /* libsqlite3.tbd */,
 				702CD3172422864B0021E255 /* libsqlite3.0.tbd */,
@@ -158,6 +165,7 @@
 		703649FB243FCB7C00FC11B5 /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
+				7050518E24463E2E00F15D88 /* Sub View */,
 				AE84FA4224047568007865C7 /* HomeScreenViewController.swift */,
 				703649FC243FCBB800FC11B5 /* HomeController.swift */,
 			);
@@ -171,6 +179,14 @@
 				70AF89B224435B0900E0DBD6 /* Detail */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		7050518E24463E2E00F15D88 /* Sub View */ = {
+			isa = PBXGroup;
+			children = (
+				7050518F24463E4F00F15D88 /* SlideOutViewController.swift */,
+			);
+			path = "Sub View";
 			sourceTree = "<group>";
 		};
 		7061479824438DC800203985 /* Map Screen */ = {
@@ -480,7 +496,7 @@
 				AE84FA4324047568007865C7 /* HomeScreenViewController.swift in Sources */,
 				70AF89A7244359CB00E0DBD6 /* EString.swift in Sources */,
 				703649FD243FCBB800FC11B5 /* HomeController.swift in Sources */,
-				7061479F244394C900203985 /* StoreDataClass.swift in Sources */,
+				7050519024463E4F00F15D88 /* SlideOutViewController.swift in Sources */,
 				70AF89A4244359A800E0DBD6 /* ChatService.swift in Sources */,
 				702CD31D242287B40021E255 /* DatabaseBuilder.swift in Sources */,
 				AE84FA4124047568007865C7 /* AppDelegate.swift in Sources */,
