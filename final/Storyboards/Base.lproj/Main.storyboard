@@ -595,6 +595,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="njL-ck-PYC" id="1q3-JK-6JW"/>
+                                </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MapIcon2.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRP-um-rZ9">
                                 <rect key="frame" x="0.0" y="730" width="163" height="95"/>

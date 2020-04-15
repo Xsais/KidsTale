@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoreDetailViewController: UIViewController {
+class StoreDetailViewController: SmartUIViewController {
 
     //define Action OutLet variable for tags
     @IBOutlet var storeImage : UIImageView!
