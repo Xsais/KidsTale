@@ -1,11 +1,9 @@
-/*
- 
- Heon Lee
- 991280638
- 
- A view controller to take usernames from users
- 2020-04-19
- */
+//
+//  UserViewController.swift
+//  final
+//
+//  Created by Xcode User on 2020-04-11.
+//
 
 import UIKit
 
@@ -24,18 +22,14 @@ class UserViewController: UIViewController {
         
         let strUsername = tfusername.text!
         
-        //If the username is empty
         if (strUsername.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
             username = strUsername
         }
         
-        //Programmatically redirect to the next view controller
-        
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChatListTableView") as! ChatListViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "UserListTableView") as! UserListTableViewController
         
-        //Pass the username to the UserListTableViewController
         vc.username = self.username
         
         self.present(vc, animated: true, completion: nil)

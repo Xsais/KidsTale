@@ -1,17 +1,8 @@
-/*
- 
- Heon Lee
- 991280638
- 
- Color extensions
- 2020-04-19
- */
 import Foundation
 import UIKit
 
 //Generate random red, green, and blue values
 extension UIColor {
-    //Generates random hex color
     static var random: UIColor {
         return UIColor(
             red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)

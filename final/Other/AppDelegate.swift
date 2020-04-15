@@ -16,21 +16,8 @@ import SQLite3
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    /**
-     * Stores the name of the database that is to be used throughout the application
-    */
     private static let DATABASE_NAME : String = "KidsTale.db"
     
-    /**
-     * Stores the name of the database that is to be used throughout the application
-    */
-    public static let validAnimations : [String: String] = ["Blink": "opacity", "Grow": "transform.scale"]
-    
-    /**
-     * Stores the animation that will be applied to the notification dot when a message is recieved
-    */
-    public var appliedAnimation : String = AppDelegate.validAnimations["Blink"]!
-  
     /**
      * Stores the time the last query results that were called to a specific table
     */
@@ -47,31 +34,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
     /**
+     * The typealias responsible for handling getting a value
+    */
+    typealias HandleGetValue = () -> Any
+
+    /**
+     * The typealias responsible for handling setting a value
+    */
+    typealias HandleSetValue = (Any) -> Void
+
+    /**
+     * Stores the expresion used to set the notification count
+    */
+    public var setNotificationCount: HandleSetValue? = nil
+
+    /**
+     * Stores the expresion used to get the notification count
+    */
+    public var getNotificationCount: HandleGetValue? = nil
+
+    /**
      * Stores the item that is selected on the HomeScreen
     */
     public var selectedItem: DatabaseItem?
 
     /**
-     * Stores the volume the application will use
+     * Retrieves and assigns the current amount of notification, only if the handlers have been registered
     */
-    public var applicationVolume: Float = 50
+    public var notificationCount: Int {
+        get {
+
+            if (getNotificationCount == nil) {
+
+                return -1
+            }
+
+            return getNotificationCount!() as! Int
+        }
+        set {
+
+            if (setNotificationCount == nil) {
+
+                return
+            }
+
+            setNotificationCount!(newValue)
+        }
+    }
 
     /**
      * Stores the handler  that will be used to communicate with the database
     */
-    private let databaseCommunicator = DatabaseBuilder(databaseName: DATABASE_NAME)
+    private let databaseCommunicator = DatabaseBuilder(databaseName: AppDelegate.DATABASE_NAME)
     
     var databasePath : String?
-    
     var storeData : [Store] = []
     
-    //created variable to store selected store and it's location <Jie Ming Wu >
-    var storeSelect: String?
+//created variables to store selected store and it's location will be use for StoreDetailViewController and MapViewController 
+    
+    var storeSelect : String?
     var storeLocation : String?
-    var LocationChoise : String = "OFF"
+    var LocationChoise : String = "OFF"   //set Location choise to default value OFF
     var InputLocation : String?
     
-    //<Jie Ming Wu>
+//end of StoreDetailsViewController
     
     /**
      * Stores the current window that is presented to the user
@@ -216,7 +242,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-     
+    
+//Check if Database exist and return database Path.
+//contribute and will be use by <Jie Ming Wu>
     func checkAndCreateDatabase(){
          var success = false
          let fileManager = FileManager.default
@@ -227,10 +255,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let databasePathFromApp = Bundle.main.resourcePath?.appending("/" + AppDelegate.DATABASE_NAME)
      
          try? fileManager.copyItem(atPath: databasePathFromApp!, toPath: databasePath!)
-         
          return
      }
-    
+   
+//function to read Data from databased and store data into a local store array.
+//contribute and will be use by <Jie Ming Wu>
     func readDataFromDatabase(){
         storeData.removeAll()
         var db : OpaquePointer? = nil
@@ -249,22 +278,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let cstorename = sqlite3_column_text(queryStatement, 1)
                     let cstorelocation = sqlite3_column_text(queryStatement, 2)
                     let cdescription = sqlite3_column_text(queryStatement, 3)
-                      let cstorehour = sqlite3_column_text(queryStatement, 4)
-                     let cstoreimage = sqlite3_column_text(queryStatement, 5)
-                    
+                    let cstorehour = sqlite3_column_text(queryStatement, 4)
+                    let cstoreimage = sqlite3_column_text(queryStatement, 5)
+                
                     let storename = String(cString: cstorename!)
                     let storelocation = String(cString: cstorelocation!)
                     let storedescription = String(cString: cdescription!)
                     let storehour = String(cString: cstorehour!)
                     let storeimage = String(cString: cstoreimage!)
-                    
-                    
                     let data : Store = Store.init(name: storename)
                         data.initWithData(theRow: id, storeLocation: storelocation, storeDescription: storedescription, storeHour: storehour, storeImage: storeimage)
                     storeData.append(data)
                     print("query result")
                     print("\(id) | \(storename) | \(storelocation) | \(storedescription)")
-                    
                 }
                 sqlite3_finalize(queryStatement)
             }else{
