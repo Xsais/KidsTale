@@ -3,8 +3,8 @@
  Heon Lee
  991280638
  
- Alternative Final Exam
- 2020-04-08
+ UserViewCell.swift
+ 2020-04-19
  */
 
 import UIKit
@@ -46,7 +46,7 @@ class UserViewCell: UITableViewCell {
         primaryLabel.frame = CGRect(x: 100, y: 5, width: 460, height: 30)
         secondaryLabel.frame = CGRect(x: 100, y: 40, width: 460, height: 30)
         
-        myImageView.frame = CGRect(x: 5, y: 5, width: 45, height: 45)
+        myImageView.frame = CGRect(x: 5, y: 5, width: 80, height: 50)
     }
     
     
