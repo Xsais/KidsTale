@@ -10,6 +10,7 @@
 		6D0C42EE9E075D58965A0156 /* HelpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C46B5E13D34083617DBEA /* HelpScreenViewController.swift */; };
 		6D0C43770B646E04E1E29804 /* DatabaseItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C47553D4EA313D0D3B08A /* DatabaseItems.swift */; };
 		6D0C4EE45548096B2EB7C516 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C461EFDF414DD64363C72 /* Resource.swift */; };
+		701FDE0D2446C9FE004E1B78 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FDE0C2446C9FE004E1B78 /* BookDetailsViewController.swift */; };
 		702CD318242286520021E255 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 702CD3172422864B0021E255 /* libsqlite3.0.tbd */; };
 		702CD31A242286610021E255 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 702CD319242286570021E255 /* libsqlite3.tbd */; };
 		702CD31D242287B40021E255 /* DatabaseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CD31C242287B40021E255 /* DatabaseBuilder.swift */; };
@@ -58,6 +59,7 @@
 		6D0C461EFDF414DD64363C72 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		6D0C46B5E13D34083617DBEA /* HelpScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpScreenViewController.swift; sourceTree = "<group>"; };
 		6D0C47553D4EA313D0D3B08A /* DatabaseItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseItems.swift; sourceTree = "<group>"; };
+		701FDE0C2446C9FE004E1B78 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		702CD3172422864B0021E255 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		702CD319242286570021E255 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		702CD31C242287B40021E255 /* DatabaseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseBuilder.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 				6D0C461EFDF414DD64363C72 /* Resource.swift */,
 			);
 			path = Object;
+			sourceTree = "<group>";
+		};
+		701FDE0B2446C9DD004E1B78 /* Book Screen */ = {
+			isa = PBXGroup;
+			children = (
+				701FDE0C2446C9FE004E1B78 /* BookDetailsViewController.swift */,
+			);
+			path = "Book Screen";
 			sourceTree = "<group>";
 		};
 		702CD3162422864B0021E255 /* Frameworks */ = {
@@ -301,6 +311,7 @@
 		AE3CE08E240ABB0800E62413 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				701FDE0B2446C9DD004E1B78 /* Book Screen */,
 				70FB91B72415A23F0039DE36 /* Helpers */,
 				7061479924438DDB00203985 /* Store Screen */,
 				7061479824438DC800203985 /* Map Screen */,
@@ -521,6 +532,7 @@
 				70AF89A02443597500E0DBD6 /* EUIColor.swift in Sources */,
 				70AF89B524435B2300E0DBD6 /* UserViewCell.swift in Sources */,
 				70AF89B024435A4400E0DBD6 /* UserViewController.swift in Sources */,
+				701FDE0D2446C9FE004E1B78 /* BookDetailsViewController.swift in Sources */,
 				AED729EF244603BD00EF1AD4 /* MapWebViewController.swift in Sources */,
 				AE865C3024469BE9008A1C04 /* Room.swift in Sources */,
 				7061479D24438E1500203985 /* StoreDetailViewController.swift in Sources */,

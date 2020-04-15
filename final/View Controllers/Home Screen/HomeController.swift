@@ -14,8 +14,6 @@ import UIKit
 
 public class HomeController: SmartUIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
 
-    
-    let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     /**
      * An event that is fired when the view is loaded into memory
     */
@@ -50,7 +48,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
     /**
      * Stores the releasable name for the table cell
     */
-    private static let CELL_NAME: String = "resource"
+    public static let CELL_NAME: String = "resource"
 
     /**
      * Stores a copy of the Table view that displays all chosen resources
@@ -93,7 +91,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
     }
 
     /**
-     * Allows ViewController to perform an unwind segue
+     * determines the total amount of element in the table view
      * - Parameters:
      *      - tableView: The object that initialized the event
      *      - numberOfRowsInSection: The number of rows in the selection
@@ -144,12 +142,10 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
         
         if (viewing == Book.self) {
 
-            // TODO: present() additional information for the specific book
+            self.performSegue(withIdentifier: "bookDetailViewController", sender: self)
         } else if (viewing == Store.self) {
 
             //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
-            //store the select data into appdalegate's object, this object will be use to pull out the store details from db
-            mainDelegate.storeSelect = selectedItem?.name
             self.performSegue(withIdentifier: "storeDetailViewController", sender: self)
 
             //end (Jie Ming Wu)

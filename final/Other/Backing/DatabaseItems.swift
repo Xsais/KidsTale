@@ -11,6 +11,7 @@
 */
 
 import Foundation
+import UIKit
 
 public class DatabaseItem {
 
@@ -157,12 +158,12 @@ public class Store: DatabaseItem, Resource {
     /**
      * Stores the hours in which the store is opened
     */
-    var hours: String?
+    public var hours: String?
 
     /**
      * Stores image that represents the store
     */
-    var image: String?
+    public var image: String?
 
     /**
      * Allows the creation of an physical store
@@ -246,6 +247,91 @@ public class Store: DatabaseItem, Resource {
             case "image":
 
                 builtItem.image = (value as! String)
+                break
+            default:
+                break
+            }
+        })
+
+        return builtItem
+    }
+}
+
+/**
+ * Represents a the inventory of a physical store
+*/
+public class Inventory: DatabaseItem, Resource {
+
+    /**
+     * Stores the book that the store has in there inventory
+    */
+    public var book: Book?
+
+    /**
+     * Stores the store the has the inventory
+    */
+    public var store: Store?
+
+    /**
+     * Stores the book that the store has in there inventory
+    */
+    public var stock: Int?
+
+    /**
+     * Allows the creation of an blank physical store
+    */
+    private override init() {
+
+        super.init()
+    }
+
+    /**
+     * The place were all of the 'ColumnDescriptors' are registered
+    */
+    public static func initDescriptors() {
+
+        // Registers all of the columns the are in the store table
+        DatabaseItem.registerColumn(table: Inventory.self, columns:
+        ColumnDescriptor(columnName: "bookID", columnType: .integer),
+                ColumnDescriptor(columnName: "storeID", columnType: .integer),
+                ColumnDescriptor(columnName: "stock", columnType: .integer))
+    }
+
+    /**
+     * Allows the creation of an store inventory from a table query look-up
+     * - Parameters:
+     *      - columns: The table columns that the store properties will be initialized with
+    */
+    public static func initWithColumnDescriptors(columns: Dictionary<ColumnDescriptor, Any>) -> DatabaseItem {
+
+        let builtItem: Inventory = Inventory()
+
+        let sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
+        // Searches throw each 'ColumnDescriptor' for the fields required to initialize the book
+        columns.forEach({ (column: ColumnDescriptor, value: Any) in
+
+            switch (column.name) {
+
+            case "bookID":
+
+                builtItem._id = (value as! Int)
+
+                builtItem.book = (sharedDelegate.findAll(table: Book.self) as! Array<Book>).filter({ (book: Book) in
+
+                    return book.id == builtItem.id
+                }).first
+                break
+            case "storeID":
+
+                builtItem.store = (sharedDelegate.findAll(table: Store.self) as! Array<Store>).filter({ (store: Store) in
+
+                    return store.id == (value as! Int)
+                }).first
+                break
+            case "stock":
+
+                builtItem.stock = (value as! Int)
                 break
             default:
                 break

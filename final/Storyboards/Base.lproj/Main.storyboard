@@ -132,6 +132,7 @@
                         <outlet property="tableResources" destination="HJV-8h-EX3" id="7E3-W0-grN"/>
                         <outlet property="textSearch" destination="dmP-Ub-dLZ" id="CDX-0K-Vw3"/>
                         <segue destination="njL-ck-PYC" kind="presentation" identifier="storeDetailViewController" id="oQ4-gY-f1w"/>
+                        <segue destination="tO0-Ir-rOf" kind="presentation" identifier="bookDetailViewController" id="riz-hN-mqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -352,10 +353,10 @@
             </objects>
             <point key="canvasLocation" x="965" y="929"/>
         </scene>
-        <!--View Controller-->
+        <!--Book Details View Controller-->
         <scene sceneID="sNV-Gx-xi2">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="tO0-Ir-rOf" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="tO0-Ir-rOf" customClass="BookDetailsViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZvV-eg-0ql">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,15 +380,6 @@
                                 <rect key="frame" x="41" y="136" width="92" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klJ-Mg-55M">
-                                <rect key="frame" x="148" y="136" width="230" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nVS-U3-Bwz">
                                 <rect key="frame" x="41" y="248" width="325" height="257"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -401,6 +393,10 @@
                                 <rect key="frame" x="0.0" y="555" width="414" height="341"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="tO0-Ir-rOf" id="oHc-ce-cv4"/>
+                                    <outlet property="delegate" destination="tO0-Ir-rOf" id="8H1-oP-x2E"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfj-El-Tb5">
                                 <rect key="frame" x="164" y="519" width="56" height="24"/>
@@ -417,15 +413,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxm-qw-R35">
+                                <rect key="frame" x="141" y="174" width="218" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="OrL-KC-Bt3"/>
                     </view>
+                    <connections>
+                        <outlet property="lblTitle" destination="fxm-qw-R35" id="9EP-WQ-zxV"/>
+                        <outlet property="txtDescription" destination="nVS-U3-Bwz" id="DkG-tt-7tG"/>
+                        <segue destination="njL-ck-PYC" kind="presentation" identifier="storeDetailViewController" id="Hcd-N7-FIB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9as-JO-OKz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="tG9-I2-LsJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1799" y="929"/>
+            <point key="canvasLocation" x="1798.5507246376812" y="928.79464285714278"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="ifr-Kj-7Lt">
@@ -829,6 +837,7 @@
         <image name="search" width="342" height="342"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U7a-bO-DYq"/>
+        <segue reference="Hcd-N7-FIB"/>
+        <segue reference="8nY-1D-uyD"/>
     </inferredMetricsTieBreakers>
 </document>
