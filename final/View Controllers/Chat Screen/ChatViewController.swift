@@ -28,6 +28,21 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+         Reference: https://stackoverflow.com/questions/53642355/uibarbuttonitem-doesnt-show-up-when-using-messagekit
+        */
+        //Add navigation bar
+        
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 45))
+        
+        navigationBar.items?.append(UINavigationItem(title: chatName))
+        
+        //Add back button
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
+        
+        navigationBar.topItem?.leftBarButtonItem = backButton
+        self.view.addSubview(navigationBar)
+        
         //Member
         //Username given by the user
         //Color is generated randomly.
@@ -58,6 +73,19 @@ class ChatViewController: MessagesViewController {
         //Connect the Chat Service
         chatService.connect()
     }
+    
+    /*
+     Reference:
+     https://github.com/MessageKit/MessageKit/issues/860
+    */
+    @objc func back(sender : UIBarButtonItem){
+        
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChatListTableView") as! ChatListViewController
+        
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 //Number and content of messages
@@ -81,6 +109,7 @@ extension ChatViewController: MessagesDataSource{
     }
     
     //Top label height of the message
+    //Height between each messages
     func messageTopLabelHeight(for message: MessageType
         , at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> CGFloat {
         return 12
