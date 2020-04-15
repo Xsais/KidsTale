@@ -47,26 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public static let ANIMATION_DURATION: TimeInterval = TimeInterval(CGFloat(0.25))
 
     /**
-     * The typealias responsible for handling getting a value
-    */
-    typealias HandleGetValue = () -> Any
-
-    /**
-     * The typealias responsible for handling setting a value
-    */
-    typealias HandleSetValue = (Any) -> Void
-
-    /**
-     * Stores the expresion used to set the notification count
-    */
-    public var setNotificationCount: HandleSetValue? = nil
-
-    /**
-     * Stores the expresion used to get the notification count
-    */
-    public var getNotificationCount: HandleGetValue? = nil
-
-    /**
      * Stores the item that is selected on the HomeScreen
     */
     public var selectedItem: DatabaseItem?
@@ -75,30 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * Stores the volume the application will use
     */
     public var applicationVolume: Float = 50
-
-    /**
-     * Retrieves and assigns the current amount of notification, only if the handlers have been registered
-    */
-    public var notificationCount: Int {
-        get {
-
-            if (getNotificationCount == nil) {
-
-                return -1
-            }
-
-            return getNotificationCount!() as! Int
-        }
-        set {
-
-            if (setNotificationCount == nil) {
-
-                return
-            }
-
-            setNotificationCount!(newValue)
-        }
-    }
 
     /**
      * Stores the handler  that will be used to communicate with the database
