@@ -110,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storeData : [Store] = []
     
     //created variable to store selected store and it's location <Jie Ming Wu >
+    var storeSelect: String?
     var storeLocation : String?
     var LocationChoise : String = "OFF"
     var InputLocation : String?

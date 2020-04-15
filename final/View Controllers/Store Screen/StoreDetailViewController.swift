@@ -33,11 +33,17 @@ class StoreDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
-        //pull out what store did the user select
 
-        //get store detail
-        storeDetail = (mainDelegate.selectedItem as! Store)
+        //pull out what store did the user select
+        //pull out the store details by comparing the stores data array to the
+        //storeSelect object created in AppDelegate
+        for store in mainDelegate.storeData{
+            if store.name == mainDelegate.storeSelect{
+
+                //get store detail
+                storeDetail = store
+            }
+        }
         
         //assign variable to the page by getting values from the store details selected by user
         mapIconString = "MapIcon2"
