@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +13,7 @@
         <!--Home Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,7 +94,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="chat"/>
                                 <connections>
-                                    <segue destination="3fD-mz-6lj" kind="presentation" id="8nY-1D-uyD"/>
+                                    <action selector="redirectToChatWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="522-3b-aEH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdY-w1-5vZ">
@@ -212,9 +214,9 @@
         <!--Help Screen View Controller-->
         <scene sceneID="Iya-HF-RlU">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="hWd-M9-RQy" customClass="HelpScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="hWd-M9-RQy" customClass="HelpScreenViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Je-Pi-DB5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-2R-2lW">
@@ -356,7 +358,7 @@
         <!--Book Details View Controller-->
         <scene sceneID="sNV-Gx-xi2">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="tO0-Ir-rOf" customClass="BookDetailsViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tO0-Ir-rOf" customClass="BookDetailsViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZvV-eg-0ql">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,7 +440,7 @@
         <!--User View Controller-->
         <scene sceneID="ifr-Kj-7Lt">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserView" id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dL4-dq-uKj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,7 +497,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="O08-wx-H0X">
             <objects>
-                <viewController storyboardIdentifier="ChatListTableView" modalPresentationStyle="fullScreen" id="WkZ-b5-kwF" customClass="ChatListViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListTableView" id="WkZ-b5-kwF" customClass="ChatListViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDw-zf-JVO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -552,7 +554,7 @@
         <!--Chat View Controller-->
         <scene sceneID="XdG-8k-0Qo">
             <objects>
-                <viewController storyboardIdentifier="ChatView" modalPresentationStyle="fullScreen" id="MRn-Dc-XJB" customClass="ChatViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatView" id="MRn-Dc-XJB" customClass="ChatViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wgk-CC-bxh" customClass="ChatVie">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -567,7 +569,7 @@
         <!--Store Detail View Controller-->
         <scene sceneID="iHT-n5-JY5">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="njL-ck-PYC" customClass="StoreDetailViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="njL-ck-PYC" customClass="StoreDetailViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="diB-bU-bJj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -720,7 +722,7 @@
         <!--Map View Controller-->
         <scene sceneID="cws-JP-AF3">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="AL0-tt-O4i" customClass="MapViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AL0-tt-O4i" customClass="MapViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ouc-vV-uTo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -791,7 +793,7 @@
         <!--Map Web View Controller-->
         <scene sceneID="99x-je-y6g">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="eOK-Ge-2WC" customClass="MapWebViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eOK-Ge-2WC" customClass="MapWebViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hNp-3j-Wwt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -840,7 +842,6 @@
         <image name="search" width="342" height="342"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hcd-N7-FIB"/>
-        <segue reference="8nY-1D-uyD"/>
+        <segue reference="oQ4-gY-f1w"/>
     </inferredMetricsTieBreakers>
 </document>
