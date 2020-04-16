@@ -147,8 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return findAll(table: table).filter(filter)
     }
 
-    private var hiddenNotificationCount: Int = -1;
-
     /**
      * Retrieves and assigns the current amount of notification, only if the handlers have been registered
      */
@@ -157,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if (getNotificationCount == nil) {
 
-                return hiddenNotificationCount
+                return -1
             }
             
             return getNotificationCount!() as! Int
@@ -166,7 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if (setNotificationCount == nil) {
 
-                hiddenNotificationCount = newValue
                 return
             }
             
