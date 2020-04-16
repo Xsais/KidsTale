@@ -6,7 +6,7 @@
  * Program: Software Development and Network Engineering
  * Course: PROG31632 - Mobile iOS Application Development
  * Creation Date: 04-11-2020
- * Description: Handles the activities that occurs on the Home page
+ * Description: Custom methods that allow all view do extra functionality
  * ----------------------------------------------------------------------------+
 */
 

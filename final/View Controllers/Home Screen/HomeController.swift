@@ -22,10 +22,6 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
-
-    }
-
     /**
      * Stores a copy of the applications delegate
     */
@@ -143,13 +139,12 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
 
         if (viewing == Book.self) {
 
+            // redirect the page to Book Details (Sher Khan)
             self.performSegue(withIdentifier: "bookDetailViewController", sender: self)
         } else if (viewing == Store.self) {
 
-            //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
+            // redirect the page to Store Details ( Jie Ming Wu)
             self.performSegue(withIdentifier: "storeDetailViewController", sender: self)
-
-            //end (Jie Ming Wu)
         }
     }
 

@@ -152,16 +152,19 @@ public class Store: DatabaseItem, Resource {
 
     /**
      * Stores the location of the store to be consumed by the map API
+     * Author: Jie Ming Wu
     */
     public var location: String?
 
     /**
      * Stores the hours in which the store is opened
+     * Author: Jie Ming Wu
     */
     public var hours: String?
 
     /**
      * Stores image that represents the store
+     * Author: Jie Ming Wu
     */
     public var image: String?
 

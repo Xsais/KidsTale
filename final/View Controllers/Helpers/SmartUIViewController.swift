@@ -24,6 +24,9 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
     */
     private var currentTextField: UITextField?
 
+    /**
+     * Determines weather the responder shall be ignored
+    */
     private var respondersIgnored: Bool = false
 
     /**
@@ -57,6 +60,11 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
         resignFirstResponder(nil)
     }
 
+    /**
+     * Resigns the first responder of the textfield if one iis provided
+     * - Parameters:
+     *      - textField: The sending textfield
+    */
     public func resignFirstResponder(_ textField: UITextField?) -> Bool {
 
         if (textField != nil) {

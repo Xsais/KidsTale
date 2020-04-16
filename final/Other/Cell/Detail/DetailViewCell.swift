@@ -46,6 +46,7 @@ class DetailViewCell: UITableViewCell {
 
             _customAccessory = newValue
 
+            // If use the system provided accessory icons if none are provided
             if (newValue == nil) {
 
                 self.accessoryView = nil
@@ -69,6 +70,7 @@ class DetailViewCell: UITableViewCell {
 
             _customResource = newValue
 
+            // If a name was not specified hide the image
             if (newValue == nil) {
 
                 picture.isHidden = true
@@ -111,6 +113,7 @@ class DetailViewCell: UITableViewCell {
     var object: DatabaseItem? {
         set {
 
+            // If the object is not null, set the labels to the property text
             if (newValue != nil) {
 
                 name.text = newValue!.name

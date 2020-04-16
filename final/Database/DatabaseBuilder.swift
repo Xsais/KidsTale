@@ -231,6 +231,7 @@ public class DatabaseBuilder {
         // Appends the required values to the to the insertion statement
         columns.forEach({ (descriptor: ColumnDescriptor) in
 
+            // Appends a comma to query if it is required
             if (hasAppended) {
 
                 queryStatement += ","
