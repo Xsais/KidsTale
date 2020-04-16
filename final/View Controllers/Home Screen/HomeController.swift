@@ -146,10 +146,6 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
         } else if (viewing == Store.self) {
 
             //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
-            //store the select data into appdalegate's object, this object will be use to pull out the store details from db
-            sharedDelegate.storeSelect = selectedItem?.name
-
-            //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
             self.performSegue(withIdentifier: "storeDetailViewController", sender: self)
 
             //end (Jie Ming Wu)

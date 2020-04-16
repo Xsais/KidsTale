@@ -204,8 +204,8 @@ public class Store: DatabaseItem, Resource {
         DatabaseItem.registerColumn(table: Store.self, columns:
         ColumnDescriptor(isAuto: true, columnName: "ID", columnType: .integer),
                 ColumnDescriptor(columnName: "name", columnType: .text),
-                ColumnDescriptor(columnName: "description", columnType: .text),
                 ColumnDescriptor(columnName: "location", columnType: .text),
+                ColumnDescriptor(columnName: "description", columnType: .text),
                 ColumnDescriptor(columnName: "hours", columnType: .text),
                 ColumnDescriptor(columnName: "image", columnType: .text))
     }

@@ -35,15 +35,7 @@ class StoreDetailViewController: SmartUIViewController {
         super.viewDidLoad()
 
         //pull out what store did the user select
-        //pull out the store details by comparing the stores data array to the
-        //storeSelect object created in AppDelegate
-        for store in mainDelegate.storeData{
-            if store.name == mainDelegate.storeSelect{
-
-                //get store detail
-                storeDetail = store
-            }
-        }
+        storeDetail = (mainDelegate.selectedItem as! Store)
         
         //assign variable to the page by getting values from the store details selected by user
         mapIconString = "MapIcon2"
