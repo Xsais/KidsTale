@@ -15,22 +15,22 @@ import SQLite3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     /**
      * Stores the name of the database that is to be used throughout the application
     */
-    private static let DATABASE_NAME : String = "KidsTale.db"
-    
+    private static let DATABASE_NAME: String = "KidsTale.db"
+
     /**
      * Stores the name of the database that is to be used throughout the application
     */
-    public static let validAnimations : [String: String] = ["Blink": "opacity", "Grow": "transform.scale"]
-    
+    public static let validAnimations: [String: String] = ["Blink": "opacity", "Grow": "transform.scale"]
+
     /**
      * Stores the animation that will be applied to the notification dot when a message is recieved
     */
-    public var appliedAnimation : String = AppDelegate.validAnimations["Blink"]!
-  
+    public var appliedAnimation: String = AppDelegate.validAnimations["Blink"]!
+
     /**
      * Stores the time the last query results that were called to a specific table
     */
@@ -60,14 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * Stores the handler  that will be used to communicate with the database
     */
     private let databaseCommunicator = DatabaseBuilder(databaseName: AppDelegate.DATABASE_NAME)
-    
+
     //created variable to store selected store and it's location <Jie Ming Wu >
-    var storeLocation : String?
-    var LocationChoise : String = "OFF"   //set Location choise to default value OFF
-    var InputLocation : String?
+    var storeLocation: String?
+    var LocationChoise: String = "OFF"   //set Location choise to default value OFF
+    var InputLocation: String?
 
     //end of StoreDetailsViewController
-    
+
     /**
      * Stores the current window that is presented to the user
     */
@@ -201,8 +201,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *      - launchOptions: Any options that have been passed with the application launch
     */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-         // Override point for customization after application launch.
-        
+        // Override point for customization after application launch.
+
         return true
     }
 

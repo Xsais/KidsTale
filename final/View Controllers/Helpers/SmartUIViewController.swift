@@ -108,7 +108,7 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
      * Revels all of the required elements to handle resigns
     */
     private func textFieldDidBeginEditing() {
-        
+
         disappearButton.isHidden = false
     }
 

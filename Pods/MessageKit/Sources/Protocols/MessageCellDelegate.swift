@@ -68,7 +68,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
     /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
     /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didTapCellTopLabel(in cell: MessageCollectionViewCell)
-    
+
     /// Triggered when a tap occurs in the cellBottomLabel.
     ///
     /// - Parameters:
@@ -78,7 +78,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
     /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
     /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didTapCellBottomLabel(in cell: MessageCollectionViewCell)
-    
+
     /// Triggered when a tap occurs in the messageTopLabel.
     ///
     /// - Parameters:
@@ -98,7 +98,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
     /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
     /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didTapMessageBottomLabel(in cell: MessageCollectionViewCell)
-    
+
     /// Triggered when a tap occurs in the accessoryView.
     ///
     /// - Parameters:
@@ -153,28 +153,40 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
 
 public extension MessageCellDelegate {
 
-    func didTapBackground(in cell: MessageCollectionViewCell) {}
+    func didTapBackground(in cell: MessageCollectionViewCell) {
+    }
 
-    func didTapMessage(in cell: MessageCollectionViewCell) {}
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+    }
 
-    func didTapAvatar(in cell: MessageCollectionViewCell) {}
+    func didTapAvatar(in cell: MessageCollectionViewCell) {
+    }
 
-    func didTapCellTopLabel(in cell: MessageCollectionViewCell) {}
-    
-    func didTapCellBottomLabel(in cell: MessageCollectionViewCell) {}
+    func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
+    }
 
-    func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {}
+    func didTapCellBottomLabel(in cell: MessageCollectionViewCell) {
+    }
 
-    func didTapPlayButton(in cell: AudioMessageCell) {}
+    func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
+    }
 
-    func didStartAudio(in cell: AudioMessageCell) {}
+    func didTapPlayButton(in cell: AudioMessageCell) {
+    }
 
-    func didPauseAudio(in cell: AudioMessageCell) {}
+    func didStartAudio(in cell: AudioMessageCell) {
+    }
 
-    func didStopAudio(in cell: AudioMessageCell) {}
+    func didPauseAudio(in cell: AudioMessageCell) {
+    }
 
-    func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {}
-    
-    func didTapAccessoryView(in cell: MessageCollectionViewCell) {}
+    func didStopAudio(in cell: AudioMessageCell) {
+    }
+
+    func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {
+    }
+
+    func didTapAccessoryView(in cell: MessageCollectionViewCell) {
+    }
 
 }

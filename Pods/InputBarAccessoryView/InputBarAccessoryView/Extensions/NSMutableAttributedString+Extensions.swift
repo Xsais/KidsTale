@@ -28,47 +28,47 @@
 import UIKit
 
 internal extension NSMutableAttributedString {
- 
+
     @discardableResult
     func bold(_ text: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize, textColor: UIColor = .black) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key:AnyObject] = [
-            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: fontSize),
-            NSAttributedString.Key.foregroundColor : textColor
+        let attrs: [NSAttributedString.Key: AnyObject] = [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize),
+            NSAttributedString.Key.foregroundColor: textColor
         ]
         let boldString = NSMutableAttributedString(string: text, attributes: attrs)
         self.append(boldString)
         return self
     }
-    
+
     @discardableResult
     func medium(_ text: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize, textColor: UIColor = .black) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key:AnyObject] = [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.medium),
-            NSAttributedString.Key.foregroundColor : textColor
+        let attrs: [NSAttributedString.Key: AnyObject] = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.medium),
+            NSAttributedString.Key.foregroundColor: textColor
         ]
         let mediumString = NSMutableAttributedString(string: text, attributes: attrs)
         self.append(mediumString)
         return self
     }
-    
+
     @discardableResult
     func italic(_ text: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize, textColor: UIColor = .black) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key:AnyObject] = [
-            NSAttributedString.Key.font : UIFont.italicSystemFont(ofSize: fontSize),
-            NSAttributedString.Key.foregroundColor : textColor
+        let attrs: [NSAttributedString.Key: AnyObject] = [
+            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: fontSize),
+            NSAttributedString.Key.foregroundColor: textColor
         ]
         let italicString = NSMutableAttributedString(string: text, attributes: attrs)
         self.append(italicString)
         return self
     }
-    
+
     @discardableResult
     func normal(_ text: String, fontSize: CGFloat = UIFont.preferredFont(forTextStyle: .body).pointSize, textColor: UIColor = .black) -> NSMutableAttributedString {
-        let attrs:[NSAttributedString.Key:AnyObject] = [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: fontSize),
-            NSAttributedString.Key.foregroundColor : textColor
+        let attrs: [NSAttributedString.Key: AnyObject] = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+            NSAttributedString.Key.foregroundColor: textColor
         ]
-        let normal =  NSMutableAttributedString(string: text, attributes: attrs)
+        let normal = NSMutableAttributedString(string: text, attributes: attrs)
         self.append(normal)
         return self
     }
@@ -82,17 +82,17 @@ internal extension NSAttributedString {
         ns.replaceCharacters(in: range, with: attributedString)
         return ns
     }
-    
-    static func += (lhs: inout NSAttributedString, rhs: NSAttributedString) {
+
+    static func +=(lhs: inout NSAttributedString, rhs: NSAttributedString) {
         let ns = NSMutableAttributedString(attributedString: lhs)
         ns.append(rhs)
         lhs = ns
     }
-    
-    static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
+
+    static func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
         let ns = NSMutableAttributedString(attributedString: lhs)
         ns.append(rhs)
         return NSAttributedString(attributedString: ns)
     }
-    
+
 }

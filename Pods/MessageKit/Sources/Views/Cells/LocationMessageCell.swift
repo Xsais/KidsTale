@@ -33,7 +33,7 @@ open class LocationMessageCell: MessageContentCell {
 
     /// The image view holding the map image.
     open var imageView = UIImageView()
-    
+
     private weak var snapShotter: MKMapSnapshotter?
 
     open override func setupSubviews() {
@@ -49,7 +49,7 @@ open class LocationMessageCell: MessageContentCell {
         imageView.fillSuperview()
         activityIndicator.centerInSuperview()
     }
-    
+
     open override func prepareForReuse() {
         super.prepareForReuse()
         snapShotter?.cancel()
@@ -64,7 +64,9 @@ open class LocationMessageCell: MessageContentCell {
         let annotationView = displayDelegate.annotationViewForLocation(message: message, at: indexPath, in: messagesCollectionView)
         let animationBlock = displayDelegate.animationBlockForLocation(message: message, at: indexPath, in: messagesCollectionView)
 
-        guard case let .location(locationItem) = message.kind else { fatalError("") }
+        guard case let .location(locationItem) = message.kind else {
+            fatalError("")
+        }
 
         activityIndicator.startAnimating()
 

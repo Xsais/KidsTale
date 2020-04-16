@@ -39,7 +39,9 @@ class DetailViewCell: UITableViewCell {
     */
     public var customAccessory: String? {
 
-        get { return _customResource }
+        get {
+            return _customResource
+        }
         set {
 
             _customAccessory = newValue
@@ -60,7 +62,9 @@ class DetailViewCell: UITableViewCell {
     */
     public var customResource: String? {
 
-        get { return _customResource }
+        get {
+            return _customResource
+        }
         set {
 
             _customResource = newValue

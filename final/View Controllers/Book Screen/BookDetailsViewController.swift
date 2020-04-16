@@ -51,8 +51,8 @@ class BookDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         availableStores = (sharedDelegate.findAll(table: Inventory.self) as! Array<Inventory>)
                 .filter({ (inventory: Inventory) in
 
-                    return selectedBook.id == inventory.id
-                })
+            return selectedBook.id == inventory.id
+        })
 
         // Do any additional setup after loading the view.
     }

@@ -27,7 +27,9 @@ import UIKit
 open class InsetLabel: UILabel {
 
     open var textInsets: UIEdgeInsets = .zero {
-        didSet { setNeedsDisplay() }
+        didSet {
+            setNeedsDisplay()
+        }
     }
 
     open override func drawText(in rect: CGRect) {

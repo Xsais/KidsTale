@@ -13,7 +13,7 @@
 import Foundation
 
 public enum DataType {
-    
+
     case text
     case integer
 }

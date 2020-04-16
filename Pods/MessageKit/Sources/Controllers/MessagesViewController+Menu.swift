@@ -43,19 +43,23 @@ internal extension MessagesViewController {
     private func menuControllerWillShow(_ notification: Notification) {
 
         guard let currentMenuController = notification.object as? UIMenuController,
-            let selectedIndexPath = selectedIndexPathForMenu else { return }
+              let selectedIndexPath = selectedIndexPathForMenu else {
+            return
+        }
 
         NotificationCenter.default.removeObserver(self, name: UIMenuController.willShowMenuNotification, object: nil)
         defer {
             NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(MessagesViewController.menuControllerWillShow(_:)),
-                                                   name: UIMenuController.willShowMenuNotification, object: nil)
+                    selector: #selector(MessagesViewController.menuControllerWillShow(_:)),
+                    name: UIMenuController.willShowMenuNotification, object: nil)
             selectedIndexPathForMenu = nil
         }
 
         currentMenuController.setMenuVisible(false, animated: false)
 
-        guard let selectedCell = messagesCollectionView.cellForItem(at: selectedIndexPath) as? MessageContentCell else { return }
+        guard let selectedCell = messagesCollectionView.cellForItem(at: selectedIndexPath) as? MessageContentCell else {
+            return
+        }
         let selectedCellMessageBubbleFrame = selectedCell.convert(selectedCell.messageContainerView.frame, to: view)
 
         var messageInputBarFrame: CGRect = .zero

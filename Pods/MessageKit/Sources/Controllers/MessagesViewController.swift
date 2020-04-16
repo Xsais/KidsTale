@@ -28,7 +28,7 @@ import InputBarAccessoryView
 /// A subclass of `UIViewController` with a `MessagesCollectionView` object
 /// that is used to display conversation interfaces.
 open class MessagesViewController: UIViewController,
-UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+        UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     /// The `MessagesCollectionView` managed by the messages view controller object.
     open var messagesCollectionView = MessagesCollectionView()
@@ -41,7 +41,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     ///
     /// The default value of this property is `false`.
     open var scrollsToBottomOnKeyboardBeginsEditing: Bool = false
-    
+
     /// A Boolean value that determines whether the `MessagesCollectionView`
     /// maintains it's current position when the height of the `MessageInputBar` changes.
     ///
@@ -78,7 +78,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     public var selectedIndexPathForMenu: IndexPath?
 
     private var isFirstLayout: Bool = true
-    
+
     internal var isMessagesControllerBeingDismissed: Bool = false
 
     internal var messageCollectionViewBottomInset: CGFloat = 0 {
@@ -99,26 +99,28 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         addMenuControllerObservers()
         addObservers()
     }
-    
+
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         isMessagesControllerBeingDismissed = false
     }
-    
+
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         isMessagesControllerBeingDismissed = true
     }
-    
+
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         isMessagesControllerBeingDismissed = false
     }
-    
+
     open override func viewDidLayoutSubviews() {
         // Hack to prevent animation of the contentInset after viewDidAppear
         if isFirstLayout {
-            defer { isFirstLayout = false }
+            defer {
+                isFirstLayout = false
+            }
             addKeyboardObservers()
             messageCollectionViewBottomInset = requiredInitialScrollViewBottomInset()
         }
@@ -162,7 +164,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     private func setupConstraints() {
         messagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let top = messagesCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuide.length)
         let bottom = messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         if #available(iOS 11.0, *) {
@@ -201,7 +203,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
             messagesCollectionView.performBatchUpdates({ [weak self] in
                 self?.performUpdatesForTypingIndicatorVisability(at: section)
                 updates?()
-                }, completion: completion)
+            }, completion: completion)
         } else {
             performUpdatesForTypingIndicatorVisability(at: section)
             updates?()
@@ -322,7 +324,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     // MARK: - UICollectionViewDelegateFlowLayout
 
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let messagesFlowLayout = collectionViewLayout as? MessagesCollectionViewFlowLayout else { return .zero }
+        guard let messagesFlowLayout = collectionViewLayout as? MessagesCollectionViewFlowLayout else {
+            return .zero
+        }
         return messagesFlowLayout.sizeForItem(at: indexPath)
     }
 
@@ -341,7 +345,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? TypingIndicatorCell else { return }
+        guard let cell = cell as? TypingIndicatorCell else {
+            return
+        }
         cell.typingBubble.startAnimating()
     }
 
@@ -359,7 +365,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        guard let messagesDataSource = messagesCollectionView.messagesDataSource else { return false }
+        guard let messagesDataSource = messagesCollectionView.messagesDataSource else {
+            return false
+        }
 
         if isSectionReservedForTypingIndicator(indexPath.section) {
             return false
@@ -403,16 +411,16 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     }
 
     // MARK: - Helpers
-    
+
     private func addObservers() {
         NotificationCenter.default.addObserver(
-            self, selector: #selector(clearMemoryCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+                self, selector: #selector(clearMemoryCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    
+
     private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    
+
     @objc private func clearMemoryCache() {
         MessageStyle.bubbleImageCache.removeAllObjects()
     }

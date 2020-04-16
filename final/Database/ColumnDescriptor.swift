@@ -20,7 +20,7 @@ public class ColumnDescriptor: Hashable {
      *      - compare: The 'ColumnDescriptor' object that will be compared to
      *      - against: The 'ColumnDescriptor' object that will be compared against
     */
-    public static func == (compare: ColumnDescriptor, against: ColumnDescriptor) -> Bool {
+    public static func ==(compare: ColumnDescriptor, against: ColumnDescriptor) -> Bool {
 
         return compare.name == against.name && compare.type == against.type
     }
@@ -32,10 +32,18 @@ public class ColumnDescriptor: Hashable {
     private let _type: DataType
 
     // Allows the retrieval of the name of the tables column
-    public var name: String { get { return _name }}
+    public var name: String {
+        get {
+            return _name
+        }
+    }
 
     // Allows the retrieval of the datatype of the tables column
-    public var type: DataType { get { return _type }}
+    public var type: DataType {
+        get {
+            return _type
+        }
+    }
 
     // Determines weather the field will be auto generated (NULL value)
     public let isAuto: Bool
@@ -48,9 +56,9 @@ public class ColumnDescriptor: Hashable {
     *      - columnType: The type of the column as it is in the database
     */
     public init(isAuto: Bool = false, columnName: String, columnType: DataType) {
-        
+
         self.isAuto = isAuto
-        
+
         self._name = columnName
         self._type = columnType
     }

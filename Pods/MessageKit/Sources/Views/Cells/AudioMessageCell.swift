@@ -101,8 +101,12 @@ open class AudioMessageCell: MessageContentCell {
             fatalError(MessageKitError.nilMessagesDataSource)
         }
 
-        let playButtonLeftConstraint = messageContainerView.constraints.filter { $0.identifier == "left" }.first
-        let durationLabelRightConstraint = messageContainerView.constraints.filter { $0.identifier == "right" }.first
+        let playButtonLeftConstraint = messageContainerView.constraints.filter {
+            $0.identifier == "left"
+        }.first
+        let durationLabelRightConstraint = messageContainerView.constraints.filter {
+            $0.identifier == "right"
+        }.first
 
         if !dataSource.isFromCurrentSender(message: message) {
             playButtonLeftConstraint?.constant = 12

@@ -31,7 +31,7 @@ import UIKit
 public typealias InputManager = InputPlugin
 
 extension InputPlugin {
-    
+
     @available(*, deprecated, message: "`handleInput(object:)` should return a `Bool` if handle was successful or now")
     func handleInput(of object: AnyObject) {
         _ = self.handleInput(of: object)
@@ -39,7 +39,7 @@ extension InputPlugin {
 }
 
 extension AutocompleteCompletion {
-    
+
     // An optional string to display instead of `text`, for example emojis
     @available(*, deprecated, message: "`displayText` should no longer be used, use `context: [String: Any]` instead")
     public var displayText: String? {
@@ -53,14 +53,17 @@ extension AutocompleteManager {
     /// DEPRICATED; will always return `FALSE`
     @available(*, deprecated, message: "`isCaseSensitive` was replaced in favour of a more customizable `filterBlock: (String) -> (Bool)`")
     public var isCaseSensitive: Bool {
-        get { return false }
+        get {
+            return false
+        }
         set {
             if isCaseSensitive {
                 filterBlock = { session, completion in
                     completion.text.contains(session.filter)
                 }
             } else {
-                filterBlock = { session, completion in completion.text.lowercased().contains(session.filter.lowercased())
+                filterBlock = { session, completion in
+                    completion.text.lowercased().contains(session.filter.lowercased())
                 }
             }
         }

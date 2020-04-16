@@ -42,7 +42,9 @@ open class MessagesCollectionView: UICollectionView {
 
     private var indexPathForLastItem: IndexPath? {
         let lastSection = numberOfSections - 1
-        guard lastSection >= 0, numberOfItems(inSection: lastSection) > 0 else { return nil }
+        guard lastSection >= 0, numberOfItems(inSection: lastSection) > 0 else {
+            return nil
+        }
         return IndexPath(item: numberOfItems(inSection: lastSection) - 1, section: lastSection)
     }
 
@@ -61,7 +63,7 @@ open class MessagesCollectionView: UICollectionView {
         registerReusableViews()
         setupGestureRecognizers()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(frame: .zero, collectionViewLayout: MessagesCollectionViewFlowLayout())
     }
@@ -71,7 +73,7 @@ open class MessagesCollectionView: UICollectionView {
     }
 
     // MARK: - Methods
-    
+
     private func registerReusableViews() {
         register(TextMessageCell.self)
         register(MediaMessageCell.self)
@@ -82,20 +84,24 @@ open class MessagesCollectionView: UICollectionView {
         register(MessageReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         register(MessageReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter)
     }
-    
+
     private func setupGestureRecognizers() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         tapGesture.delaysTouchesBegan = true
         addGestureRecognizer(tapGesture)
     }
-    
+
     @objc
     open func handleTapGesture(_ gesture: UIGestureRecognizer) {
-        guard gesture.state == .ended else { return }
-        
+        guard gesture.state == .ended else {
+            return
+        }
+
         let touchLocation = gesture.location(in: self)
-        guard let indexPath = indexPathForItem(at: touchLocation) else { return }
-        
+        guard let indexPath = indexPathForItem(at: touchLocation) else {
+            return
+        }
+
         let cell = cellForItem(at: indexPath) as? MessageCollectionViewCell
         cell?.handleTapGesture(gesture)
     }
@@ -107,21 +113,21 @@ open class MessagesCollectionView: UICollectionView {
             self.scrollRectToVisible(CGRect(0.0, collectionViewContentHeight - 1.0, 1.0, 1.0), animated: animated)
         }
     }
-    
+
     public func reloadDataAndKeepOffset() {
         // stop scrolling
         setContentOffset(contentOffset, animated: false)
-        
+
         // calculate the offset and reloadData
         let beforeContentSize = contentSize
         reloadData()
         layoutIfNeeded()
         let afterContentSize = contentSize
-        
+
         // reset the contentOffset after data is updated
         let newOffset = CGPoint(
-            x: contentOffset.x + (afterContentSize.width - beforeContentSize.width),
-            y: contentOffset.y + (afterContentSize.height - beforeContentSize.height))
+                x: contentOffset.x + (afterContentSize.width - beforeContentSize.width),
+                y: contentOffset.y + (afterContentSize.height - beforeContentSize.height))
         setContentOffset(newOffset, animated: false)
     }
 
@@ -134,7 +140,7 @@ open class MessagesCollectionView: UICollectionView {
     internal func setTypingIndicatorViewHidden(_ isHidden: Bool) {
         messagesCollectionViewFlowLayout.setTypingIndicatorViewHidden(isHidden)
     }
-    
+
     /// A method that by default checks if the section is the last in the
     /// `messagesCollectionView` and that `isTypingIndicatorViewHidden`
     /// is FALSE
@@ -155,15 +161,15 @@ open class MessagesCollectionView: UICollectionView {
     /// Registers a reusable view for a specific SectionKind
     public func register<T: UICollectionReusableView>(_ reusableViewClass: T.Type, forSupplementaryViewOfKind kind: String) {
         register(reusableViewClass,
-                 forSupplementaryViewOfKind: kind,
-                 withReuseIdentifier: String(describing: T.self))
+                forSupplementaryViewOfKind: kind,
+                withReuseIdentifier: String(describing: T.self))
     }
-    
+
     /// Registers a nib with reusable view for a specific SectionKind
     public func register<T: UICollectionReusableView>(_ nib: UINib? = UINib(nibName: String(describing: T.self), bundle: nil), headerFooterClassOfNib headerFooterClass: T.Type, forSupplementaryViewOfKind kind: String) {
         register(nib,
-                 forSupplementaryViewOfKind: kind,
-                 withReuseIdentifier: String(describing: T.self))        
+                forSupplementaryViewOfKind: kind,
+                withReuseIdentifier: String(describing: T.self))
     }
 
     /// Generically dequeues a cell of the correct type allowing you to avoid scattering your code with guard-let-else-fatal

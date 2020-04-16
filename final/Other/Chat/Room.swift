@@ -9,13 +9,13 @@
 import UIKit
 
 class Room: NSObject {
-    
-    var name : String?
-    var image : String?
-    var availability : String?
-    
-    func initWithData(theName n : String, theAvailability a : String,
-                      theImage i : String){
+
+    var name: String?
+    var image: String?
+    var availability: String?
+
+    func initWithData(theName n: String, theAvailability a: String,
+                      theImage i: String) {
         self.name = n
         self.image = i
         self.availability = a

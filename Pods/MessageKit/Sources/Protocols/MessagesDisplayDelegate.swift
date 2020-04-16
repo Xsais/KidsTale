@@ -55,7 +55,7 @@ public protocol MessagesDisplayDelegate: AnyObject {
     ///   Current sender: Green
     ///
     ///   All other senders: Gray
-    func backgroundColor(for message: MessageType, at  indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor
 
     /// The section header to use for a given `IndexPath`.
     ///
@@ -71,7 +71,7 @@ public protocol MessagesDisplayDelegate: AnyObject {
     ///   - indexPath: The `IndexPath` of the footer.
     ///   - messagesCollectionView: The `MessagesCollectionView` in which this footer will be displayed.
     func messageFooterView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView
-    
+
     /// Used to configure the `AvatarView`‘s image in a `MessageContentCell` class.
     ///
     /// - Parameters:
@@ -174,7 +174,7 @@ public protocol MessagesDisplayDelegate: AnyObject {
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView)
 
     // MARK: - Audio Message
-    
+
     /// Used to configure the audio cell UI:
     ///     1. play button selected state;
     ///     2. progresssView progress;
@@ -223,17 +223,19 @@ public extension MessagesDisplayDelegate {
         return .bubble
     }
 
-    func backgroundColor(for message: MessageType, at  indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 
         switch message.kind {
         case .emoji:
             return .clear
         default:
-            guard let dataSource = messagesCollectionView.messagesDataSource else { return .white }
+            guard let dataSource = messagesCollectionView.messagesDataSource else {
+                return .white
+            }
             return dataSource.isFromCurrentSender(message: message) ? .outgoingGreen : .incomingGray
         }
     }
-    
+
     func messageHeaderView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
         return messagesCollectionView.dequeueReusableHeaderView(MessageReusableView.self, for: indexPath)
     }
@@ -241,12 +243,13 @@ public extension MessagesDisplayDelegate {
     func messageFooterView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
         return messagesCollectionView.dequeueReusableFooterView(MessageReusableView.self, for: indexPath)
     }
-    
+
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         avatarView.initials = "?"
     }
 
-    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {}
+    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    }
 
     // MARK: - Text Messages Defaults
 
@@ -285,9 +288,9 @@ public extension MessagesDisplayDelegate {
     }
 
     // MARK: - Audio Message Defaults
-    
+
     func configureAudioCell(_ cell: AudioMessageCell, message: MessageType) {
-        
+
     }
 
     func audioTintColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -302,11 +305,11 @@ public extension MessagesDisplayDelegate {
         if duration < 60 {
             retunValue = String(format: "0:%.02d", Int(duration.rounded(.up)))
         } else if duration < 3600 {
-            retunValue = String(format: "%.02d:%.02d", Int(duration/60), Int(duration) % 60)
+            retunValue = String(format: "%.02d:%.02d", Int(duration / 60), Int(duration) % 60)
         } else {
-            let hours = Int(duration/3600)
-            let remainingMinutsInSeconds = Int(duration) - hours*3600
-            retunValue = String(format: "%.02d:%.02d:%.02d", hours, Int(remainingMinutsInSeconds/60), Int(remainingMinutsInSeconds) % 60)
+            let hours = Int(duration / 3600)
+            let remainingMinutsInSeconds = Int(duration) - hours * 3600
+            retunValue = String(format: "%.02d:%.02d:%.02d", hours, Int(remainingMinutsInSeconds / 60), Int(remainingMinutsInSeconds) % 60)
         }
         return retunValue
     }

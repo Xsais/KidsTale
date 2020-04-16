@@ -34,7 +34,8 @@ open class MessageKitDateFormatter {
 
     // MARK: - Initializer
 
-    private init() {}
+    private init() {
+    }
 
     // MARK: - Methods
 
@@ -62,5 +63,5 @@ open class MessageKitDateFormatter {
             formatter.dateFormat = "MMM d, yyyy, h:mm a"
         }
     }
-    
+
 }

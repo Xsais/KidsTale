@@ -12,4 +12,5 @@
 
 import Foundation
 
-public protocol Resource: InitDelegate, DatabaseItem { }
+public protocol Resource: InitDelegate, DatabaseItem {
+}

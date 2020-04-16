@@ -45,20 +45,22 @@ open class PlayButtonView: UIView {
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         setupSubviews()
         setupConstraints()
         setupView()
     }
 
     // MARK: - Methods
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
-        guard !cacheFrame.equalTo(frame) else { return }
+
+        guard !cacheFrame.equalTo(frame) else {
+            return
+        }
         cacheFrame = frame
-        
+
         updateTriangleConstraints()
         applyCornerRadius()
         applyTriangleMask()
@@ -67,11 +69,11 @@ open class PlayButtonView: UIView {
     private func setupSubviews() {
         addSubview(triangleView)
     }
-    
+
     private func setupView() {
         triangleView.clipsToBounds = true
         triangleView.backgroundColor = .black
-        
+
         backgroundColor = .playButtonLightGray
     }
 
@@ -93,13 +95,13 @@ open class PlayButtonView: UIView {
         let trianglePath = UIBezierPath()
 
         let point1 = CGPoint(x: frame.minX, y: frame.minY)
-        let point2 = CGPoint(x: frame.maxX, y: frame.maxY/2)
+        let point2 = CGPoint(x: frame.maxX, y: frame.maxY / 2)
         let point3 = CGPoint(x: frame.minX, y: frame.maxY)
 
-        trianglePath .move(to: point1)
-        trianglePath .addLine(to: point2)
-        trianglePath .addLine(to: point3)
-        trianglePath .close()
+        trianglePath.move(to: point1)
+        trianglePath.addLine(to: point2)
+        trianglePath.addLine(to: point3)
+        trianglePath.close()
 
         shapeLayer.path = trianglePath.cgPath
 
@@ -107,7 +109,7 @@ open class PlayButtonView: UIView {
     }
 
     private func updateTriangleConstraints() {
-        triangleCenterXConstraint?.constant = frame.width/8
+        triangleCenterXConstraint?.constant = frame.width / 8
     }
 
     private func applyTriangleMask() {
@@ -118,5 +120,5 @@ open class PlayButtonView: UIView {
     private func applyCornerRadius() {
         layer.cornerRadius = frame.width / 2
     }
-    
+
 }

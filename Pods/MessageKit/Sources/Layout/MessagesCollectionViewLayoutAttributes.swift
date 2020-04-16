@@ -40,10 +40,10 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
 
     public var cellTopLabelAlignment = LabelAlignment(textAlignment: .center, textInsets: .zero)
     public var cellTopLabelSize: CGSize = .zero
-    
+
     public var cellBottomLabelAlignment = LabelAlignment(textAlignment: .center, textInsets: .zero)
     public var cellBottomLabelSize: CGSize = .zero
-    
+
     public var messageTopLabelAlignment = LabelAlignment(textAlignment: .center, textInsets: .zero)
     public var messageTopLabelSize: CGSize = .zero
 
@@ -53,7 +53,7 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
     public var accessoryViewSize: CGSize = .zero
     public var accessoryViewPadding: HorizontalEdgeInsets = .zero
     public var accessoryViewPosition: AccessoryPosition = .messageCenter
-    
+
     // MARK: - Methods
 
     open override func copy(with zone: NSZone? = nil) -> Any {
@@ -85,23 +85,23 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
         // MARK: - LEAVE this as is
         if let attributes = object as? MessagesCollectionViewLayoutAttributes {
             return super.isEqual(object) && attributes.avatarSize == avatarSize
-                && attributes.avatarPosition == avatarPosition
-                && attributes.avatarLeadingTrailingPadding == avatarLeadingTrailingPadding
-                && attributes.messageContainerSize == messageContainerSize
-                && attributes.messageContainerPadding == messageContainerPadding
-                && attributes.messageLabelFont == messageLabelFont
-                && attributes.messageLabelInsets == messageLabelInsets
-                && attributes.cellTopLabelAlignment == cellTopLabelAlignment
-                && attributes.cellTopLabelSize == cellTopLabelSize
-                && attributes.cellBottomLabelAlignment == cellBottomLabelAlignment
-                && attributes.cellBottomLabelSize == cellBottomLabelSize
-                && attributes.messageTopLabelAlignment == messageTopLabelAlignment
-                && attributes.messageTopLabelSize == messageTopLabelSize
-                && attributes.messageBottomLabelAlignment == messageBottomLabelAlignment
-                && attributes.messageBottomLabelSize == messageBottomLabelSize
-                && attributes.accessoryViewSize == accessoryViewSize
-                && attributes.accessoryViewPadding == accessoryViewPadding
-                && attributes.accessoryViewPosition == accessoryViewPosition
+                    && attributes.avatarPosition == avatarPosition
+                    && attributes.avatarLeadingTrailingPadding == avatarLeadingTrailingPadding
+                    && attributes.messageContainerSize == messageContainerSize
+                    && attributes.messageContainerPadding == messageContainerPadding
+                    && attributes.messageLabelFont == messageLabelFont
+                    && attributes.messageLabelInsets == messageLabelInsets
+                    && attributes.cellTopLabelAlignment == cellTopLabelAlignment
+                    && attributes.cellTopLabelSize == cellTopLabelSize
+                    && attributes.cellBottomLabelAlignment == cellBottomLabelAlignment
+                    && attributes.cellBottomLabelSize == cellBottomLabelSize
+                    && attributes.messageTopLabelAlignment == messageTopLabelAlignment
+                    && attributes.messageTopLabelSize == messageTopLabelSize
+                    && attributes.messageBottomLabelAlignment == messageBottomLabelAlignment
+                    && attributes.messageBottomLabelSize == messageBottomLabelSize
+                    && attributes.accessoryViewSize == accessoryViewSize
+                    && attributes.accessoryViewPadding == accessoryViewPadding
+                    && attributes.accessoryViewPosition == accessoryViewPosition
         } else {
             return false
         }

@@ -74,8 +74,12 @@ open class InputBarSendButton: InputBarButtonItem {
 
     /// Starts the animation of the activity view, hiding other elements
     open func startAnimating() {
-        guard !isAnimating else { return }
-        defer { isAnimating = true }
+        guard !isAnimating else {
+            return
+        }
+        defer {
+            isAnimating = true
+        }
         activityView.startAnimating()
         activityView.isHidden = false
         // Setting isHidden doesn't hide the elements
@@ -85,8 +89,12 @@ open class InputBarSendButton: InputBarButtonItem {
 
     /// Stops the animation of the activity view, shows other elements
     open func stopAnimating() {
-        guard isAnimating else { return }
-        defer { isAnimating = false }
+        guard isAnimating else {
+            return
+        }
+        defer {
+            isAnimating = false
+        }
         activityView.stopAnimating()
         activityView.isHidden = true
         titleLabel?.alpha = 1

@@ -31,9 +31,9 @@ import RxSwift
 import RxCocoa
 
 final class RxInputBarAccessoryViewDelegate:
-    DelegateProxy<InputBarAccessoryView, InputBarAccessoryViewDelegate>,
-    DelegateProxyType,
-InputBarAccessoryViewDelegate {
+        DelegateProxy<InputBarAccessoryView, InputBarAccessoryViewDelegate>,
+        DelegateProxyType,
+        InputBarAccessoryViewDelegate {
 
     let sendText = PublishSubject<String>()
     let currentText = PublishSubject<String>()
@@ -59,8 +59,8 @@ InputBarAccessoryViewDelegate {
     static func registerKnownImplementations() {
         register {
             RxInputBarAccessoryViewDelegate(
-                parentObject: $0,
-                delegateProxy: RxInputBarAccessoryViewDelegate.self
+                    parentObject: $0,
+                    delegateProxy: RxInputBarAccessoryViewDelegate.self
             )
         }
     }

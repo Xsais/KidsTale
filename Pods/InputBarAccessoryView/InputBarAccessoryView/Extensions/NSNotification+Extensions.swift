@@ -28,7 +28,7 @@
 import UIKit
 
 internal extension NSNotification {
-    
+
     var event: KeyboardEvent {
         switch self.name {
         case UIResponder.keyboardWillShowNotification:
@@ -47,20 +47,28 @@ internal extension NSNotification {
             return .unknown
         }
     }
-    
+
     var timeInterval: TimeInterval? {
-        guard let value = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber else { return nil }
+        guard let value = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber else {
+            return nil
+        }
         return TimeInterval(truncating: value)
     }
-    
+
     var animationCurve: UIView.AnimationCurve? {
-        guard let index = (userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue else { return nil }
-        guard index >= 0 && index <= 3 else { return .linear }
+        guard let index = (userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue else {
+            return nil
+        }
+        guard index >= 0 && index <= 3 else {
+            return .linear
+        }
         return UIView.AnimationCurve.init(rawValue: index) ?? .linear
     }
-    
+
     var animationOptions: UIView.AnimationOptions {
-        guard let curve = animationCurve else { return [] }
+        guard let curve = animationCurve else {
+            return []
+        }
         switch curve {
         case .easeIn:
             return .curveEaseIn
@@ -72,18 +80,18 @@ internal extension NSNotification {
             return .curveLinear
         }
     }
-    
+
     var startFrame: CGRect? {
         return (userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
     }
-    
+
     var endFrame: CGRect? {
         return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
     }
-    
+
     var isForCurrentApp: Bool? {
         return (userInfo?[UIResponder.keyboardIsLocalUserInfoKey] as? NSNumber)?.boolValue
     }
-    
+
 }
 

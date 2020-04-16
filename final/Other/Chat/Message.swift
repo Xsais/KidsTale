@@ -25,15 +25,15 @@ struct Message {
 }
 
 //MessageKit works with MessageType protocols
-extension Message: MessageType{
+extension Message: MessageType {
     var sender: SenderType {
         return Sender(id: member.name, displayName: member.name)
     }
-    
+
     var sentDate: Date {
         return Date()
     }
-    
+
     var kind: MessageKind {
         return .text(text)
     }
@@ -46,22 +46,22 @@ extension Member {
     //Converts Member class into JSON Data
     var toJSON: Any {
         return [
-            "name" : name,
+            "name": name,
             "color": color.hexString
         ]
     }
-    
+
     //Get JSON data and create a member class
-    init?(fromJSON json: Any){
+    init?(fromJSON json: Any) {
         guard
-            let data = json as? [String: Any],
-            let name = data["name"] as? String,
-            let hexColor = data["color"] as? String
-        else {
+                let data = json as? [String: Any],
+                let name = data["name"] as? String,
+                let hexColor = data["color"] as? String
+                else {
             print("Couldn't parse Member")
             return nil
         }
-        
+
         self.name = name
         self.color = UIColor(hex: hexColor)
     }

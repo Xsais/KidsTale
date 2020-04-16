@@ -50,7 +50,7 @@ open class MessageLabel: UILabel {
     }()
 
     internal lazy var rangesForDetectors: [DetectorType: [(NSRange, MessageTextCheckingType)]] = [:]
-    
+
     private var isConfiguring: Bool = false
 
     // MARK: - Public Properties
@@ -90,14 +90,18 @@ open class MessageLabel: UILabel {
     open override var lineBreakMode: NSLineBreakMode {
         didSet {
             textContainer.lineBreakMode = lineBreakMode
-            if !isConfiguring { setNeedsDisplay() }
+            if !isConfiguring {
+                setNeedsDisplay()
+            }
         }
     }
 
     open override var numberOfLines: Int {
         didSet {
             textContainer.maximumNumberOfLines = numberOfLines
-            if !isConfiguring { setNeedsDisplay() }
+            if !isConfiguring {
+                setNeedsDisplay()
+            }
         }
     }
 
@@ -109,7 +113,9 @@ open class MessageLabel: UILabel {
 
     open var textInsets: UIEdgeInsets = .zero {
         didSet {
-            if !isConfiguring { setNeedsDisplay() }
+            if !isConfiguring {
+                setNeedsDisplay()
+            }
         }
     }
 
@@ -119,7 +125,7 @@ open class MessageLabel: UILabel {
         size.height += textInsets.vertical
         return size
     }
-    
+
     internal var messageLabelFont: UIFont?
 
     private var attributesNeedUpdate = false
@@ -139,11 +145,11 @@ open class MessageLabel: UILabel {
     open internal(set) var phoneNumberAttributes: [NSAttributedString.Key: Any] = defaultAttributes
 
     open internal(set) var urlAttributes: [NSAttributedString.Key: Any] = defaultAttributes
-    
+
     open internal(set) var transitInformationAttributes: [NSAttributedString.Key: Any] = defaultAttributes
-    
+
     open internal(set) var hashtagAttributes: [NSAttributedString.Key: Any] = defaultAttributes
-    
+
     open internal(set) var mentionAttributes: [NSAttributedString.Key: Any] = defaultAttributes
 
     open internal(set) var customAttributes: [NSRegularExpression: [NSAttributedString.Key: Any]] = [:]
@@ -201,7 +207,7 @@ open class MessageLabel: UILabel {
     }
 
     // MARK: - Public Methods
-    
+
     public func configure(block: () -> Void) {
         isConfiguring = true
         block()
@@ -222,19 +228,19 @@ open class MessageLabel: UILabel {
             setNeedsDisplay()
             return
         }
-        
+
         let style = paragraphStyle(for: newText)
         let range = NSRange(location: 0, length: newText.length)
-        
+
         let mutableText = NSMutableAttributedString(attributedString: newText)
         mutableText.addAttribute(.paragraphStyle, value: style, range: range)
-        
+
         if shouldParse {
             rangesForDetectors.removeAll()
             let results = parse(text: mutableText)
             setRangesForDetectors(in: results)
         }
-        
+
         for (detector, rangeTuples) in rangesForDetectors {
             if enabledDetectors.contains(detector) {
                 let attributes = detectorAttributes(for: detector)
@@ -247,32 +253,40 @@ open class MessageLabel: UILabel {
         let modifiedText = NSAttributedString(attributedString: mutableText)
         textStorage.setAttributedString(modifiedText)
 
-        if !isConfiguring { setNeedsDisplay() }
+        if !isConfiguring {
+            setNeedsDisplay()
+        }
 
     }
-    
+
     private func paragraphStyle(for text: NSAttributedString) -> NSParagraphStyle {
-        guard text.length > 0 else { return NSParagraphStyle() }
-        
+        guard text.length > 0 else {
+            return NSParagraphStyle()
+        }
+
         var range = NSRange(location: 0, length: text.length)
         let existingStyle = text.attribute(.paragraphStyle, at: 0, effectiveRange: &range) as? NSMutableParagraphStyle
         let style = existingStyle ?? NSMutableParagraphStyle()
-        
+
         style.lineBreakMode = lineBreakMode
         style.alignment = textAlignment
-        
+
         return style
     }
 
     private func updateAttributes(for detectors: [DetectorType]) {
 
-        guard let attributedText = attributedText, attributedText.length > 0 else { return }
+        guard let attributedText = attributedText, attributedText.length > 0 else {
+            return
+        }
         let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText)
 
         for detector in detectors {
-            guard let rangeTuples = rangesForDetectors[detector] else { continue }
+            guard let rangeTuples = rangesForDetectors[detector] else {
+                continue
+            }
 
-            for (range, _)  in rangeTuples {
+            for (range, _) in rangeTuples {
                 let attributes = detectorAttributes(for: detector)
                 mutableAttributedString.addAttributes(attributes, range: range)
             }
@@ -321,7 +335,7 @@ open class MessageLabel: UILabel {
             fatalError(MessageKitError.unrecognizedCheckingResult)
         }
     }
-    
+
     private func setupView() {
         numberOfLines = 0
         lineBreakMode = .byWordWrapping
@@ -330,21 +344,31 @@ open class MessageLabel: UILabel {
     // MARK: - Parsing Text
 
     private func parse(text: NSAttributedString) -> [NSTextCheckingResult] {
-        guard enabledDetectors.isEmpty == false else { return [] }
+        guard enabledDetectors.isEmpty == false else {
+            return []
+        }
         let range = NSRange(location: 0, length: text.length)
         var matches = [NSTextCheckingResult]()
 
         // Get matches of all .custom DetectorType and add it to matches array
         let regexs = enabledDetectors
-            .filter { $0.isCustom }
-            .map { parseForMatches(with: $0, in: text, for: range) }
-            .joined()
+                .filter {
+                    $0.isCustom
+                }
+                .map {
+                    parseForMatches(with: $0, in: text, for: range)
+                }
+                .joined()
         matches.append(contentsOf: regexs)
 
         // Get all Checking Types of detectors, except for .custom because they contain their own regex
         let detectorCheckingTypes = enabledDetectors
-            .filter { !$0.isCustom }
-            .reduce(0) { $0 | $1.textCheckingType.rawValue }
+                .filter {
+                    !$0.isCustom
+                }
+                .reduce(0) {
+                    $0 | $1.textCheckingType.rawValue
+                }
         if detectorCheckingTypes > 0, let detector = try? NSDataDetector(types: detectorCheckingTypes) {
             let detectorMatches = detector.matches(in: text.string, options: [], range: range)
             matches.append(contentsOf: detectorMatches)
@@ -358,7 +382,9 @@ open class MessageLabel: UILabel {
         var results: [NSTextCheckingResult] = matches
 
         text.enumerateAttribute(NSAttributedString.Key.link, in: range, options: []) { value, range, _ in
-            guard let url = value as? URL else { return }
+            guard let url = value as? URL else {
+                return
+            }
             let result = NSTextCheckingResult.linkCheckingResult(range: range, url: url)
             results.append(result)
         }
@@ -377,8 +403,10 @@ open class MessageLabel: UILabel {
 
     private func setRangesForDetectors(in checkingResults: [NSTextCheckingResult]) {
 
-        guard checkingResults.isEmpty == false else { return }
-        
+        guard checkingResults.isEmpty == false else {
+            return
+        }
+
         for result in checkingResults {
 
             switch result.resultType {
@@ -408,7 +436,9 @@ open class MessageLabel: UILabel {
                 ranges.append(tuple)
                 rangesForDetectors.updateValue(ranges, forKey: .transitInformation)
             case .regularExpression:
-                guard let text = text, let regex = result.regularExpression, let range = Range(result.range, in: text) else { return }
+                guard let text = text, let regex = result.regularExpression, let range = Range(result.range, in: text) else {
+                    return
+                }
                 let detector = DetectorType.custom(regex)
                 var ranges = rangesForDetectors[detector] ?? []
                 let tuple: (NSRange, MessageTextCheckingType) = (result.range, .custom(pattern: regex.pattern, match: String(text[range])))
@@ -425,7 +455,9 @@ open class MessageLabel: UILabel {
     // MARK: - Gesture Handling
 
     private func stringIndex(at location: CGPoint) -> Int? {
-        guard textStorage.length > 0 else { return nil }
+        guard textStorage.length > 0 else {
+            return nil
+        }
 
         var location = location
 
@@ -435,20 +467,22 @@ open class MessageLabel: UILabel {
         let index = layoutManager.glyphIndex(for: location, in: textContainer)
 
         let lineRect = layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: nil)
-        
+
         var characterIndex: Int?
-        
+
         if lineRect.contains(location) {
             characterIndex = layoutManager.characterIndexForGlyph(at: index)
         }
-        
+
         return characterIndex
 
     }
 
-  open func handleGesture(_ touchLocation: CGPoint) -> Bool {
+    open func handleGesture(_ touchLocation: CGPoint) -> Bool {
 
-        guard let index = stringIndex(at: touchLocation) else { return false }
+        guard let index = stringIndex(at: touchLocation) else {
+            return false
+        }
 
         for (detectorType, ranges) in rangesForDetectors {
             for (range, value) in ranges {
@@ -463,33 +497,45 @@ open class MessageLabel: UILabel {
 
     // swiftlint:disable cyclomatic_complexity
     private func handleGesture(for detectorType: DetectorType, value: MessageTextCheckingType) {
-        
+
         switch value {
         case let .addressComponents(addressComponents):
             var transformedAddressComponents = [String: String]()
-            guard let addressComponents = addressComponents else { return }
+            guard let addressComponents = addressComponents else {
+                return
+            }
             addressComponents.forEach { (key, value) in
                 transformedAddressComponents[key.rawValue] = value
             }
             handleAddress(transformedAddressComponents)
         case let .phoneNumber(phoneNumber):
-            guard let phoneNumber = phoneNumber else { return }
+            guard let phoneNumber = phoneNumber else {
+                return
+            }
             handlePhoneNumber(phoneNumber)
         case let .date(date):
-            guard let date = date else { return }
+            guard let date = date else {
+                return
+            }
             handleDate(date)
         case let .link(url):
-            guard let url = url else { return }
+            guard let url = url else {
+                return
+            }
             handleURL(url)
         case let .transitInfoComponents(transitInformation):
             var transformedTransitInformation = [String: String]()
-            guard let transitInformation = transitInformation else { return }
+            guard let transitInformation = transitInformation else {
+                return
+            }
             transitInformation.forEach { (key, value) in
                 transformedTransitInformation[key.rawValue] = value
             }
             handleTransitInformation(transformedTransitInformation)
         case let .custom(pattern, match):
-            guard let match = match else { return }
+            guard let match = match else {
+                return
+            }
             switch detectorType {
             case .hashtag:
                 handleHashtag(match)
@@ -500,24 +546,25 @@ open class MessageLabel: UILabel {
             }
         }
     }
+
     // swiftlint:enable cyclomatic_complexity
-    
+
     private func handleAddress(_ addressComponents: [String: String]) {
         delegate?.didSelectAddress(addressComponents)
     }
-    
+
     private func handleDate(_ date: Date) {
         delegate?.didSelectDate(date)
     }
-    
+
     private func handleURL(_ url: URL) {
         delegate?.didSelectURL(url)
     }
-    
+
     private func handlePhoneNumber(_ phoneNumber: String) {
         delegate?.didSelectPhoneNumber(phoneNumber)
     }
-    
+
     private func handleTransitInformation(_ components: [String: String]) {
         delegate?.didSelectTransitInformation(components)
     }

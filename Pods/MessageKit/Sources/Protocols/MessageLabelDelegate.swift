@@ -56,13 +56,13 @@ public protocol MessageLabelDelegate: AnyObject {
     /// - Parameters:
     ///   - transitInformation: The selected transit information.
     func didSelectTransitInformation(_ transitInformation: [String: String])
-    
+
     /// Triggered when a tap occurs on a mention
     ///
     /// - Parameters:
     ///   - mention: The selected mention
     func didSelectMention(_ mention: String)
-    
+
     /// Triggered when a tap occurs on a hashtag
     ///
     /// - Parameters:
@@ -80,20 +80,28 @@ public protocol MessageLabelDelegate: AnyObject {
 
 public extension MessageLabelDelegate {
 
-    func didSelectAddress(_ addressComponents: [String: String]) {}
+    func didSelectAddress(_ addressComponents: [String: String]) {
+    }
 
-    func didSelectDate(_ date: Date) {}
+    func didSelectDate(_ date: Date) {
+    }
 
-    func didSelectPhoneNumber(_ phoneNumber: String) {}
+    func didSelectPhoneNumber(_ phoneNumber: String) {
+    }
 
-    func didSelectURL(_ url: URL) {}
-    
-    func didSelectTransitInformation(_ transitInformation: [String: String]) {}
+    func didSelectURL(_ url: URL) {
+    }
 
-    func didSelectMention(_ mention: String) {}
+    func didSelectTransitInformation(_ transitInformation: [String: String]) {
+    }
 
-    func didSelectHashtag(_ hashtag: String) {}
+    func didSelectMention(_ mention: String) {
+    }
 
-    func didSelectCustom(_ pattern: String, match: String?) {}
+    func didSelectHashtag(_ hashtag: String) {
+    }
+
+    func didSelectCustom(_ pattern: String, match: String?) {
+    }
 
 }

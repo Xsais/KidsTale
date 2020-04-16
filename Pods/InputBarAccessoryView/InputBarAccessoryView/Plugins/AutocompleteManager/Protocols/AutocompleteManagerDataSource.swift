@@ -29,7 +29,7 @@ import UIKit
 
 /// AutocompleteManagerDataSource is a protocol that passes data to the AutocompleteManager
 public protocol AutocompleteManagerDataSource: AnyObject {
-    
+
     /// The autocomplete options for the registered prefix.
     ///
     /// - Parameters:
@@ -37,7 +37,7 @@ public protocol AutocompleteManagerDataSource: AnyObject {
     ///   - prefix: The registered prefix
     /// - Returns: An array of `AutocompleteCompletion` options for the given prefix
     func autocompleteManager(_ manager: AutocompleteManager, autocompleteSourceFor prefix: String) -> [AutocompleteCompletion]
-    
+
     /// The cell to populate the `AutocompleteTableView` with
     ///
     /// - Parameters:
@@ -50,18 +50,18 @@ public protocol AutocompleteManagerDataSource: AnyObject {
 }
 
 public extension AutocompleteManagerDataSource {
-    
+
     func autocompleteManager(_ manager: AutocompleteManager, tableView: UITableView, cellForRowAt indexPath: IndexPath, for session: AutocompleteSession) -> UITableViewCell {
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AutocompleteCell.reuseIdentifier, for: indexPath) as? AutocompleteCell else {
             fatalError("AutocompleteCell is not registered")
         }
-        
+
         cell.textLabel?.attributedText = manager.attributedText(matching: session, fontSize: 13)
         cell.backgroundColor = .white
         cell.separatorLine.isHidden = tableView.numberOfRows(inSection: indexPath.section) - 1 == indexPath.row
         return cell
-        
+
     }
-    
+
 }

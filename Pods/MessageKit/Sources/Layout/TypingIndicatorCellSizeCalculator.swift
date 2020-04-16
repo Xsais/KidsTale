@@ -34,7 +34,9 @@ open class TypingCellSizeCalculator: CellSizeCalculator {
     }
 
     open override func sizeForItem(at indexPath: IndexPath) -> CGSize {
-        guard let layout = layout else { return .zero }
+        guard let layout = layout else {
+            return .zero
+        }
         let collectionViewWidth = layout.collectionView?.bounds.width ?? 0
         let contentInset = layout.collectionView?.contentInset ?? .zero
         let inset = layout.sectionInset.horizontal + contentInset.horizontal

@@ -27,7 +27,7 @@ import Foundation
 open class AvatarView: UIImageView {
 
     // MARK: - Properties
-    
+
     open var initials: String? {
         didSet {
             setImageFrom(initials: initials)
@@ -74,7 +74,7 @@ open class AvatarView: UIImageView {
         super.init(frame: frame)
         prepareView()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepareView()
@@ -84,27 +84,33 @@ open class AvatarView: UIImageView {
         self.init(frame: .zero)
         prepareView()
     }
-    
+
     private func setImageFrom(initials: String?) {
-        guard let initials = initials else { return }
+        guard let initials = initials else {
+            return
+        }
         image = getImageFrom(initials: initials)
     }
 
     private func getImageFrom(initials: String) -> UIImage {
         let width = frame.width
         let height = frame.height
-        if width == 0 || height == 0 {return UIImage()}
+        if width == 0 || height == 0 {
+            return UIImage()
+        }
         var font = placeholderFont
 
         _ = UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, UIScreen.main.scale)
-        defer { UIGraphicsEndImageContext() }
+        defer {
+            UIGraphicsEndImageContext()
+        }
         let context = UIGraphicsGetCurrentContext()!
 
         //// Text Drawing
         let textRect = calculateTextRect(outerViewWidth: width, outerViewHeight: height)
         let initialsText = NSAttributedString(string: initials, attributes: [.font: font])
         if adjustsFontSizeToFitWidth,
-            initialsText.width(considering: textRect.height) > textRect.width {
+           initialsText.width(considering: textRect.height) > textRect.width {
             let newFontSize = calculateFontSize(text: initials, font: font, width: textRect.width, height: textRect.height)
             font = placeholderFont.withSize(newFontSize)
         }
@@ -118,7 +124,9 @@ open class AvatarView: UIImageView {
         context.clip(to: textRect)
         initials.draw(in: CGRect(textRect.minX, textRect.minY + (textRect.height - textTextHeight) / 2, textRect.width, textTextHeight), withAttributes: textFontAttributes)
         context.restoreGState()
-        guard let renderedImage = UIGraphicsGetImageFromCurrentImageContext() else { assertionFailure("Could not create image from context"); return UIImage()}
+        guard let renderedImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            assertionFailure("Could not create image from context"); return UIImage()
+        }
         return renderedImage
     }
 
@@ -152,10 +160,10 @@ open class AvatarView: UIImageView {
         // calculate a rectangle
         let w = shortEdge * sin(CGFloat(45).degreesToRadians) * 2
         let h = shortEdge * cos(CGFloat(45).degreesToRadians) * 2
-        let startX = (outerViewWidth - w)/2
-        let startY = (outerViewHeight - h)/2
+        let startX = (outerViewWidth - w) / 2
+        let startY = (outerViewHeight - h) / 2
         // In case the font exactly fits to the region, put 2 pixel both left and right
-        return CGRect(startX+2, startY, w-4, h)
+        return CGRect(startX + 2, startY, w - 4, h)
     }
 
     // MARK: - Internal methods
@@ -169,7 +177,7 @@ open class AvatarView: UIImageView {
     }
 
     // MARK: - Open setters
-    
+
     open func set(avatar: Avatar) {
         if let image = avatar.image {
             self.image = image
@@ -182,7 +190,7 @@ open class AvatarView: UIImageView {
         guard let radius = radius else {
             //if corner radius not set default to Circle
             let cornerRadius = min(frame.width, frame.height)
-            layer.cornerRadius = cornerRadius/2
+            layer.cornerRadius = cornerRadius / 2
             return
         }
         self.radius = radius
@@ -192,6 +200,10 @@ open class AvatarView: UIImageView {
 }
 
 fileprivate extension FloatingPoint {
-    var degreesToRadians: Self { return self * .pi / 180 }
-    var radiansToDegrees: Self { return self * 180 / .pi }
+    var degreesToRadians: Self {
+        return self * .pi / 180
+    }
+    var radiansToDegrees: Self {
+        return self * 180 / .pi
+    }
 }

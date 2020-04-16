@@ -62,7 +62,7 @@ public extension MessagesLayoutDelegate {
         fatalError("widthForLocation(message:at:with:in) has been removed in MessageKit 1.0.")
     }
 
-   func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+    func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         fatalError("heightForLocation(message:at:with:in) has been removed in MessageKit 1.0.")
     }
 

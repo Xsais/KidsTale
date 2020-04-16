@@ -7,7 +7,7 @@ target 'final' do
 
   # Pods for final
 
-pod 'MessageKit'
-pod 'Scaledrone', '~> 0.5.0' 
+  pod 'MessageKit'
+  pod 'Scaledrone', '~> 0.5.0'
 
 end

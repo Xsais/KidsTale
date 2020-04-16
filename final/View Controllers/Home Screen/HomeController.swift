@@ -21,10 +21,11 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
 
         super.viewDidLoad()
     }
-    override public func viewDidAppear(_ animated: Bool){
-        
+
+    override public func viewDidAppear(_ animated: Bool) {
+
     }
-  
+
     /**
      * Stores a copy of the applications delegate
     */
@@ -139,7 +140,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
         }
 
         sharedDelegate.selectedItem = selectedItem
-        
+
         if (viewing == Book.self) {
 
             self.performSegue(withIdentifier: "bookDetailViewController", sender: self)

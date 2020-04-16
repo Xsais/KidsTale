@@ -77,12 +77,16 @@ open class InputBarViewController: UIViewController, InputBarAccessoryViewDelega
 
     // MARK: - InputBarAccessoryViewDelegate
 
-    open func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) { }
+    open func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+    }
 
-    open func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) { }
+    open func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
+    }
 
-    open func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) { }
+    open func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
+    }
 
-    open func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer) { }
+    open func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer) {
+    }
 }
 

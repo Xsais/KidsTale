@@ -42,7 +42,7 @@ public struct HorizontalEdgeInsets: Equatable {
 
 public extension HorizontalEdgeInsets {
 
-    static func == (lhs: HorizontalEdgeInsets, rhs: HorizontalEdgeInsets) -> Bool {
+    static func ==(lhs: HorizontalEdgeInsets, rhs: HorizontalEdgeInsets) -> Bool {
         return lhs.left == rhs.left && lhs.right == rhs.right
     }
 }

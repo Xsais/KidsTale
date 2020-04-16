@@ -15,34 +15,34 @@ var chatService: ChatService!
 //Implementing MessagesViewController allows us to use
 //basic chat UI provided by MessageKit
 class ChatViewController: MessagesViewController {
-    
+
     //Username
-    var username : String = ""
-    var chatName : String = ""
-    
+    var username: String = ""
+    var chatName: String = ""
+
     //List of messages
     var messages: [Message] = []
     //Chat Member
     var member: Member!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         /*
          Reference: https://stackoverflow.com/questions/53642355/uibarbuttonitem-doesnt-show-up-when-using-messagekit
         */
         //Add navigation bar
-        
+
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 45))
-        
+
         navigationBar.items?.append(UINavigationItem(title: chatName))
-        
+
         //Add back button
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
-        
+
         navigationBar.topItem?.leftBarButtonItem = backButton
         self.view.addSubview(navigationBar)
-        
+
         //Member
         //Username given by the user
         //Color is generated randomly.
@@ -55,7 +55,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
+
         //Instantiate a ChatService object
         //Pass the member object and the message object
         //Reload the data and the chat room after the message is uploaded
@@ -67,71 +67,71 @@ class ChatViewController: MessagesViewController {
             self?.messagesCollectionView.reloadData()
             self?.messagesCollectionView.scrollToBottom(animated: true)
         })
-        
+
         chatService.setChatName(chatName: chatName)
-        
+
         //Connect the Chat Service
         chatService.connect()
     }
-    
+
     /*
      Reference:
      https://github.com/MessageKit/MessageKit/issues/860
     */
-    @objc func back(sender : UIBarButtonItem){
-        
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
+    @objc func back(sender: UIBarButtonItem) {
+
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
         let vc = storyboard.instantiateViewController(withIdentifier: "ChatListTableView") as! ChatListViewController
-        
+
         self.present(vc, animated: true, completion: nil)
     }
 }
 
 //Number and content of messages
 //Number of messages means the order of the messages
-extension ChatViewController: MessagesDataSource{
-    
-    
+extension ChatViewController: MessagesDataSource {
+
+
     //Create a Sender object using the member
     func currentSender() -> SenderType {
         return Sender(id: member.name, displayName: member.name)
     }
-    
+
     //Return the message of a specific section index
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
-    
+
     //Return the number of messages
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-    
+
     //Top label height of the message
     //Height between each messages
     func messageTopLabelHeight(for message: MessageType
-        , at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> CGFloat {
+            , at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> CGFloat {
         return 12
     }
-    
+
     //Determine font size and add sender name
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         return NSAttributedString(string: message.sender.displayName,
-                                  attributes: [.font: UIFont.systemFont(ofSize: 12)])
+                attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
-    
+
 }
 
 //Provides height, padding, and alignment of views
-extension ChatViewController: MessagesLayoutDelegate{
+extension ChatViewController: MessagesLayoutDelegate {
     func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 0
     }
 }
 
 //Defines the look of the message
-extension ChatViewController: MessagesDisplayDelegate{
+extension ChatViewController: MessagesDisplayDelegate {
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let message = messages[indexPath.section]
         let color = message.member.color
@@ -140,7 +140,7 @@ extension ChatViewController: MessagesDisplayDelegate{
 }
 
 //Manages sending and typing new messages
-extension ChatViewController: MessageInputBarDelegate{
+extension ChatViewController: MessageInputBarDelegate {
     func inputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         chatService.sendMessage(text)
         //Empty string on the input bar by default

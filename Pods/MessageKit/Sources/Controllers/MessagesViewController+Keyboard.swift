@@ -46,23 +46,29 @@ internal extension MessagesViewController {
     @objc
     private func handleTextViewDidBeginEditing(_ notification: Notification) {
         if scrollsToBottomOnKeyboardBeginsEditing {
-            guard let inputTextView = notification.object as? InputTextView, inputTextView === messageInputBar.inputTextView else { return }
+            guard let inputTextView = notification.object as? InputTextView, inputTextView === messageInputBar.inputTextView else {
+                return
+            }
             messagesCollectionView.scrollToBottom(animated: true)
         }
     }
 
     @objc
     private func handleKeyboardDidChangeState(_ notification: Notification) {
-        guard !isMessagesControllerBeingDismissed else { return }
+        guard !isMessagesControllerBeingDismissed else {
+            return
+        }
 
-        guard let keyboardStartFrameInScreenCoords = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect else { return }
+        guard let keyboardStartFrameInScreenCoords = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect else {
+            return
+        }
         guard !keyboardStartFrameInScreenCoords.isEmpty || UIDevice.current.userInterfaceIdiom != .pad else {
             // WORKAROUND for what seems to be a bug in iPad's keyboard handling in iOS 11: we receive an extra spurious frame change
             // notification when undocking the keyboard, with a zero starting frame and an incorrect end frame. The workaround is to
             // ignore this notification.
             return
         }
-        
+
         // Note that the check above does not exclude all notifications from an undocked keyboard, only the weird ones.
         //
         // We've tried following Apple's recommended approach of tracking UIKeyboardWillShow / UIKeyboardDidHide and ignoring frame
@@ -77,18 +83,20 @@ internal extension MessagesViewController {
         // We could make it work by adding extra checks for the state of the keyboard and compensating accordingly, but it seems easier
         // to simply check whether the current keyboard frame, whatever it is (even when undocked), covers the bottom of the collection
         // view.
-        
-        guard let keyboardEndFrameInScreenCoords = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+
+        guard let keyboardEndFrameInScreenCoords = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
         let keyboardEndFrame = view.convert(keyboardEndFrameInScreenCoords, from: view.window)
-        
+
         let newBottomInset = requiredScrollViewBottomInset(forKeyboardFrame: keyboardEndFrame)
         let differenceOfBottomInset = newBottomInset - messageCollectionViewBottomInset
-        
+
         if maintainPositionOnKeyboardFrameChanged && differenceOfBottomInset != 0 {
             let contentOffset = CGPoint(x: messagesCollectionView.contentOffset.x, y: messagesCollectionView.contentOffset.y + differenceOfBottomInset)
             messagesCollectionView.setContentOffset(contentOffset, animated: false)
         }
-        
+
         messageCollectionViewBottomInset = newBottomInset
     }
 
@@ -111,7 +119,7 @@ internal extension MessagesViewController {
         // we only need to adjust for the part of the keyboard that covers (i.e. intersects) our collection view;
         // see https://developer.apple.com/videos/play/wwdc2017/242/ for more details
         let intersection = messagesCollectionView.frame.intersection(keyboardFrame)
-        
+
         if intersection.isNull || (messagesCollectionView.frame.maxY - intersection.maxY) > 0.001 {
             // The keyboard is hidden, is a hardware one, or is undocked and does not cover the bottom of the collection view.
             // Note: intersection.maxY may be less than messagesCollectionView.frame.maxY when dealing with undocked keyboards.
@@ -122,7 +130,9 @@ internal extension MessagesViewController {
     }
 
     internal func requiredInitialScrollViewBottomInset() -> CGFloat {
-        guard let inputAccessoryView = inputAccessoryView else { return 0 }
+        guard let inputAccessoryView = inputAccessoryView else {
+            return 0
+        }
         return max(0, inputAccessoryView.frame.height + additionalBottomInset - automaticallyAddedBottomInset)
     }
 

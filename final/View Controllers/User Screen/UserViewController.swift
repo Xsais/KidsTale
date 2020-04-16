@@ -11,37 +11,36 @@ import UIKit
 
 class UserViewController: UIViewController {
 
-    @IBOutlet var tfusername : UITextField!
-    
-    var username : String = ""
-    
+    @IBOutlet var tfusername: UITextField!
+
+    var username: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
-    @IBAction func getUsername(sender : Any){
-        
+
+    @IBAction func getUsername(sender: Any) {
+
         let strUsername = tfusername.text!
-        
+
         //If the username is empty
-        if (strUsername.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
+        if (strUsername.trimmingCharacters(in: .whitespacesAndNewlines) != "") {
             username = strUsername
         }
-        
+
         //Programmatically redirect to the next view controller
-        
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
+
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
         let vc = storyboard.instantiateViewController(withIdentifier: "ChatListTableView") as! ChatListViewController
-        
+
         //Pass the username to the UserListTableViewController
         vc.username = self.username
-        
+
         self.present(vc, animated: true, completion: nil)
-        
+
     }
-    
-    
+
 
 }

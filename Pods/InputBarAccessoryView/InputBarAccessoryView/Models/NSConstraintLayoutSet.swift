@@ -29,7 +29,7 @@ import Foundation
 import UIKit
 
 class NSLayoutConstraintSet {
-    
+
     var top: NSLayoutConstraint?
     var bottom: NSLayoutConstraint?
     var left: NSLayoutConstraint?
@@ -38,7 +38,7 @@ class NSLayoutConstraintSet {
     var centerY: NSLayoutConstraint?
     var width: NSLayoutConstraint?
     var height: NSLayoutConstraint?
-    
+
     public init(top: NSLayoutConstraint? = nil, bottom: NSLayoutConstraint? = nil,
                 left: NSLayoutConstraint? = nil, right: NSLayoutConstraint? = nil,
                 centerX: NSLayoutConstraint? = nil, centerY: NSLayoutConstraint? = nil,
@@ -52,16 +52,20 @@ class NSLayoutConstraintSet {
         self.width = width
         self.height = height
     }
-    
+
     /// All of the currently configured constraints
     private var availableConstraints: [NSLayoutConstraint] {
         #if swift(>=4.1)
-            return [top, bottom, left, right, centerX, centerY, width, height].compactMap {$0}
+        return [top, bottom, left, right, centerX, centerY, width, height].compactMap {
+            $0
+        }
         #else
-            return [top, bottom, left, right, centerX, centerY, width, height].flatMap {$0}
+        return [top, bottom, left, right, centerX, centerY, width, height].flatMap {
+        $0
+        }
         #endif
     }
-    
+
     /// Activates all of the non-nil constraints
     ///
     /// - Returns: Self
@@ -70,7 +74,7 @@ class NSLayoutConstraintSet {
         NSLayoutConstraint.activate(availableConstraints)
         return self
     }
-    
+
     /// Deactivates all of the non-nil constraints
     ///
     /// - Returns: Self
