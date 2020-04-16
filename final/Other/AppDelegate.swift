@@ -27,6 +27,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public static let validAnimations: [String: String] = ["Blink": "opacity", "Grow": "transform.scale"]
 
     /**
+     * The typealias responsible for handling getting a value
+     */
+    typealias HandleGetValue = () -> Any
+    
+    /**
+     * The typealias responsible for handling setting a value
+     */
+    typealias HandleSetValue = (Any) -> Void
+    
+    /**
+     * Stores the expresion used to set the notification count
+     */
+    public var setNotificationCount: HandleSetValue? = nil
+    
+    /**
+     * Stores the expresion used to get the notification count
+     */
+    public var getNotificationCount: HandleGetValue? = nil
+
+    /**
      * Stores the animation that will be applied to the notification dot when a message is recieved
     */
     public var appliedAnimation: String = AppDelegate.validAnimations["Blink"]!
@@ -55,6 +75,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * Stores the volume the application will use
     */
     public var applicationVolume: Float = 50
+    
+    /**
+     Chat Service class object
+     */
+    public var chatService : ChatService?
+    
+    /**
+     * Check if the user is in the chatroom
+     */
+    public var inChat : Bool?
+    
+    /**
+     * New messages when the user was not in the chat
+     */
+    public var newMessages = [Message]()
+    
+    /**
+     * Remember the username
+     */
+    public var username : String?
 
     /**
      * Stores the handler  that will be used to communicate with the database
@@ -107,6 +147,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return findAll(table: table).filter(filter)
     }
 
+    /**
+     * Retrieves and assigns the current amount of notification, only if the handlers have been registered
+     */
+    public var notificationCount: Int {
+        get {
+            
+            if (getNotificationCount == nil) {
+
+                return -1
+            }
+            
+            return getNotificationCount!() as! Int
+        }
+        set {
+            
+            if (setNotificationCount == nil) {
+
+                return
+            }
+            
+            setNotificationCount!(newValue)
+        }
+    }
+    
     /**
      * Retrieves the index of the {@see cachedResults} is the cached query results stored
      * - Parameters:

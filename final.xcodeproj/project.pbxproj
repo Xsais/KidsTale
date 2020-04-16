@@ -46,6 +46,7 @@
 		AE865C3424469ED0008A1C04 /* Daniele-Bianchin-above-the-sky.png in Resources */ = {isa = PBXBuildFile; fileRef = AE865C3224469ED0008A1C04 /* Daniele-Bianchin-above-the-sky.png */; };
 		AE865C3624469ED9008A1C04 /* above_the_clouds_the_sky-wide.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE865C3524469ED9008A1C04 /* above_the_clouds_the_sky-wide.jpg */; };
 		AE865C382446A100008A1C04 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE865C372446A100008A1C04 /* ChatListViewController.swift */; };
+		AE9640F32447F8E500F9BCB9 /* imageview_of_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9640F22447F8E500F9BCB9 /* imageview_of_heart.png */; };
 		AED729EF244603BD00EF1AD4 /* MapWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED729EE244603BD00EF1AD4 /* MapWebViewController.swift */; };
 		AED729F3244606B100EF1AD4 /* storeImage3.png in Resources */ = {isa = PBXBuildFile; fileRef = AED729F0244606B000EF1AD4 /* storeImage3.png */; };
 		AED729F4244606B100EF1AD4 /* storeImage4.png in Resources */ = {isa = PBXBuildFile; fileRef = AED729F1244606B000EF1AD4 /* storeImage4.png */; };
@@ -99,6 +100,7 @@
 		AE865C3224469ED0008A1C04 /* Daniele-Bianchin-above-the-sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Daniele-Bianchin-above-the-sky.png"; sourceTree = "<group>"; };
 		AE865C3524469ED9008A1C04 /* above_the_clouds_the_sky-wide.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "above_the_clouds_the_sky-wide.jpg"; sourceTree = "<group>"; };
 		AE865C372446A100008A1C04 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		AE9640F22447F8E500F9BCB9 /* imageview_of_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageview_of_heart.png; sourceTree = "<group>"; };
 		AED729EE244603BD00EF1AD4 /* MapWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWebViewController.swift; sourceTree = "<group>"; };
 		AED729F0244606B000EF1AD4 /* storeImage3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storeImage3.png; sourceTree = "<group>"; };
 		AED729F1244606B000EF1AD4 /* storeImage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storeImage4.png; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		AE2FF6CD2444E3AF00BC5A74 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AE9640F22447F8E500F9BCB9 /* imageview_of_heart.png */,
 				AE865C3524469ED9008A1C04 /* above_the_clouds_the_sky-wide.jpg */,
 				AE865C3224469ED0008A1C04 /* Daniele-Bianchin-above-the-sky.png */,
 				AE865C3124469ED0008A1C04 /* nightsky_unsplash.jpeg */,
@@ -451,6 +454,7 @@
 				AED729F3244606B100EF1AD4 /* storeImage3.png in Resources */,
 				AE865C3324469ED0008A1C04 /* nightsky_unsplash.jpeg in Resources */,
 				AED729F5244606B100EF1AD4 /* storeImage5.png in Resources */,
+				AE9640F32447F8E500F9BCB9 /* imageview_of_heart.png in Resources */,
 				AE84FA4B24047568007865C7 /* LaunchScreen.storyboard in Resources */,
 				AE2FF6D12444E40300BC5A74 /* storeImage1.png in Resources */,
 				AE84FA4824047568007865C7 /* Assets.xcassets in Resources */,

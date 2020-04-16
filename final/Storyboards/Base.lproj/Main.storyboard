@@ -92,7 +92,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="chat"/>
                                 <connections>
-                                    <segue destination="3fD-mz-6lj" kind="presentation" id="8nY-1D-uyD"/>
+                                    <action selector="redirectToChatWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="522-3b-aEH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdY-w1-5vZ">
@@ -142,7 +142,7 @@
         <!--Slide Out View Controller-->
         <scene sceneID="UVC-dA-Jdh">
             <objects>
-                <viewController id="9Xz-Lf-dhe" customClass="SlideOutViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="9Xz-Lf-dhe" customClass="SlideOutViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hth-lC-MQn">
                         <rect key="frame" x="0.0" y="0.0" width="273" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,7 +438,7 @@
         <!--User View Controller-->
         <scene sceneID="ifr-Kj-7Lt">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserView" modalPresentationStyle="fullScreen" id="3fD-mz-6lj" customClass="UserViewController" customModule="final" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dL4-dq-uKj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -840,7 +840,6 @@
         <image name="search" width="342" height="342"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hcd-N7-FIB"/>
-        <segue reference="8nY-1D-uyD"/>
+        <segue reference="oQ4-gY-f1w"/>
     </inferredMetricsTieBreakers>
 </document>
