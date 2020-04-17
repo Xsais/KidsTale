@@ -11,7 +11,6 @@
 */
 
 import UIKit
-import SQLite3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
