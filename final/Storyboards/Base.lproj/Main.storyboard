@@ -583,7 +583,7 @@
                         <viewLayoutGuide key="safeArea" id="6kt-o2-0WS"/>
                     </view>
                     <connections>
-                        <outlet property="tfusername" destination="U92-4M-4dB" id="MbI-lr-1jD"/>
+                        <outlet property="txtUsername" destination="U92-4M-4dB" id="MbI-lr-1jD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3hd-GZ-q6v" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -17,7 +17,7 @@ class UserViewController: UIViewController {
     /**
      * The entered username by the user
     */
-    @IBOutlet var tfusername : UITextField!
+    @IBOutlet var txtUsername: UITextField!
     
     /**
      * define the AppDelegate object as to get the AppDelegate data
@@ -44,7 +44,7 @@ class UserViewController: UIViewController {
      */
     @IBAction func getUsername(sender : Any){
         
-        let strUsername = tfusername.text!
+        let strUsername = txtUsername.text!
         
         //If the username is empty
         if (strUsername.trimmingCharacters(in: .whitespacesAndNewlines) != ""){

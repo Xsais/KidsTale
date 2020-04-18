@@ -34,7 +34,7 @@ class ChatViewController: MessagesViewController {
     var mainDelegate = UIApplication.shared.delegate as! AppDelegate
     
     /**
-     * Stores the messages that have been sent and recieved
+     * Stores the messages that have been sent and received
     */
     var messages: [Message] = []
     
