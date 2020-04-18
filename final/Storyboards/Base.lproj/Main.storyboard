@@ -212,6 +212,7 @@
                     </view>
                     <connections>
                         <outlet property="lblCurrentVolume" destination="uSY-XW-cVQ" id="mqg-fx-sCB"/>
+                        <outlet property="pickerAnimation" destination="AXb-Od-HXu" id="WfN-0r-0vE"/>
                         <outlet property="sldNotificationVolume" destination="6sa-fz-gHz" id="P7b-7t-aPj"/>
                     </connections>
                 </viewController>

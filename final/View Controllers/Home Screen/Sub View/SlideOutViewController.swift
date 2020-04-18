@@ -27,6 +27,12 @@ class SlideOutViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     private var lblCurrentVolume: UILabel?
 
     /**
+     * Stores the picker that is responsible for selecting the animation
+    */
+    @IBOutlet
+    private var pickerAnimation: UIPickerView?
+
+    /**
      * Stores a copy of the applications delegate
     */
     private let sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -43,6 +49,8 @@ class SlideOutViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         sldNotificationVolume?.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / -2))
 
         updateNotificationVolume(sender: sldNotificationVolume!)
+
+        updateAnimation(pickerView: pickerAnimation!, component: 0)
     }
 
     /**
@@ -59,6 +67,17 @@ class SlideOutViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
 
     /**
+     * Exposes the current selected animation to the applications delegate
+     * - Parameters:
+     *      - pickerView: The sending Picker
+     *      - component: The component that called the event
+    */
+    private func updateAnimation(pickerView: UIPickerView, component: Int) {
+
+        sharedDelegate.appliedAnimation = AppDelegate.validAnimations[Array(AppDelegate.validAnimations.keys)[pickerView.selectedRow(inComponent: component)]]!
+    }
+
+    /**
      * The callback handler for a item in the picker being selected
      * - Parameters:
      *      - pickerView: The sending Picker
@@ -67,7 +86,7 @@ class SlideOutViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     */
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-        sharedDelegate.appliedAnimation = AppDelegate.validAnimations[Array(AppDelegate.validAnimations.keys)[pickerView.selectedRow(inComponent: component)]]!
+        updateAnimation(pickerView: pickerView, component: component)
     }
 
     /**
