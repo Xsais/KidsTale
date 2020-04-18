@@ -92,6 +92,12 @@ class BookDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         return DetailViewCell.CELL_HEIGHT
     }
 
+    /**
+     * Fills the TableView with UITableViewCells
+     * - Parameters:
+     *      - tableView: The object that initialized the event
+     *      - cellForRowAt: The object that initialized the event
+    */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         var tableCell: DetailViewCell? = tableView.dequeueReusableCell(withIdentifier: HomeController.CELL_NAME) as? DetailViewCell
@@ -114,5 +120,24 @@ class BookDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         }
 
         return tableCell!
+    }
+
+    /**
+     * Event that fires when a cell is set to be loaded into the view
+     * - Parameters:
+     *      - tableView: The object that initialized the event
+     *      - cell: The cell that is scheduled to be loaded into the view
+     *      - forRowAt: The indexpath of the selected row
+    */
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        // everything you scroll the table cells are animated left to right
+        // gives impression that data is being fetched live
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity,-500, 10, 1)
+        cell.layer.transform = rotationTransform
+        UIView.animate(withDuration: 1.0)
+        {
+            cell.layer.transform = CATransform3DIdentity
+        }
     }
 }
