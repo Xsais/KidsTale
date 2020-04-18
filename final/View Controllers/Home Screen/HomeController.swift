@@ -28,7 +28,7 @@ public class HomeController: SmartUIViewController, UITableViewDelegate, UITable
     private let sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
     /**
-     * Stores a cached copy of all the items that are currently bieng displayed to the user
+     * Stores a cached copy of all the items that are currently being displayed to the user
     */
     private var searchCache: Array<DatabaseItem>? = nil
 

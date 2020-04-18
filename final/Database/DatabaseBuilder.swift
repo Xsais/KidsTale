@@ -18,7 +18,7 @@ public class DatabaseBuilder {
     // Stores the name of the SQLite database
     public let databaseName: String
 
-    // Store the path of the SQLite databe on the phones filesystem
+    // Store the path of the SQLite database on the phones filesystem
     private let databasePath: String
 
     // Store a copy of the current pointer to the opened SQLite database
@@ -86,7 +86,7 @@ public class DatabaseBuilder {
     */
     private func checkAndCreateDatabase(databaseName: String) {
 
-        // In the case the file alreaady exist do nothing
+        // In the case the file already exist do nothing
         if (FileManager.default.fileExists(atPath: self.databasePath)) {
             return
         }

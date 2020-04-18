@@ -96,6 +96,8 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
 
     /**
      * Handles the action that is to be performed when a TetField is scheduled to return
+     * - Parameters:
+     *      - textField: The text field that initialized the event
     */
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
@@ -122,6 +124,8 @@ public class SmartUIViewController: UIViewController, UITextFieldDelegate {
 
     /**
      * Handles the action that is to be performed when a TetField requested to be in focus
+     * - Parameters:
+     *      - textField: The text field that initialized the event
     */
     public func textFieldDidBeginEditing(_ textField: UITextField) {
 

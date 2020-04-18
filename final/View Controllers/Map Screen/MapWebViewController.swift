@@ -1,18 +1,28 @@
-//
-//  MapWebViewController.swift
-//  final
-//
-//  Created by Xcode User on 2020-04-14.
-//
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Jie Ming Wu
+ * Filename: MapWebViewController.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description: The backing view controller for the map screen web page view
+ * ----------------------------------------------------------------------------+
+*/
 
 import UIKit
 import WebKit
 
 class MapWebViewController: UIViewController {
-
-    //define wkwebview object
+    
+    /**
+     * The UIElement that stores the location of the map view
+    */
     @IBOutlet var wbPage: WKWebView!
-
+    
+    /**
+     * An event that is fired when the view is loaded into memory
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,16 +31,4 @@ class MapWebViewController: UIViewController {
         let url = URLRequest(url: urlAddress!)
         wbPage?.load(url)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

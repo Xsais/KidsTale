@@ -1,41 +1,58 @@
-/*
- 
- Heon Lee
- 991280638
- 
- ChatViewController.swift
- 2020-04-19
- */
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Heon Lee
+ * Filename: ChatViewController.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description:  The view controller that handles sending a recieving messages, Implementing MessagesViewController allows us to use
+ * basic chat UI provided by MessageKit
+ * ----------------------------------------------------------------------------+
+*/
 
 import UIKit
 import MessageKit
 
 var chatService: ChatService!
 
-//Implementing MessagesViewController allows us to use
-//basic chat UI provided by MessageKit
 class ChatViewController: MessagesViewController {
     
-    //Username
+    /**
+     * Stores the user desired username
+    */
     var username : String = ""
+    
+    /**
+     * Stores the chat room name
+    */
     var chatName : String = ""
     
-    //Global variable
+    /**
+     * define the AppDelegate object as to get the AppDelegate data
+    */
     var mainDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    //List of messages
+    /**
+     * Stores the messages that have been sent and recieved
+    */
     var messages: [Message] = []
-    //Chat Member
+    
+    /**
+     * Stores the current member of the chat
+    */
     var member: Member!
     
+    /**
+     * An event that is fired when the view is loaded into memory
+     *
+     * - Reference:
+     *     - https://stackoverflow.com/questions/53642355/uibarbuttonitem-doesnt-show-up-when-using-messagekit
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-         Reference: https://stackoverflow.com/questions/53642355/uibarbuttonitem-doesnt-show-up-when-using-messagekit
-         */
         //Add navigation bar
-        
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 45))
         
         navigationBar.items?.append(UINavigationItem(title: chatName))
@@ -94,10 +111,14 @@ class ChatViewController: MessagesViewController {
         
         mainDelegate.chatService!.publishNewMessages()
     }
-    
-    /*
-     Reference:
-     https://github.com/MessageKit/MessageKit/issues/860
+
+    /**
+      * Performs a transition to the previous page
+      * - Parameters:
+      *      - sender: The buttonitem that was clicked
+      *
+      * - Reference:
+      *     - https://github.com/MessageKit/MessageKit/issues/860
      */
     @objc func back(sender : UIBarButtonItem){
         
@@ -112,7 +133,12 @@ class ChatViewController: MessagesViewController {
         //Initialize notification count
         mainDelegate.notificationCount = 0
     }
-    
+
+    /**
+      * Exits and disconnects the chat features of the application
+      * - Parameters:
+      *      - sender: The buttonitem that was clicked
+     */
     @objc func exit(sender : UIBarButtonItem){
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -134,34 +160,56 @@ class ChatViewController: MessagesViewController {
     }
 }
 
-//Number and content of messages
-//Number of messages means the order of the messages
-extension ChatViewController: MessagesDataSource{
-    
-    
-    //Create a Sender object using the member
+/**
+  * Number and content of messages
+  * Number of messages means the order of the messages
+ */
+extension ChatViewController: MessagesDataSource {
+
+    /**
+      * Create a Sender object using the member
+     */
     func currentSender() -> SenderType {
         return Sender(id: member.name, displayName: member.name)
     }
-    
-    //Return the message of a specific section index
+
+    /**
+      * Return the message of a specific section index
+      * - Parameters:
+      *      - indexPath: The current index of the message
+      *      - messagesCollectionView: The collection that stores all of the messages
+     */
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
-    
-    //Return the number of messages
+
+    /**
+      * Retrieves the number of messages
+      * - Parameters:
+      *      - messagesCollectionView: The collection that stores all of the messages
+     */
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-    
-    //Top label height of the message
-    //Height between each messages
+
+    /**
+      * Assigns the top label height of the message, height between each messages
+      * - Parameters:
+      *      - message: The type of the message
+      *      - indexPath: The current index of the message
+      *      - messagesCollectionView: The collection that stores all of the messages
+     */
     func messageTopLabelHeight(for message: MessageType
         , at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> CGFloat {
         return 12
     }
-    
-    //Determine font size and add sender name
+
+    /**
+      * Retrevies the font that is to be used for the sender name
+      * - Parameters:
+      *      - message: The type of the message
+      *      - indexPath: The current index of the message
+     */
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         return NSAttributedString(string: message.sender.displayName,
                                   attributes: [.font: UIFont.systemFont(ofSize: 12)])
@@ -169,15 +217,37 @@ extension ChatViewController: MessagesDataSource{
     
 }
 
-//Provides height, padding, and alignment of views
+/**
+  * Provides height, padding, and alignment of views
+ */
 extension ChatViewController: MessagesLayoutDelegate{
+
+    /**
+      * Retrieves the that each messages sub component shall have
+      * - Parameters:
+      *      - message: The type of the message
+      *      - indexPath: The current index of the message
+      *      - maxWidth: The maximum width of the message
+      *      - messagesCollectionView: The collection that stores all of the messages
+     */
     func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 0
     }
 }
 
-//Defines the look of the message
-extension ChatViewController: MessagesDisplayDelegate{
+/**
+  * Defines the look of the message
+ */
+extension ChatViewController: MessagesDisplayDelegate {
+
+    /**
+      * Retrieves the avatar that is assigned for a specific message
+      * - Parameters:
+      *      - avatarView: The avatar that will be assigned to the message
+      *      - message: The type of the message
+      *      - indexPath: The current index of the message
+      *      - messagesCollectionView: The collection that stores all of the messages
+     */
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let message = messages[indexPath.section]
         let color = message.member.color
@@ -185,8 +255,17 @@ extension ChatViewController: MessagesDisplayDelegate{
     }
 }
 
-//Manages sending and typing new messages
-extension ChatViewController: MessageInputBarDelegate{
+/**
+  * Manages sending and typing new messages
+ */
+extension ChatViewController: MessageInputBarDelegate {
+
+    /**
+      * Event that occurs when the input bar receives an event to send a message
+      * - Parameters:
+      *      - inputBar: The input bar that is responsible for the the event
+      *      - didPressSendButtonWith: The text that is being requested to be sent
+     */
     func inputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         //chatService.sendMessage(text)
         mainDelegate.chatService!.sendMessage(text)

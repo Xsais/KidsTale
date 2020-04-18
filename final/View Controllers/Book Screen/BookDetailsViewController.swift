@@ -67,10 +67,7 @@ class BookDetailsViewController: UIViewController, UITableViewDataSource, UITabl
 
         sharedDelegate.selectedItem = availableStores![indexPath.row].store
 
-        //redirect the page to Store Details  and store the neccessary data into AppDelegate( Jie Ming Wu)
         self.performSegue(withIdentifier: "storeDetailViewController", sender: self)
-
-        //end (Jie Ming Wu)
     }
 
     /**

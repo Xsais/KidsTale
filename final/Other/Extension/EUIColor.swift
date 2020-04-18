@@ -1,23 +1,35 @@
-/*
- 
- Heon Lee
- 991280638
- 
- Color extensions
- 2020-04-19
- */
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Heon Lee
+ * Filename: EColor.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description: Color extensions, Generate random red, green, and blue values
+ * ----------------------------------------------------------------------------+
+*/
 
 import Foundation
 import UIKit
 
-//Generate random red, green, and blue values
 extension UIColor {
-    //Generates random hex color
-    static var random: UIColor {
+
+    /**
+     * Generates random hex color
+     * - Parameters:
+     *      - sender: The UIElement that desired to be a circle
+    */
+    public static var random: UIColor {
         return UIColor(
                 red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
     }
 
+    /**
+     * Derives a color from its hex value
+     * - Parameters:
+     *      - hex: The desired hex color
+    */
     convenience init(hex: String) {
         var hex = hex
         if hex.hasPrefix("#") {
@@ -38,6 +50,9 @@ extension UIColor {
                 alpha: 1)
     }
 
+    /**
+     * Retrieves the hex String for the current color
+    */
     var hexString: String {
         var r: CGFloat = 0
         var g: CGFloat = 0

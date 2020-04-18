@@ -1,34 +1,79 @@
-//
-//  MapViewController.swift
-//  IOSFinalProjectStoreDetails
-//
-//  Created by Xcode User on 2020-04-11.
-//  Copyright © 2020 Xcode User. All rights reserved.
-//
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Jie Ming Wu
+ * Filename: MapViewController.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description: The backing view controller for the map screen
+ * ----------------------------------------------------------------------------+
+*/
 
 import UIKit
 import MapKit
 import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-
-// define action variable
+    
+    /**
+     * The UIElement that stores the location of the map view
+    */
     @IBOutlet weak var mapview: MKMapView!
-    // @IBOutlet weak var getDirectionBtn: UIButton!
+    
+    /**
+     * The label that shows the destination address of the map
+    */
     @IBOutlet weak var DestinationAddress: UILabel!
-    //@IBOutlet weak var OriginalAddress: UITextField!
+    
+    /**
+     * The icon that is displayed on the map page
+    */
     @IBOutlet weak var MapIcon: UIImageView!
-
+    
+    /**
+     * The object that manages the locations
+    */
     let locationManager = CLLocationManager()
+    
+    /**
+     * The current location to display on the map
+    */
     var previousLocation: CLLocation?
+    
+    /**
+     * Stores the originating address
+    */
     var OriAddressString: String!
+    
+    /**
+     * Stores the destination address
+    */
     var DesAddressString: String!
+    
+    /**
+     * Stores the coordinates the the originating address
+    */
     var OriginalAddressString: CLLocationCoordinate2D!
+    
+    /**
+     * Stores the string of the original address
+    */
     var OriginalString: String!
+    
+    /**
+     * Stores the choice for the location
+    */
     var LocationChoise: String!
-    //define the AppDelegate object as to get the AppDelegate data
+    
+    /**
+     * define the AppDelegate object as to get the AppDelegate data
+    */
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    /**
+     * An event that is fired when the view is loaded into memory
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,13 +85,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         //get user input location
         OriginalString = mainDelegate.InputLocation!
-        LocationChoise = mainDelegate.LocationChoise
+        LocationChoise = mainDelegate.LocationChoice
 
-        //provide direction to user by location choise
-        //if location choise is off, navigate user via user's GPS locaiton
-        if mainDelegate.LocationChoise == "OFF" {
+        //provide direction to user by location choice
+        //if location choice is off, navigate user via user's GPS location
+        if mainDelegate.LocationChoice == "OFF" {
 
-            //get user authorizatoion for location
+            //get user authorization for location
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
@@ -55,9 +100,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapview.delegate = self
             getAddress()
         }
-        // if locaiton choise is ON, navigate user via user's input location
+        // if location choice is ON, navigate user via user's input location
         else {
-            //get user authorizatoion for location
+            //get user authorization for location
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
@@ -69,12 +114,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
-    //   @IBAction func getDirectionsTapped(sender: Any)
-    //  {
-    //  getAddress()
-    // }
-
-//get address geocode info
+    /**
+     * get address geocode info
+    */
     func getAddress() {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(DesAddressString) { (placemarks, error)
@@ -97,7 +139,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
-//function to get geocode
+    /**
+     * function to get geocode
+    */
     func getGeocode() {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(OriginalString) { (placemarks, error)
@@ -114,12 +158,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
 
-//oakville longitude latitude 43.4675   79.6877
-
+    /**
+     * The callback for the location manager
+      * - Parameters:
+      *      - manager: The manager that is used to manage the location
+      *      - locations: The valid locations
+     */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
     }
 
+    /**
+     * Maps the current GPS coordinate
+     * - Parameters:
+     *      - destinationCord: The coordinates that is to be mapped
+    */
     func mapThisGPSLocation(destinationCord: CLLocationCoordinate2D) {
         let souceCordinate = (locationManager.location?.coordinate)!
 
@@ -149,10 +202,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
+    /**
+     * Maps the location that was imputed
+     * - Parameters:
+     *      - destinationCord: The coordinates that is to be mapped
+    */
     func mapThisInputLocation(destinationCord: CLLocationCoordinate2D) {
-        // let souceCordinate = (locationManager.location?.coordinate)!
 
-        let soucePlaceMark = MKPlacemark(coordinate: OriginalAddressString!)//souceCordinate)
+        //souceCordinate)
+        let soucePlaceMark = MKPlacemark(coordinate: OriginalAddressString!)
         let destPalceMark = MKPlacemark(coordinate: destinationCord)
 
         let sourceItem = MKMapItem(placemark: soucePlaceMark)
@@ -178,12 +236,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
+    /**
+     * Callback for when the map view is rendering
+     * - Parameters:
+     *      - mapView: The mapview that is rendering
+     *      - overlay: The overlay for the map view
+    */
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let render = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         render.strokeColor = .blue
         return render
     }
 
+    /**
+     * Allows ViewController to perform an unwind segue
+     * - Parameters:
+     *      - sender: The object that initialized the event
+    */
     @IBAction func unwindToMapViewController(sender:
             UIStoryboardSegue) {
     }

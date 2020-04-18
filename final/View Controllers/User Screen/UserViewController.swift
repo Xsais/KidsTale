@@ -1,28 +1,47 @@
-/*
- 
- Heon Lee
- 991280638
- 
- A view controller to take usernames from users
- 2020-04-19
- */
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Heon Lee
+ * Filename: UserViewController.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description:  A view controller to take usernames from users
+ * ----------------------------------------------------------------------------+
+*/
 
 import UIKit
 
 class UserViewController: UIViewController {
     
+    /**
+     * The entered username by the user
+    */
     @IBOutlet var tfusername : UITextField!
     
-    //Global variable
+    /**
+     * define the AppDelegate object as to get the AppDelegate data
+    */
     var mainDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    /**
+     * The username that is to be used
+    */
     var username : String = ""
     
+    /**
+     * An event that is fired when the view is loaded into memory
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    
+
+    /**
+     * Retrieves the usernames that was entered by the user
+      * - Parameters:
+      *      - sender: The object that initiated the event
+     */
     @IBAction func getUsername(sender : Any){
         
         let strUsername = tfusername.text!
@@ -44,12 +63,6 @@ class UserViewController: UIViewController {
         //Save the username to the app delegate for the future use
         mainDelegate.username = self.username
         
-        
-        
         self.present(vc, animated: true, completion: nil)
-        
     }
-    
-    
-    
 }

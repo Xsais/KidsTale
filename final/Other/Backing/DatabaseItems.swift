@@ -180,16 +180,6 @@ public class Store: DatabaseItem, Resource {
         self.name = name
     }
 
-    public func initWithData(theRow i: Int, storeLocation: String, storeDescription: String, storeHour: String, storeImage: String) {
-
-        _id = i
-        location = storeLocation
-        description = storeDescription
-        hours = storeHour
-        image = storeImage
-
-    }
-
     /**
      * Allows the creation of an blank physical store
     */

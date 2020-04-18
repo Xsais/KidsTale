@@ -1,58 +1,100 @@
-/*
- 
- Heon Lee
- 991280638
- 
- Message.swift
- 2020-04-19
- */
+/**
+ * ----------------------------------------------------------------------------+
+ * Created by: Heon Lee
+ * Filename: Message.swift
+ * Project Name: Final Project : KidsTale
+ * Program: Software Development and Network Engineering
+ * Course: PROG31632 - Mobile iOS Application Development
+ * Creation Date: 04-12-2020
+ * Description: The backing object for a message, Chat Member
+ * ----------------------------------------------------------------------------+
+*/
 
 import Foundation
 import UIKit
 import MessageKit
 
-//Chat Member
 struct Member {
+    
+    /**
+     * Stores the name
+    */
     let name: String
+    
+    /**
+     * Stores the color
+    */
     let color: UIColor
 }
 
-//Chat Message
+/**
+ * Chat Message
+*/
 struct Message {
+    
+    /**
+     * The member that associated with the message
+    */
     let member: Member
+    
+    /**
+     * Stores the actual text of the message
+    */
     let text: String
+    
+    /**
+     * Stores the id of the message
+    */
     let messageId: String
 }
 
-//MessageKit works with MessageType protocols
+/**
+ * An extension to the message class, MessageKit works with MessageType protocols
+*/
 extension Message: MessageType {
+    
+    /**
+     * The sender of the message
+    */
     var sender: SenderType {
         return Sender(id: member.name, displayName: member.name)
     }
-
+    
+    /**
+     * The timestamp of the message
+    */
     var sentDate: Date {
         return Date()
     }
-
+    
+    /**
+     * The type of the message
+    */
     var kind: MessageKind {
         return .text(text)
     }
 }
 
-
-//Converts between a JSON dictionary and Member class
+/**
+ * An extension to the message class, Converts between a JSON dictionary and Member class
+*/
 extension Member {
-    //Scaledrone Member class takes name and color in JSON format
-    //Converts Member class into JSON Data
+    
+    /**
+     * Scaledrone Member class takes name and color in JSON format
+     * Converts Member class into JSON Data
+    */
     var toJSON: Any {
         return [
             "name": name,
             "color": color.hexString
         ]
     }
-
-    //Get JSON data and create a member class
-    init?(fromJSON json: Any) {
+    
+    /**
+     * Get JSON data and create a member class
+    */
+   public init?(fromJSON json: Any) {
         guard
                 let data = json as? [String: Any],
                 let name = data["name"] as? String,

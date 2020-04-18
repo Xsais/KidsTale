@@ -67,45 +67,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /**
      * Stores the item that is selected on the HomeScreen
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     public var selectedItem: DatabaseItem?
 
     /**
      * Stores the volume the application will use
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     public var applicationVolume: Float = 50
     
     /**
      Chat Service class object
+     * - Author(s):
+     *      - Heon Lee
      */
     public var chatService : ChatService?
     
     /**
-     * Check if the user is in the chatroom
+     * Check if the user is in the coatrooms
+     * - Author(s):
+     *      - Heon Lee
      */
     public var inChat : Bool?
     
     /**
      * New messages when the user was not in the chat
+     * - Author(s):
+     *      - Heon Lee
      */
     public var newMessages = [Message]()
     
     /**
      * Remember the username
+     * - Author(s):
+     *      - Heon Lee
      */
     public var username : String?
 
     /**
      * Stores the handler  that will be used to communicate with the database
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     private let databaseCommunicator = DatabaseBuilder(databaseName: AppDelegate.DATABASE_NAME)
 
-    //created variable to store selected store and it's location <Jie Ming Wu >
+    /**
+     * Stores to location of the store
+     * - Author(s):
+     *      - Jie Ming Wu
+    */
     var storeLocation: String?
-    var LocationChoise: String = "OFF"   //set Location choise to default value OFF
-    var InputLocation: String?
 
-    //end of StoreDetailsViewController
+    /**
+     * Stores the user choice to store the location, set Location choice to default value OFF
+     * - Author(s):
+     *      - Jie Ming Wu
+    */
+    var LocationChoice: String = "OFF"
+
+    /**
+     * Stores the user inputted location
+     * - Author(s):
+     *      - Jie Ming Wu
+    */
+    var InputLocation: String?
 
     /**
      * Stores the current window that is presented to the user
@@ -116,6 +144,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       * Retrieves all of the items of a specific type that are in the stores list of items
       * - Parameters:
       *      - table: The type of the item you expect to get in return
+      *
+      * - Author(s):
+      *      - Nathaniel Primo
      */
     public func findAll(table: DatabaseItem.Type) -> Array<DatabaseItem> {
 
@@ -140,6 +171,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * - Parameters:
      *      - table: The type of the item you expect to get in return
      *      - filter: The filter that should be applied to the items the were fetched
+     *
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     public func findAll(table: DatabaseItem.Type, filter: (DatabaseItem) -> Bool) -> Array<DatabaseItem> {
 
@@ -148,6 +182,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /**
      * Retrieves and assigns the current amount of notification, only if the handlers have been registered
+     *
+     * - Author(s):
+     *      - Nathaniel Primo
      */
     public var notificationCount: Int {
         get {
@@ -174,6 +211,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * Retrieves the index of the {@see cachedResults} is the cached query results stored
      * - Parameters:
      *      - table: The type of the item you expect to get in return
+     *
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     private func getCacheIndex(table: DatabaseItem.Type) -> Int {
 
@@ -200,6 +240,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * - Parameters:
      *      - table: The type of the item you expect to get in return
      *      - index: The desired index in which to be pulled
+     *
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     public func getSingleResource(table: DatabaseItem.Type, index: Int) -> DatabaseItem {
 
@@ -219,6 +262,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      *      - table: The type of the item you expect to get in return
      *      - index: The desired index in which to be pulled
      *      - filter: The filter that should be applied to the items the were fetched
+     *
+     * - Author(s):
+     *      - Nathaniel Primo
     */
     public func getSingleResource(table: DatabaseItem.Type, index: Int, filter: (DatabaseItem) -> Bool) -> DatabaseItem {
 
@@ -237,6 +283,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * - Parameters:
      *      - table: The type of the item you expect to get in return
      *      - values: The mathematical formula that the animation should follow
+     *
+     * - Author(s):
+     *      - Nathaniel Primo 
     */
     public func save(table: DatabaseItem.Type, values: [Any]) -> DatabaseItem {
 
